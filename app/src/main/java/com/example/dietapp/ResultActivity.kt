@@ -1,5 +1,6 @@
 package com.example.dietapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -77,5 +78,19 @@ class ResultActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this,  "$bmi", Toast.LENGTH_SHORT).show()
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.radioButton1 -> {
+                    val intent = Intent(this, RecoWay::class.java)
+                    startActivity(intent)
+                }
+
+                R.id.radioButton2 -> {
+                    val intent = Intent(this, RecoWay::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 }
