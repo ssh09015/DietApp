@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".Cal"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".Cal"
+            android:parentActivityName=".MainActivity"/> // 업 네비게이션 부분 (세이)
         <activity
             android:name=".recommand"
             android:parentActivityName=".MainActivity" />
