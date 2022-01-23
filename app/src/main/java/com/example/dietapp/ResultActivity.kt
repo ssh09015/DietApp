@@ -39,6 +39,7 @@ class ResultActivity : AppCompatActivity() {
 
         //BMI 계산
         var bmi = weight / Math.pow(height/100.0, 2.0)
+
         //글자로 출력
         when {
             bmi >= 35 -> ResultTextView.text = "고도 비만"
@@ -63,13 +64,13 @@ class ResultActivity : AppCompatActivity() {
         }
 
         when{
-            bmi >= 23 -> {  // 옵션 하나만 나와야 하는 부분에 두 개 나오는 부분 고쳐서 하나만 나오게 수정 함(세이)
+            bmi >= 25 -> {  // 옵션 하나만 나와야 하는 부분에 두 개 나오는 부분 고쳐서 하나만 나오게 수정 함(세이)
                 radioButton1.visibility = View.INVISIBLE
                 radioButton2.text = "살 빼기"
             }
             bmi > 18.5 -> {
                 radioButton1.text = "유지하기"
-                radioButton2.visibility = View.INVISIBLE
+                radioButton2.text = "살 빼기"
             }
             else -> {
                 radioButton1.visibility = View.INVISIBLE
