@@ -38,22 +38,21 @@ class RecoWay : AppCompatActivity() {
         when {
             // 정상 (유지)
             bmi >= 18.5 && num == 1 -> {
-                        text1.text = "과식하지 않기\n" + "물 많이 먹기"
-                        text2.text = "유산소(소미핏)"
-                        text3.text = "운동 전 스트레칭 (땅끄부부)"
-                        text4.visibility = android.view.View.INVISIBLE
-                        video3.visibility = android.view.View.INVISIBLE
+                text1.text = "과식하지 않기\n" + "물 많이 먹기"
+                text2.text = "유산소(소미핏)"
+                text3.text = "운동 전 스트레칭 (땅끄부부)"
+                text4.visibility = android.view.View.INVISIBLE
+                video3.visibility = android.view.View.INVISIBLE
 
-                        video1.setOnClickListener {
-                            val intent = Intent(Intent.ACTION_VIEW)
-                            intent.data = Uri.parse("https://youtu.be/lazFuEUBB7A")
-                            startActivity(Intent.createChooser(intent, null))
-                        }
-
-                        video2.setOnClickListener {
-                            val intent = Intent(Intent.ACTION_VIEW)
-                            intent.data = Uri.parse("https://youtu.be/2LyDkE7sDec")
-                            startActivity(Intent.createChooser(intent, null))
+                video1.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse("https://youtu.be/lazFuEUBB7A")
+                    startActivity(Intent.createChooser(intent, null))
+                }
+                    video2.setOnClickListener {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse("https://youtu.be/2LyDkE7sDec")
+                        startActivity(Intent.createChooser(intent, null))
                 }
             }
             // 정상 (감량)
