@@ -3,6 +3,8 @@ package com.example.dietapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -70,6 +72,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
+        menuInflater.inflate(R.menu.main,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
+        when(item?.itemId){
+            R.id.action_cal->{
+                var intent=Intent(this, Cal::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 
 }
