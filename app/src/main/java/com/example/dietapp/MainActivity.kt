@@ -31,10 +31,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("weight", weightEditText.text.toString())
             startActivity(intent)
         }
-        //recommandButton.setOnClickListener {
-        //var intent = Intent(this, 이동할페이지::class.java) : 오류나서 잠시 주석 처리
-        //startActivity(intent)
-        //}
+
+        recommandButton.setOnClickListener { //추천 버튼 누르면 나오는 액티비티(세이)
+            var intent=Intent(this, recommand::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun saveData(height: Int, weight: Int){

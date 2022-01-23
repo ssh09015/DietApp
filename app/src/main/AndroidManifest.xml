@@ -9,12 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".RecoWay"></activity>
-        <activity android:name=".ResultActivity" />
+        <activity android:name=".recommand"
+            android:parentActivityName=".MainActivity"/> //추천 창 업 네비게이션 (세이)
+        <activity android:name=".RecoWay"
+            android:parentActivityName=".MainActivity"/> //추천 창 업 네비게이션 (세이)
+        <activity android:name=".ResultActivity"
+            android:parentActivityName=".MainActivity"/> //추천 창 업 네비게이션 (세이)
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
