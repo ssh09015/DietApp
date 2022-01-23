@@ -28,6 +28,7 @@ class Cal : AppCompatActivity() { //달력 파트(세이)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_cal)
 
         // UI값 생성
         calendarView=findViewById(R.id.calendarView)
