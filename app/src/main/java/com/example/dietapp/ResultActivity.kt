@@ -35,7 +35,7 @@ class ResultActivity : AppCompatActivity() {
 
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
-        var num : Int
+        var num : Int = 0
 
 
         //BMI 계산_변수형 Double로 변경 (송하)
@@ -84,15 +84,19 @@ class ResultActivity : AppCompatActivity() {
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.radioButton1 -> {
+                    num = 1
                     val intent = Intent(this, RecoWay::class.java)
                     // bmi 값을 RecoWay로 전달 (송하)
                     intent.putExtra("bmi", bmi)
+                    intent.putExtra("num", num)
                     startActivity(intent)
                 }
 
                 R.id.radioButton2 -> {
+                    num = 2
                     val intent = Intent(this, RecoWay::class.java)
                     intent.putExtra("bmi", bmi)
+                    intent.putExtra("num", num)
                     startActivity(intent)
                 }
             }
