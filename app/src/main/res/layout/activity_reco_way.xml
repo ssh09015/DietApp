@@ -64,7 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:padding="10dp"
-                app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -81,7 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:padding="10dp"
-                app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -98,7 +100,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:padding="10dp"
-                app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
         </LinearLayout>
 
