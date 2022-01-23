@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".recommand">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <TextView
+                android:id="@+id/recoText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="추천 습관"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="24sp"
+                tools:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/recoText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="하루 세번 규칙적으로 식사하기\n물 많이 먹기"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                android:padding="10dp"
+                tools:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/recoText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="추천 운동"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="24sp"
+                android:padding="10dp"
+                tools:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/recoText4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="유산소 (빅씨스)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                android:padding="10dp"
+                tools:textAlignment="center" />
+
+            <ImageButton
+                android:id="@+id/recoImage1"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
+
+            <TextView
+                android:id="@+id/recoText5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="운동 전 스트레칭 (소미핏)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                android:padding="10dp"
+                tools:textAlignment="center" />
+
+            <ImageButton
+                android:id="@+id/recoImage2"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
+
+            <TextView
+                android:id="@+id/recoText6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="타바타운동 (핏블리)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                android:padding="10dp"
+                tools:textAlignment="center" />
+
+            <ImageButton
+                android:id="@+id/recoImage3"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_baseline_play_circle_outline_24" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
