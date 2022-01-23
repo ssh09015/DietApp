@@ -63,17 +63,17 @@ class ResultActivity : AppCompatActivity() {
         }
 
         when{
-            bmi >= 23 -> {
-                radioButton1.text = "살 빼기"
-                radioButton2.text = "유지하기"
+            bmi >= 23 -> {  // 옵션 하나만 나와야 하는 부분에 두 개 나오는 부분 고쳐서 하나만 나오게 수정 함(세이)
+                radioButton1.visibility = View.INVISIBLE
+                radioButton2.text = "살 빼기"
             }
             bmi > 18.5 -> {
                 radioButton1.text = "유지하기"
                 radioButton2.visibility = View.INVISIBLE
             }
             else -> {
-                radioButton1.text = "살 찌기"
-                radioButton2.text = "유지하기"
+                radioButton1.visibility = View.INVISIBLE
+                radioButton2.text = "살 찌우기"
             }
         }
 
@@ -92,5 +92,7 @@ class ResultActivity : AppCompatActivity() {
                 }
             }
         }
+
+
     }
 }
