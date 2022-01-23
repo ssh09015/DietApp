@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
+//activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
 class MainActivity : AppCompatActivity() {
     lateinit var resultButton: Button//추후에 초기화 변수타입
     lateinit var heightEditText: EditText

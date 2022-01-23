@@ -14,6 +14,7 @@ import android.widget.Toast
 
 class ResultActivity : AppCompatActivity() {
 
+    //결과 페이지 부분 텍스트, 사진, 버튼 변수 선언(윤솔)
     lateinit var ResultTextView : TextView
     lateinit var imageView : ImageView
     lateinit var radioGroup: RadioGroup
@@ -25,6 +26,7 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmi_result)
 
+        //변수에 위젯 대입(윤솔)
         ResultTextView = findViewById(R.id.bmiResultTextView)
         imageView = findViewById<ImageView>(R.id.imageView)
         radioGroup = findViewById(R.id.RadioGroup)
@@ -64,21 +66,24 @@ class ResultActivity : AppCompatActivity() {
                     R.drawable.ic_baseline_mood_bad_24)
         }
 
+        //무게별 라디오 버튼 출력(윤솔)
+        //송하가 말한 단계로 이름 수정 완료(윤솔)
         when{
             bmi >= 25 -> {  // 옵션 하나만 나와야 하는 부분에 두 개 나오는 부분 고쳐서 하나만 나오게 수정 함(세이)
                 radioButton1.visibility = View.INVISIBLE
-                radioButton2.text = "살 빼기"
+                radioButton2.text = "감량"
             }
-            bmi > 18.5 -> {
-                radioButton1.text = "유지하기"
-                radioButton2.text = "살 빼기"
+            bmi >= 18.5 -> {
+                radioButton1.text = "유지"
+                radioButton2.text = "감량"
             }
             else -> {
                 radioButton1.visibility = View.INVISIBLE
-                radioButton2.text = "살 찌우기"
+                radioButton2.text = "증량"
             }
         }
 
+        //토스트 문구
         Toast.makeText(this,  "$bmi", Toast.LENGTH_SHORT).show()
 
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
