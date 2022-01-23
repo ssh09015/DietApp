@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         resultButton.setOnClickListener {
             if (heightEditText.length()==0 && weightEditText.length()==0){ //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
-                Toast.makeText(this,"값을 모두 입력해주세요",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"값을 모두 입력해주세요.",Toast.LENGTH_SHORT).show()
             }
             else{
                 saveData(heightEditText.text.toString().toInt(), weightEditText.text.toString().toInt())
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         recommandButton.setOnClickListener { //추천 버튼 누르면 나오는 액티비티(세이)
             if (heightEditText.length()==0 && weightEditText.length()==0){ //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기(세이)
-                Toast.makeText(this,"값을 모두 입력해주세요",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"값을 모두 입력해주세요.",Toast.LENGTH_SHORT).show()
             }
             else{
                 var intent=Intent(this, recommand::class.java)
