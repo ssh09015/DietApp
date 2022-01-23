@@ -11,7 +11,7 @@ import android.widget.TextView
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class Cal : AppCompatActivity() {
+class Cal : AppCompatActivity() { //달력 파트(세이)
     var userID: String = "userID"
     lateinit var fname: String
     lateinit var str: String
@@ -24,9 +24,10 @@ class Cal : AppCompatActivity() {
     lateinit var title:TextView
     lateinit var contextEditText: EditText
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cal)
+        setContentView(R.layout.activity_main)
 
         // UI값 생성
         calendarView=findViewById(R.id.calendarView)
@@ -39,6 +40,7 @@ class Cal : AppCompatActivity() {
         contextEditText=findViewById(R.id.contextEditText)
 
         title.text = "달력 일기장"
+
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             diaryTextView.visibility = View.VISIBLE
             saveBtn.visibility = View.VISIBLE
@@ -63,6 +65,7 @@ class Cal : AppCompatActivity() {
         }
     }
 
+    // 달력 내용 조회, 수정
     fun checkDay(cYear: Int, cMonth: Int, cDay: Int, userID: String) {
         //저장할 파일 이름설정
         fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
@@ -111,6 +114,7 @@ class Cal : AppCompatActivity() {
         }
     }
 
+
     // 달력 내용 제거
     @SuppressLint("WrongConstant")
     fun removeDiary(readDay: String?) {
@@ -139,5 +143,4 @@ class Cal : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
 }
