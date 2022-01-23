@@ -39,7 +39,7 @@ class Cal : AppCompatActivity() { //달력 파트(세이)
         title=findViewById(R.id.title)
         contextEditText=findViewById(R.id.contextEditText)
 
-        title.text = "달력 일기장"
+        title.text = "Daily Memo"
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             diaryTextView.visibility = View.VISIBLE
