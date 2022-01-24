@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 
 class ResultActivity : AppCompatActivity() {
@@ -42,6 +44,24 @@ class ResultActivity : AppCompatActivity() {
 
         //progressbar는 정수만 되는 관계로 bmi를 int형으로 변경 (윤솔)
         var bmiInt : Int = bmi.toInt()
+
+        // 정상 몸무게 계산 (송하)
+        var normalWeight : Double = 22.9 * Math.pow(height/100.0, 2.0)
+
+        // 증량/감량 해야하는 몸무게 계산 (송하)
+        var goalWeight : Double
+        when {
+            normalWeight > weight && bmi < 18.5 -> {
+                goalWeight = normalWeight - weight
+            }
+            normalWeight < weight && bmi >= 23 -> {
+                goalWeight = weight - normalWeight
+            }
+            else -> {
+                goalWeight = 0.0
+            }
+        }
+        goalWeight = round(goalWeight)
 
         //글자로 출력
         when {
@@ -100,17 +120,19 @@ class ResultActivity : AppCompatActivity() {
             // bmi 값을 RecoWay로 전달 (송하)
             intent.putExtra("bmi", bmi)
             intent.putExtra("num", num)
+            intent.putExtra("goalWeight", goalWeight)
             startActivity(intent)
             val intent2 = Intent(this, recommand::class.java)
             // bmi 값을 RecoWay로 전달 (송하)
             intent2.putExtra("bmi", bmi)
             intent2.putExtra("num", num)
+            intent2.putExtra("goalWeight", goalWeight)
         }
 
         //progress 진행(max = 40이고 진행은 bmiInt 숫자로) progress 관련 수정은 activity_bmi_result에서 완료!!
             progressBar.max = 40
             progressBar.progress = bmiInt
 
-
     }
+
 }
