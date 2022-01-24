@@ -8,10 +8,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_check_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DietApp"> //런처 아이콘(세이)
+        android:theme="@style/Theme.DietApp">
+        <activity android:name=".SplashScreenActivity"
+            android:theme="@style/SplashScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Cal"
-            android:parentActivityName=".MainActivity"/> // 업 네비게이션 부분 (세이)
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".recommand"
             android:parentActivityName=".MainActivity" />
@@ -22,11 +30,6 @@
             android:name=".ResultActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
