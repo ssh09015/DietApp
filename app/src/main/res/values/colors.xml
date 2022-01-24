@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="button">#FFFFFFFF</color>//버튼 색
+    <color name="top_bar">#FF3649AA</color>//상단 색
+    <color name="background">#FFDDE5FF</color>//배경 색
 </resources>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
-
 
 
     <EditText
@@ -15,8 +15,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="185dp"
         android:layout_marginEnd="16dp"
-        android:hint="키"
         android:ems="10"
+        android:hint="키"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,31 +35,41 @@
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/recommendButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/heightEditText"
+        app:layout_constraintVertical_bias="0.227" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/resultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="131dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button_resource"
         android:text="입력"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/recommendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="131dp"
+        android:background="@drawable/button_resource"
         android:text="추천"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
