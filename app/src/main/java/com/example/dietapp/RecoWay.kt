@@ -40,7 +40,7 @@ class RecoWay : AppCompatActivity() {
         // 추천 운동에서 동영상 부분을 누르면 추천 운동 영상의 유튜브 링크로 이동 (송하)
         when {
             // 정상 (유지)
-            bmi >= 18.5 && num == 1 -> {
+            bmi >= 18.5 && num == 2 -> {
                 text1.text = "과식하지 않기\n" + "물 많이 먹기"
                 text2.text = "유산소(소미핏)"
                 text3.text = "운동 전 스트레칭 (땅끄부부)"
@@ -58,7 +58,7 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 정상 (감량)
-            bmi >= 18.5 && num == 2 -> {
+            bmi >= 18.5 && num == 1 -> {
                 text1.text = "야식, 간식 줄이기\n" + "과식하지 않기\n" + "물 많이 먹기\n" + "식사 시간에 채소 먹는 양 늘리기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신운동 (힘으뜸)"
@@ -83,7 +83,7 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 과체중 (유지)
-            bmi >= 23 && num == 1 -> {
+            bmi >= 23 && num == 2 -> {
                     text1.text = "과식하지 않기\n" + "물 많이 먹기"
                     text2.text = "유산소(소미핏)"
                     text3.text = "운동 전 스트레칭 (땅끄부부)"
@@ -102,7 +102,7 @@ class RecoWay : AppCompatActivity() {
                     }
             }
             // 과체중 (감량)
-            bmi >= 23 && num == 2-> {
+            bmi >= 23 && num == 1 -> {
                 text1.text = "야식, 간식 줄이기\n" + "과식하지 않기\n" + "물 많이 먹기\n" + "식사 시간에 채소 먹는 양 늘리기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신운동 (힘으뜸)"

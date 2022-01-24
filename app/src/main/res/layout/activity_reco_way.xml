@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".RecoWay">
 
     <ScrollView
@@ -33,7 +34,7 @@
             <ImageView
                 android:id="@+id/habit_image"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="150dp"
                 app:srcCompat="@drawable/habit" />
 
             <TextView
@@ -59,7 +60,7 @@
             <ImageView
                 android:id="@+id/exercise_image"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="150dp"
                 app:srcCompat="@drawable/exercise" />
 
             <LinearLayout
@@ -89,7 +90,13 @@
 
             </LinearLayout>
 
-        <LinearLayout
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -115,7 +122,13 @@
                 app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
         </LinearLayout>
 
-        <LinearLayout
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
             android:id="@+id/reco_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
