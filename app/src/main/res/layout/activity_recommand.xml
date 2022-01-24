@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingTop="30dp"
             android:paddingBottom="16dp"
@@ -24,86 +24,127 @@
                 android:id="@+id/recoText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="추천 습관"
+                android:layout_gravity="center"
+                android:text="@string/reco_habit"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="24sp"
-                tools:textAlignment="center" />
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/habitImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:srcCompat="@drawable/habit" />
 
             <TextView
                 android:id="@+id/recoText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="하루 세번 규칙적으로 식사하기\n물 많이 먹기"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
+                android:layout_gravity="center"
                 android:padding="10dp"
-                tools:textAlignment="center" />
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/recoText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="추천 운동"
+                android:padding="10dp"
+                android:text="@string/reco_exercise"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="24sp"
-                android:padding="10dp"
-                tools:textAlignment="center" />
+                android:textSize="36sp" />
 
-            <TextView
-                android:id="@+id/recoText4"
+            <ImageView
+                android:id="@+id/exerciseImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:srcCompat="@drawable/exercise" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="유산소 (빅씨스)"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
-                android:padding="10dp"
-                tools:textAlignment="center" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <ImageButton
-                android:id="@+id/recoImage1"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:padding="10dp"
-                android:tint="@color/white"
-                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+                <TextView
+                    android:id="@+id/recoText4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/recoText5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="운동 전 스트레칭 (소미핏)"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
-                android:padding="10dp"
-                tools:textAlignment="center" />
+                <ImageButton
+                    android:id="@+id/recoImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_square"
+                    android:padding="10dp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
-            <ImageButton
-                android:id="@+id/recoImage2"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:padding="10dp"
-                android:tint="@color/white"
-                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/recoText6"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="타바타운동 (핏블리)"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
-                android:padding="10dp"
-                tools:textAlignment="center" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <ImageButton
-                android:id="@+id/recoImage3"
+                <TextView
+                    android:id="@+id/recoText5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/recoImage2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_square"
+                    android:padding="10dp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/recoLayout"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:padding="10dp"
-                android:tint="@color/white"
-                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/recoText6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/recoImage3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_square"
+                    android:padding="10dp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>
