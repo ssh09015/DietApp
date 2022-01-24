@@ -90,31 +90,22 @@ class ResultActivity : AppCompatActivity() {
             when(checkedId){
                 R.id.radioButton1 -> {
                     num = 1
-                    val intent = Intent(this, RecoWay::class.java)
-                    // bmi 값을 RecoWay로 전달 (송하)
-                    intent.putExtra("bmi", bmi)
-                    intent.putExtra("num", num)
-                    startActivity(intent)
-                    val intent2 = Intent(this, recommand::class.java)
-                    // bmi 값을 RecoWay로 전달 (송하)
-                    intent2.putExtra("bmi", bmi)
-                    intent2.putExtra("num", num)
-                    startActivity(intent2)
                 }
 
                 R.id.radioButton2 -> {
                     num = 2
-                    val intent = Intent(this, RecoWay::class.java)
-                    intent.putExtra("bmi", bmi)
-                    intent.putExtra("num", num)
-                    startActivity(intent)
-                    val intent2 = Intent(this, recommand::class.java)
-                    // bmi 값을 RecoWay로 전달 (송하)
-                    intent2.putExtra("bmi", bmi)
-                    intent2.putExtra("num", num)
-                    startActivity(intent2)
                 }
             }
+            val intent = Intent(this, RecoWay::class.java)
+            // bmi 값을 RecoWay로 전달 (송하)
+            intent.putExtra("bmi", bmi)
+            intent.putExtra("num", num)
+            startActivity(intent)
+            val intent2 = Intent(this, recommand::class.java)
+            // bmi 값을 RecoWay로 전달 (송하)
+            intent2.putExtra("bmi", bmi)
+            intent2.putExtra("num", num)
+            startActivity(intent2)
         }
 
 
