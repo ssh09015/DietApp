@@ -42,6 +42,7 @@ class ResultActivity : AppCompatActivity() {
 
         //progressbar는 정수만 되는 관계로 bmi를 int형으로 변경 (윤솔)
         var bmiInt : Int = bmi.toInt()
+
         //글자로 출력
         when {
             bmi >= 35 -> ResultTextView.text = "고도 비만"
