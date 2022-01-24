@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 
 class RecoWay : AppCompatActivity() {
@@ -16,6 +17,7 @@ class RecoWay : AppCompatActivity() {
     lateinit var text2: TextView
     lateinit var text3: TextView
     lateinit var text4: TextView
+    lateinit var layout : LinearLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class RecoWay : AppCompatActivity() {
         text2 = findViewById(R.id.textView2)
         text3 = findViewById(R.id.textView5)
         text4 = findViewById(R.id.textView6)
+        layout = findViewById(R.id.recoLayout2)
 
         // ResultActivity에서 bmi 값 받기 (송하)
         var bmi = intent.getDoubleExtra("bmi", 0.0)
@@ -41,8 +44,7 @@ class RecoWay : AppCompatActivity() {
                 text1.text = "과식하지 않기\n" + "물 많이 먹기"
                 text2.text = "유산소(소미핏)"
                 text3.text = "운동 전 스트레칭 (땅끄부부)"
-                text4.visibility = android.view.View.INVISIBLE
-                video3.visibility = android.view.View.INVISIBLE
+                layout.visibility = android.view.View.INVISIBLE
 
                 video1.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW)
@@ -85,8 +87,7 @@ class RecoWay : AppCompatActivity() {
                     text1.text = "과식하지 않기\n" + "물 많이 먹기"
                     text2.text = "유산소(소미핏)"
                     text3.text = "운동 전 스트레칭 (땅끄부부)"
-                    text4.visibility = android.view.View.INVISIBLE
-                    video3.visibility = android.view.View.INVISIBLE
+                    layout.visibility = android.view.View.INVISIBLE
 
                     video1.setOnClickListener {
                         val intent = Intent(Intent.ACTION_VIEW)
@@ -130,8 +131,7 @@ class RecoWay : AppCompatActivity() {
                 text1.text = "야식, 간식 줄이기\n" + "식사 시간에 채소 먹는 양 늘리기\n" + "물 많이 먹기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신 스트레칭 (제이제이샬롱드핏)"
-                text4.visibility = android.view.View.INVISIBLE
-                video3.visibility = android.view.View.INVISIBLE
+                layout.visibility = android.view.View.INVISIBLE
 
                 video1.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW)
@@ -175,8 +175,7 @@ class RecoWay : AppCompatActivity() {
                 text1.text = "야식, 간식 줄이기\n" + "식사 시간에 채소 먹는 양 늘리기\n" + "물 많이 먹기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신 스트레칭 (DanoTV)"
-                text4.visibility = android.view.View.INVISIBLE
-                video3.visibility = android.view.View.INVISIBLE
+                layout.visibility = android.view.View.INVISIBLE
 
                 video1.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW)

@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="추천 습관"
+                android:text="@string/reco_habit"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="36sp" />
@@ -42,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:text="하루 세번 규칙적으로 식사하기\n물 많이 먹기"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="20sp" />
@@ -52,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="추천 운동"
+                android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="36sp" />
@@ -75,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="유산소 (빅씨스)"
+                    android:text=""
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
@@ -103,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:text="운동 전 스트레칭 (소미핏)"
+                android:text=""
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="20sp" />
@@ -119,6 +118,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/recoLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:text="타바타운동 (핏블리)"
+                android:text=""
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="20sp" />
@@ -149,4 +149,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>
