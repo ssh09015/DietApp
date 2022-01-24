@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">//radio버튼 배경색에 대한 xml(윤솔)
+
+    <item android:state_checked="true"
+        android:drawable="@drawable/selector_radio_text"/>//클릭했을 때 radio 버튼 배경색(윤솔)
+
+    <item android:state_checked="false"
+        android:drawable="@drawable/selector_radio_button"/>//클릭하지 않았을 때 radio 버튼 배경색(윤솔)
+
+</selector>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">//기본 형태의 버튼 색, 모양 정의(윤솔)
+    <solid android:color="@color/button" />
+    <corners android:radius="8dp"/>
+</shape>

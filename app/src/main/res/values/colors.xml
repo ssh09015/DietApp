@@ -11,4 +11,5 @@
     <color name="top_bar">#FF3649AA</color>//상단 색
     <color name="background">#FFDDE5FF</color>//배경 색
     <color name="red">#FFFF0000</color>//동영상 버튼 색
+    <color name="radio_button_click">#FFFF3399</color>//라디오 버튼 클릭했을 때 배경색
 </resources>
