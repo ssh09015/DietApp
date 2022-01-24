@@ -4,12 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Toast
-
+import android.widget.*
 
 
 class ResultActivity : AppCompatActivity() {
@@ -20,6 +15,7 @@ class ResultActivity : AppCompatActivity() {
     lateinit var radioGroup: RadioGroup
     lateinit var radioButton1: RadioButton
     lateinit var radioButton2: RadioButton
+    lateinit var progressBar : ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +28,7 @@ class ResultActivity : AppCompatActivity() {
         radioGroup = findViewById(R.id.RadioGroup)
         radioButton1 = findViewById(R.id.radioButton2)
         radioButton2 = findViewById(R.id.radioButton1)
+        progressBar = findViewById(R.id.progressBar)
 
 
 
@@ -43,6 +40,8 @@ class ResultActivity : AppCompatActivity() {
         //BMI 계산_변수형 Double로 변경 (송하)
         var bmi : Double = weight / Math.pow(height/100.0, 2.0)
 
+        //progressbar는 정수만 되는 관계로 bmi를 int형으로 변경 (윤솔)
+        var bmiInt : Int = bmi.toInt()
         //글자로 출력
         when {
             bmi >= 35 -> ResultTextView.text = "고도 비만"
@@ -106,6 +105,10 @@ class ResultActivity : AppCompatActivity() {
             intent2.putExtra("bmi", bmi)
             intent2.putExtra("num", num)
         }
+
+        //progress 진행(max = 40이고 진행은 bmiInt 숫자로) progress 관련 수정은 activity_bmi_result에서 완료!!
+            progressBar.max = 40
+            progressBar.progress = bmiInt
 
 
     }
