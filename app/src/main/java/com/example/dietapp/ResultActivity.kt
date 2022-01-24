@@ -105,7 +105,6 @@ class ResultActivity : AppCompatActivity() {
             // bmi 값을 RecoWay로 전달 (송하)
             intent2.putExtra("bmi", bmi)
             intent2.putExtra("num", num)
-            startActivity(intent2)
         }
 
 
