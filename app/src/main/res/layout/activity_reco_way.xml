@@ -28,7 +28,13 @@
                 android:text="추천 습관"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="24sp" />
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:srcCompat="@drawable/habit" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -37,35 +43,42 @@
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:text="하루 세번 규칙적으로 식사하기\n물 많이 먹기"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
-                android:textAlignment="center" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="추천 운동"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="24sp"
                 android:padding="10dp"
-                android:textAlignment="center" />
+                android:text="추천 운동"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:srcCompat="@drawable/exercise" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="10dp">
+
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="유산소 (빅씨스)"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="18sp"
-                    android:padding="10dp"
                     android:layout_weight="1"
-                    android:textAlignment="center" />
+                    android:padding="10dp"
+                    android:text="유산소 (빅씨스)"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/imageButton"
@@ -88,12 +101,12 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="운동 전 스트레칭 (소미핏)"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
-                android:padding="10dp"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:padding="10dp"
+                android:text="운동 전 스트레칭 (소미핏)"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/imageButton1"
@@ -115,12 +128,12 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="타바타운동 (핏블리)"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="18sp"
-                android:padding="10dp"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:padding="10dp"
+                android:text="타바타운동 (핏블리)"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
