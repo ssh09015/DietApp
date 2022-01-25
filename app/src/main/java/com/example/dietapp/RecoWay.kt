@@ -19,6 +19,7 @@ class RecoWay : AppCompatActivity() {
     lateinit var text4: TextView
     lateinit var layout : LinearLayout
     lateinit var goalText : TextView
+    lateinit var goalText1 : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class RecoWay : AppCompatActivity() {
         text4 = findViewById(R.id.reco_text6)
         layout = findViewById(R.id.reco_layout)
         goalText = findViewById(R.id.goal_text2)
+        goalText1 = findViewById(R.id.goal_text1)
 
         // ResultActivity에서 bmi 값 받기 (송하)
         var bmi = intent.getDoubleExtra("bmi", 0.0)
@@ -43,8 +45,9 @@ class RecoWay : AppCompatActivity() {
         // 추천 운동에서 동영상 부분을 누르면 추천 운동 영상의 유튜브 링크로 이동 (송하)
         when {
             // 정상 (유지)
-            bmi >= 18.5 && num == 2 -> {
-                goalText.text = "$weight"+"kg 입니다."
+            bmi >= 18.5 && bmi < 23 && num == 2 -> {
+                goalText1.visibility = android.view.View.INVISIBLE
+                goalText.text = "정상 체중입니다!"
                 text1.text = "과식하지 않기\n" + "물 많이 먹기"
                 text2.text = "유산소(소미핏)"
                 text3.text = "운동 전 스트레칭 (땅끄부부)"
@@ -62,8 +65,9 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 정상 (감량)
-            bmi >= 18.5 && num == 1 -> {
-                goalText.text = "$weight"+"kg 입니다."
+            bmi >= 18.5 && bmi < 23 && num == 1 -> {
+                goalText1.visibility = android.view.View.INVISIBLE
+                goalText.text = "정상 체중입니다!"
                 text1.text = "야식, 간식 줄이기\n" + "과식하지 않기\n" + "물 많이 먹기\n" + "식사 시간에 채소 먹는 양 늘리기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신운동 (힘으뜸)"
@@ -88,8 +92,8 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 과체중 (유지)
-            bmi >= 23 && num == 2 -> {
-                goalText.text = "$weight"+"kg 입니다."
+            bmi >= 23 && bmi < 25 && num == 2 -> {
+                goalText.text = "$weight"+"kg 감량 필요!"
                 text1.text = "과식하지 않기\n" + "물 많이 먹기"
                 text2.text = "유산소(소미핏)"
                 text3.text = "운동 전 스트레칭 (땅끄부부)"
@@ -108,8 +112,8 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 과체중 (감량)
-            bmi >= 23 && num == 1 -> {
-                goalText.text = "$weight"+"kg 입니다."
+            bmi >= 23 && bmi < 25 && num == 1 -> {
+                goalText.text = "$weight"+"kg 감량 필요!"
                 text1.text = "야식, 간식 줄이기\n" + "과식하지 않기\n" + "물 많이 먹기\n" + "식사 시간에 채소 먹는 양 늘리기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신운동 (힘으뜸)"
@@ -134,8 +138,8 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 1단계 비만
-            bmi >= 25 -> {
-                goalText.text = "$weight"+"kg 입니다."
+            bmi >= 25 && bmi < 30 -> {
+                goalText.text = "$weight"+"kg 감량 필요!"
                 text1.text = "야식, 간식 줄이기\n" + "식사 시간에 채소 먹는 양 늘리기\n" + "물 많이 먹기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신 스트레칭 (제이제이샬롱드핏)"
@@ -154,8 +158,8 @@ class RecoWay : AppCompatActivity() {
                 }
             }
             // 2단계 비만
-            bmi >= 30 -> {
-                goalText.text = "$weight"+"kg 입니다."
+            bmi >= 30 && bmi < 35 -> {
+                goalText.text = "$weight"+"kg 감량 필요!"
                 text1.text = "야식, 간식 줄이기\n" + "식사 시간에 채소 먹는 양 늘리기\n" + "물 많이 먹기"
                 text2.text = "유산소 (힘으뜸)"
                 text3.text = "걷기 유산소 (땅끄부부)"
@@ -181,7 +185,7 @@ class RecoWay : AppCompatActivity() {
             }
             // 3단계 비만
             bmi >= 35 -> {
-                goalText.text = "$weight"+"kg 입니다."
+                goalText.text = "$weight"+"kg 감량 필요!"
                 text1.text = "야식, 간식 줄이기\n" + "식사 시간에 채소 먹는 양 늘리기\n" + "물 많이 먹기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "전신 스트레칭 (DanoTV)"
@@ -201,7 +205,7 @@ class RecoWay : AppCompatActivity() {
             }
             // 저체중
             else -> {
-                goalText.text = "$weight"+"kg 입니다."
+                goalText.text = "$weight"+"kg 증량 필요!"
                 text1.text = "하루 세번 규칙적으로 식사하기\n물 많이 먹기"
                 text2.text = "유산소 (빅씨스)"
                 text3.text = "운동 전 스트레칭 (소미핏)"
