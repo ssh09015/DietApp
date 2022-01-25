@@ -18,6 +18,8 @@ class ResultActivity : AppCompatActivity() {
     lateinit var radioButton1: RadioButton
     lateinit var radioButton2: RadioButton
     lateinit var progressBar : ProgressBar
+    lateinit var bmiButton: Button
+    lateinit var myBmi: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,8 @@ class ResultActivity : AppCompatActivity() {
         radioButton1 = findViewById(R.id.radioButton2)
         radioButton2 = findViewById(R.id.radioButton1)
         progressBar = findViewById(R.id.progressBar)
-
+        bmiButton = findViewById(R.id.bmiButton)
+        myBmi = findViewById(R.id.myBmi)
 
 
         var height = intent.getStringExtra("height").toInt()
@@ -112,9 +115,6 @@ class ResultActivity : AppCompatActivity() {
             }
         }
 
-        //토스트 문구
-        Toast.makeText(this,  "$bmi", Toast.LENGTH_SHORT).show()
-
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.radioButton1 -> {
@@ -147,6 +147,12 @@ class ResultActivity : AppCompatActivity() {
         //progress 진행(max = 40이고 진행은 bmiInt 숫자로) progress 관련 수정은 activity_bmi_result에서 완료!!
             progressBar.max = 40
             progressBar.progress = bmiInt
+
+        bmiButton.setOnClickListener {
+            Toast.makeText(this,"키와 몸무게를 이용하여 지방의 양을 추정하는 비만 측정법",Toast.LENGTH_LONG).show()
+        }
+
+        myBmi.text = bmiInt.toString()
 
     }
 
