@@ -33,7 +33,6 @@
         android:ems="10"
         android:hint="몸무게"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/recommendButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,21 +55,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.574" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/recommendButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="131dp"
-        android:background="@drawable/button_resource"
-        android:text="추천"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
 
     <Button
         android:id="@+id/logoutButton"
