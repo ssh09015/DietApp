@@ -24,18 +24,19 @@
             <TextView
                 android:id="@+id/recoText1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="46dp"
                 android:layout_gravity="center"
+                android:fontFamily="@font/maruburibold"
                 android:text="@string/reco_habit"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/habitImage"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="128dp"
                 app:srcCompat="@drawable/habit" />
 
             <TextView
@@ -44,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="10dp"
+                android:fontFamily="@font/maruburibold"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="20sp" />
@@ -52,17 +54,18 @@
                 android:id="@+id/recoText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/maruburibold"
                 android:padding="10dp"
                 android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/exerciseImage"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="128dp"
                 app:srcCompat="@drawable/exercise" />
 
             <LinearLayout
@@ -77,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
+                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
@@ -110,6 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
+                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
@@ -143,6 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
+                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />

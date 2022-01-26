@@ -26,10 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/maruburibold"
                 android:text="@string/goal"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -38,28 +39,30 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:fontFamily="@font/maruburibold"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/red"
-                android:textSize="36sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/reco_text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/maruburibold"
                 android:padding="10dp"
                 android:text="@string/reco_habit"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/habit_image"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="128dp"
                 app:srcCompat="@drawable/habit" />
 
             <TextView
@@ -68,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="10dp"
+                android:fontFamily="@font/maruburibold"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="20sp" />
@@ -76,17 +80,18 @@
                 android:id="@+id/reco_text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/maruburibold"
                 android:padding="10dp"
                 android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/exercise_image"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="128dp"
                 app:srcCompat="@drawable/exercise" />
 
             <LinearLayout
@@ -101,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
+                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
@@ -135,6 +141,7 @@
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:textAlignment="center"
+                android:fontFamily="@font/maruburibold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="20sp" />
 
@@ -166,6 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/maruburibold"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
