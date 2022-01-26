@@ -3,11 +3,15 @@ package com.example.dietapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 //activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
 class MainActivity : AppCompatActivity() {
@@ -19,6 +23,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null) {
+            myStartActivity(SignUpActivity::class.java)
+        } else {
+            val db = FirebaseFirestore.getInstance()
+            val docRef = db.collection("users").document(user.uid)
+            docRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (document != null) {
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.data)
+                        } else {
+                            Log.d(TAG, "No such document")
+                            myStartActivity(MemberInitActivity::class.java)
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.exception)
+                }
+            }
+        }
+        findViewById<View>(R.id.logoutButton).setOnClickListener(onClickListener)
         resultButton = findViewById<Button>(R.id.resultButton)
         heightEditText = findViewById<EditText>(R.id.heightEditText)
         weightEditText = findViewById<EditText>(R.id.weightEditText)
@@ -49,6 +77,21 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
+    var onClickListener = View.OnClickListener { view ->
+        when (view.id) {
+            R.id.logoutButton -> {
+                FirebaseAuth.getInstance().signOut()
+                myStartActivity(SignUpActivity::class.java)
+            }
+        }
+    }
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        startActivity(intent)
+    }
+    companion object {
+        private const val TAG = "MainActivity"
     }
 
     private fun saveData(height: Int, weight: Int){
