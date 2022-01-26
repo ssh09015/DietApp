@@ -29,7 +29,8 @@
                 android:text="@string/reco_habit"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/habitImage"
@@ -55,7 +56,8 @@
                 android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/exerciseImage"

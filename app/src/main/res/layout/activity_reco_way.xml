@@ -29,7 +29,8 @@
                 android:text="@string/goal"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/goal_text2"
@@ -48,11 +49,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:padding="10dp"
                 android:text="@string/reco_habit"
                 android:textAlignment="center"
-                android:padding="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/habit_image"
@@ -78,7 +80,8 @@
                 android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/exercise_image"
