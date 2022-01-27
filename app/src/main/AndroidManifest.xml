@@ -36,7 +36,8 @@
         <activity
             android:name=".ResultActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
 
 
 

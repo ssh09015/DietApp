@@ -12,6 +12,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var weightEditText: EditText
     lateinit var navigationView : NavigationView
     lateinit var drawerLayout : DrawerLayout
+    lateinit var rv_todo : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         resultButton = findViewById<Button>(R.id.resultButton)
         heightEditText = findViewById<EditText>(R.id.heightEditText)
         weightEditText = findViewById<EditText>(R.id.weightEditText)
+        rv_todo = findViewById<RecyclerView>(R.id.rv_todo)
 
         loadData()
 
@@ -88,6 +92,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
         }
+
+        // 투두 리스트 우선 지정해 놓기 (지인)
+        val todoList = arrayListOf(
+            Todolist("어깨운동"),
+            Todolist("유산소 운동"),
+            Todolist("물 마시기")
+        )
+        // todolist.kt에 있는 목록을 불러오기 (지인)
+        rv_todo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_todo.setHasFixedSize(true)
+        rv_todo.adapter = TodoAdapter(todoList)
+
     }
 
     // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
@@ -161,20 +177,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-   // override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
-     //   menuInflater.inflate(R.menu.main,menu)
-   //     return true
-  //  }
+    // override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
+    //   menuInflater.inflate(R.menu.main,menu)
+    //     return true
+    //  }
 
-   // override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
-   //     when(item?.itemId){
-       //     R.id.action_cal->{
-          //      var intent=Intent(this, Cal::class.java)
-          //      startActivity(intent)
-       //     }
-     //  }
+    // override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
+    //     when(item?.itemId){
+    //     R.id.action_cal->{
+    //      var intent=Intent(this, Cal::class.java)
+    //      startActivity(intent)
+    //     }
+    //  }
     //    return super.onOptionsItemSelected(item)
-  //  }
+    //  }
 
 
 }
