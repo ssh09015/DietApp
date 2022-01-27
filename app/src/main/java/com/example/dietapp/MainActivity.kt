@@ -60,20 +60,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정
+        // 툴바를 액티비티의 앱바로 지정 (송하)
         setSupportActionBar(toolbar)
 
-        // 드로어를 꺼낼 홈 버튼 활성화
+        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 이미지 변경
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        // 툴바에 타이틀 안보이게
+        // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         drawerLayout = findViewById(R.id.drawer_layout)
 
         navigationView = findViewById(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너
+        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
         resultButton.setOnClickListener {
             if (heightEditText.length()==0 && weightEditText.length()==0){ //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
@@ -101,7 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onOptionsItemSelected(item)
     }
 
-    // navigation에서 각 아이템이 클릭되었을 때 할일
+    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_cal->{
@@ -112,7 +113,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return false
     }
 
-    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기
+    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
