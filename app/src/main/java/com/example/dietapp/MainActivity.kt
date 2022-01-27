@@ -10,18 +10,24 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 //activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var resultButton: Button//추후에 초기화 변수타입
     lateinit var heightEditText: EditText
     lateinit var weightEditText: EditText
+    lateinit var navigationView : NavigationView
+    lateinit var drawerLayout : DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setContentView(R.layout.navi_main)
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
@@ -52,6 +58,23 @@ class MainActivity : AppCompatActivity() {
 
         loadData()
 
+        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+
+        // 툴바를 액티비티의 앱바로 지정
+        setSupportActionBar(toolbar)
+
+        // 드로어를 꺼낼 홈 버튼 활성화
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 홈버튼 이미지 변경
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        // 툴바에 타이틀 안보이게
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+
+        navigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너
+
         resultButton.setOnClickListener {
             if (heightEditText.length()==0 && weightEditText.length()==0){ //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
                 Toast.makeText(this,"값을 모두 입력해주세요.",Toast.LENGTH_SHORT).show()
@@ -66,6 +89,38 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item!!.itemId){
+            android.R.id.home -> { // 메뉴 버튼
+                drawerLayout.openDrawer(GravityCompat.START) // 네비게이션 드로어 열기
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    // navigation에서 각 아이템이 클릭되었을 때 할일
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_cal->{
+                var intent=Intent(this, Cal::class.java)
+                startActivity(intent)
+            }
+        }
+        return false
+    }
+
+    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     var onClickListener = View.OnClickListener { view ->
         when (view.id) {
             R.id.logoutButton -> {
@@ -105,20 +160,20 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
-        menuInflater.inflate(R.menu.main,menu)
-        return true
-    }
+   // override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
+     //   menuInflater.inflate(R.menu.main,menu)
+   //     return true
+  //  }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
-        when(item?.itemId){
-            R.id.action_cal->{
-                var intent=Intent(this, Cal::class.java)
-                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+   // override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
+   //     when(item?.itemId){
+       //     R.id.action_cal->{
+          //      var intent=Intent(this, Cal::class.java)
+          //      startActivity(intent)
+       //     }
+     //  }
+    //    return super.onOptionsItemSelected(item)
+  //  }
 
 
 }
