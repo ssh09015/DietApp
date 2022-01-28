@@ -26,11 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/maruburibold"
+                android:fontFamily="@font/nanummingyeong"
                 android:text="@string/goal"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="25sp"
+                android:textSize="42sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -39,24 +39,30 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:fontFamily="@font/maruburibold"
+                android:fontFamily="@font/nanummingyeong"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/red"
-                android:textSize="25sp" />
+                android:textSize="35sp" />
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/reco_text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/maruburibold"
+                android:fontFamily="@font/nanummingyeong"
                 android:padding="10dp"
                 android:text="@string/reco_habit"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="25sp"
+                android:textSize="42sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -70,22 +76,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/nanummingyeong"
                 android:padding="10dp"
-                android:fontFamily="@font/maruburibold"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="20sp" />
+                android:textSize="30sp" />
+
+            <View
+                android:id="@+id/divider8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/reco_text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maruburibold"
+                android:fontFamily="@font/nanummingyeong"
                 android:padding="10dp"
                 android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="25sp"
+                android:textSize="42sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -105,11 +117,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nanummingyeong"
                     android:padding="10dp"
-                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <ImageButton
                     android:id="@+id/reco_image1"
@@ -134,16 +146,16 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/reco_text5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:textAlignment="center"
-                android:fontFamily="@font/maruburibold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/reco_text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanummingyeong"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="30sp" />
 
             <ImageButton
                 android:id="@+id/reco_image2"
@@ -168,16 +180,16 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/reco_text6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/maruburibold"
-                android:padding="10dp"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/reco_text6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanummingyeong"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="30sp" />
 
             <ImageButton
                 android:id="@+id/reco_image3"

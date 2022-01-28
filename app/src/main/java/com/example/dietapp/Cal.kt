@@ -30,6 +30,7 @@ class Cal : AppCompatActivity() { //달력 파트(세이)
         setContentView(R.layout.activity_main)
         setContentView(R.layout.activity_cal)
 
+
         // UI값 생성
         calendarView=findViewById(R.id.calendarView)
         diaryTextView=findViewById(R.id.diaryTextView)
@@ -144,4 +145,6 @@ class Cal : AppCompatActivity() { //달력 파트(세이)
             e.printStackTrace()
         }
     }
+
+
 }

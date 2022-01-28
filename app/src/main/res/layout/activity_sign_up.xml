@@ -7,14 +7,31 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView12"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fontFamily="@font/maruburibold"
+        android:layout_height="52dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanummingyeong"
+        android:text="HealthLog"
+        android:textAlignment="center"
+        android:textColor="#378ACC"
+        android:textSize="62sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/bmiRateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:fontFamily="@font/nanummingyeong"
         android:gravity="center"
+        android:letterSpacing="0.2"
         android:text="회원가입"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -29,9 +46,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:ems="10"
-            android:fontFamily="@font/maruburiregular"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="이메일"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:letterSpacing="0.1"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -39,9 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:ems="10"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="비밀번호"
-            android:fontFamily="@font/maruburiregular"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:letterSpacing="0.1"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/passwordCheckEditText"
@@ -49,18 +70,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:ems="10"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="비밀번호 확인"
-            android:fontFamily="@font/maruburiregular"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:letterSpacing="0.1"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/maruburibold"
+            android:fontFamily="@font/nanummingyeong"
+            android:letterSpacing="0.1"
             android:text="회원가입"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:backgroundTint="@color/button" />
 
@@ -68,10 +92,11 @@
             android:id="@+id/gotoLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/maruburibold"
+            android:fontFamily="@font/nanummingyeong"
+            android:letterSpacing="0.1"
             android:text="로그인"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:backgroundTint="@color/button" />
 

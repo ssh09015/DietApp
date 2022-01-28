@@ -24,13 +24,13 @@
             <TextView
                 android:id="@+id/recoText1"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/maruburibold"
+                android:fontFamily="@font/nanummingyeong"
                 android:text="@string/reco_habit"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="25sp"
+                android:textSize="42sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -44,22 +44,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/nanummingyeong"
                 android:padding="10dp"
-                android:fontFamily="@font/maruburibold"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="20sp" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/recoText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maruburibold"
+                android:fontFamily="@font/nanummingyeong"
                 android:padding="10dp"
                 android:text="@string/reco_exercise"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="25sp"
+                android:textSize="42sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -79,11 +79,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nanummingyeong"
                     android:padding="10dp"
-                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <ImageButton
                     android:id="@+id/recoImage1"
@@ -113,11 +113,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nanummingyeong"
                     android:padding="10dp"
-                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <ImageButton
                     android:id="@+id/recoImage2"
@@ -147,11 +147,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nanummingyeong"
                     android:padding="10dp"
-                    android:fontFamily="@font/maruburibold"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <ImageButton
                     android:id="@+id/recoImage3"

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import kotlin.math.round
-import kotlin.math.roundToInt
 
 
 class ResultActivity : AppCompatActivity() {
@@ -30,11 +29,11 @@ class ResultActivity : AppCompatActivity() {
         ResultTextView = findViewById(R.id.bmiResultTextView)
         imageView = findViewById<ImageView>(R.id.imageView)
         radioGroup = findViewById(R.id.RadioGroup)
-        radioButton1 = findViewById(R.id.radioButton2)
-        radioButton2 = findViewById(R.id.radioButton1)
+        radioButton1 = findViewById(R.id.bmiResultButton2)
+        radioButton2 = findViewById(R.id.bmiResultButton1)
         progressBar = findViewById(R.id.progressBar)
-        bmiButton = findViewById(R.id.bmiButton)
-        myBmi = findViewById(R.id.myBmi)
+        bmiButton = findViewById(R.id.bmiToastButton)
+        myBmi = findViewById(R.id.myBmiTextView)
 
 
         var height = intent.getStringExtra("height").toInt()
@@ -117,7 +116,7 @@ class ResultActivity : AppCompatActivity() {
 
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
-                R.id.radioButton1 -> {
+                R.id.bmiResultButton1 -> {
                     num = 1
                     val intent = Intent(this, RecoWay::class.java)
                     // bmi 값을 RecoWay로 전달 (송하)
@@ -127,7 +126,7 @@ class ResultActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                R.id.radioButton2 -> {
+                R.id.bmiResultButton2 -> {
                     num = 2
                     val intent = Intent(this, RecoWay::class.java)
                     // bmi 값을 RecoWay로 전달 (송하)
