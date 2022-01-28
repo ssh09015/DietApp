@@ -136,11 +136,6 @@ class ResultActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            val intent2 = Intent(this, recommand::class.java)
-            // bmi 값을 RecoWay로 전달 (송하)
-            intent2.putExtra("bmi", bmi)
-            intent2.putExtra("num", num)
-            intent2.putExtra("goalWeight", goalWeight)
         }
 
         //progress 진행(max = 40이고 진행은 bmiInt 숫자로) progress 관련 수정은 activity_bmi_result에서 완료!!
