@@ -5,6 +5,6 @@
     <item
         android:id="@+id/action_cal"
         android:icon="@drawable/ic_baseline_calendar_today_24"
-        android:title="@string/action_cal"
-        app:showAsAction="ifRoom" />
+        android:title="@string/action_cal" />
+
 </menu>
