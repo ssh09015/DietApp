@@ -8,6 +8,20 @@
     android:orientation="vertical"
     tools:context=".Cal">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/top_bar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="353dp"
