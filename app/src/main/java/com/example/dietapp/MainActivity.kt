@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -26,24 +27,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawerLayout : DrawerLayout
     lateinit var rv_todo : RecyclerView
 
-    lateinit var memberButton: Button // 회원정보 페이지 확인해보려고 임시로 넣은 버튼
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContentView(R.layout.navi_main)
 
-        // 회원정보 입력
         val user = FirebaseAuth.getInstance().currentUser
-        if (user == null) { // 현재 등록된 유저가 없을 때
+        if (user == null) {
             myStartActivity(SignUpActivity::class.java)
-        } else { // 파이어베이스 정보 가져오기
+        } else {
             val db = FirebaseFirestore.getInstance()
-            val docRef = db.collection("users").document(user.uid) // 사용자 고유 id로 파이어베이스 정보 가져오기
+            val docRef = db.collection("users").document(user.uid)
             docRef.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val document = task.result
-                    // 회원 정보 있으면 안 뜨게
                     if (document != null) {
                         if (document.exists()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.data)
@@ -61,12 +58,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         heightEditText = findViewById<EditText>(R.id.heightEditText)
         weightEditText = findViewById<EditText>(R.id.weightEditText)
         rv_todo = findViewById<RecyclerView>(R.id.rv_todo)
-
-        memberButton=findViewById(R.id.memberButton) // 회원정보 보는 임시 버튼
-        memberButton.setOnClickListener {
-            myStartActivity(UserInfoActivity::class.java)
-        }
-
 
         loadData()
 
@@ -101,17 +92,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-
         // 투두 리스트 우선 지정해 놓기 (지인)
         val todoList = arrayListOf(
-                Todolist("어깨운동"),
-                Todolist("유산소 운동"),
-                Todolist("물 마시기")
+            Todolist("어깨운동"),
+            Todolist("유산소 운동"),
+            Todolist("물 마시기")
         )
         // todolist.kt에 있는 목록을 불러오기 (지인)
         rv_todo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_todo.setHasFixedSize(true)
         rv_todo.adapter = TodoAdapter(todoList)
+
     }
 
     // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
@@ -129,9 +120,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_cal->{
-                var intent=Intent(this, Cal::class.java)
+            R.id.action_home -> {
+                Toast.makeText(this, "여기가 메인화면입니다.", Toast.LENGTH_SHORT).show()
+            }
+            R.id.action_cal -> {
+                var intent = Intent(this, Cal::class.java)
                 startActivity(intent)
+            }
+            R.id.action_account -> {
+                // 회원정보 페이지로 이동
+            }
+            R.id.action_logout -> {
+                // 로그아웃 기능
+                FirebaseAuth.getInstance().signOut()
+                myStartActivity(SignUpActivity::class.java)
+                Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
+            }
+            R.id.action_information -> {
+                // 앱정보 화면으로 이동
             }
         }
         return false
@@ -146,40 +152,51 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    // 로그아웃 버튼 누를 때 (세이)
-    var onClickListener = View.OnClickListener { view ->
-        when (view.id) {
-            R.id.logoutButton -> {
-                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
-                myStartActivity(SignUpActivity::class.java)
-            }
-        }
-    }
-    private fun myStartActivity(c: Class<*>) { // 인텐트 이동을 따로 함수로 만듦 (세이)
+    private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)
     }
-    companion object { // 태그 선언
-        const val TAG = "MainActivity"
+    companion object {
+        private const val TAG = "MainActivity"
     }
 
-
-    private fun saveData(height: Int, weight: Int){ // SharedPreference로 키, 몸무게 저장(세이)
+    private fun saveData(height: Int, weight: Int){
         var pref = this.getPreferences(0)
         var editor = pref.edit()
 
+        //editor.putString("KEY_NAME", nameEditText.text.toString()).apply()
         editor.putInt("KEY_HEIGHT", heightEditText.text.toString().toInt()).apply()
         editor.putInt("KEY_WEIGHT", weightEditText.text.toString().toInt()).apply()
     }
 
     private fun loadData(){
-        var pref=this.getPreferences(0) // SharedPreference로 키, 몸무게 저장(세이)
+        var pref=this.getPreferences(0)
+        //var name = pref.getString("KEY_NAME", "")
         var height = pref.getInt("KEY_HEIGHT", 0)
         var weight = pref.getInt("KEY_WEIGHT", 0)
 
         if(height != 0 && weight != 0){
+            //nameEditText.setText(name.toString())
             heightEditText.setText(height.toString())
             weightEditText.setText(weight.toString())
         }
     }
+
+
+    // override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
+    //   menuInflater.inflate(R.menu.main,menu)
+    //     return true
+    //  }
+
+    // override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
+    //     when(item?.itemId){
+    //     R.id.action_cal->{
+    //      var intent=Intent(this, Cal::class.java)
+    //      startActivity(intent)
+    //     }
+    //  }
+    //    return super.onOptionsItemSelected(item)
+    //  }
+
+
 }

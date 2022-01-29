@@ -36,7 +36,7 @@
             android:paddingRight="16dp" >
 
             <TextView
-                android:id="@+id/goal_text1"
+                android:id="@+id/goalText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -48,7 +48,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/goal_text2"
+                android:id="@+id/goalText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -67,7 +67,7 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/reco_text1"
+                android:id="@+id/recoText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -80,13 +80,13 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/habit_image"
+                android:id="@+id/habitImage"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
                 app:srcCompat="@drawable/habit" />
 
             <TextView
-                android:id="@+id/reco_text2"
+                android:id="@+id/recoText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -103,7 +103,7 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/reco_text3"
+                android:id="@+id/recoText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanummingyeong"
@@ -115,7 +115,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/exercise_image"
+                android:id="@+id/exerciseImage"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
                 app:srcCompat="@drawable/exercise" />
@@ -127,7 +127,7 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/reco_text4"
+                    android:id="@+id/recoText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -138,7 +138,7 @@
                     android:textSize="30sp" />
 
                 <ImageButton
-                    android:id="@+id/reco_image1"
+                    android:id="@+id/recoImage1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_square"
@@ -161,7 +161,7 @@
             android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/reco_text5"
+                    android:id="@+id/recoText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -172,7 +172,7 @@
                     android:textSize="30sp" />
 
             <ImageButton
-                android:id="@+id/reco_image2"
+                android:id="@+id/recoImage2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_square"
@@ -188,14 +188,14 @@
                 android:background="?android:attr/listDivider" />
 
             <LinearLayout
-            android:id="@+id/reco_layout"
+            android:id="@+id/recoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/reco_text6"
+                    android:id="@+id/recoText6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -206,7 +206,7 @@
                     android:textSize="30sp" />
 
             <ImageButton
-                android:id="@+id/reco_image3"
+                android:id="@+id/recoImage3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_square"
