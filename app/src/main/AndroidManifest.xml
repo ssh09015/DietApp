@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_check_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".UserInfoActivity"></activity>
+        <activity android:name=".MemberManagement" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".PasswordResetActivity" />
         <activity android:name=".MemberInitActivity" />
         <activity android:name=".LoginActivity" />
@@ -36,11 +38,9 @@
         <activity
             android:name=".ResultActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-
-
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
