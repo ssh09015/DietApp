@@ -3,8 +3,13 @@ package com.example.dietapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlin.math.round
 
 
@@ -35,6 +40,17 @@ class ResultActivity : AppCompatActivity() {
         bmiButton = findViewById(R.id.bmiToastButton)
         myBmi = findViewById(R.id.myBmiTextView)
 
+
+        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+
+        // 툴바를 액티비티의 앱바로 지정 (송하)
+        setSupportActionBar(toolbar)
+        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
+        // 툴바에 타이틀 안보이게 (송하)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
@@ -149,5 +165,4 @@ class ResultActivity : AppCompatActivity() {
         myBmi.text = bmiInt.toString()
 
     }
-
 }

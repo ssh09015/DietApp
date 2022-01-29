@@ -22,15 +22,12 @@ class Cal : AppCompatActivity() { //달력 파트(세이)
     lateinit var contextEditText: EditText //사용자가 메모를 입력하는 영역
 
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContentView(R.layout.activity_cal)
+
+
 
         calendarView=findViewById(R.id.calendarView)
         diaryTextView=findViewById(R.id.diaryTextView)
@@ -47,14 +44,16 @@ class Cal : AppCompatActivity() { //달력 파트(세이)
 
 
 
+        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-
-
-
-
-
-
-
+        // 툴바를 액티비티의 앱바로 지정 (송하)
+        setSupportActionBar(toolbar)
+        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
+        // 툴바에 타이틀 안보이게 (송하)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
 
 
