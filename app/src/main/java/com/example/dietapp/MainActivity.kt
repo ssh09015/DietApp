@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             }
         }
-        findViewById<View>(R.id.logoutButton).setOnClickListener(onClickListener)
         resultButton = findViewById<Button>(R.id.resultButton)
         heightEditText = findViewById<EditText>(R.id.heightEditText)
         weightEditText = findViewById<EditText>(R.id.weightEditText)
@@ -153,14 +152,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    var onClickListener = View.OnClickListener { view ->
-        when (view.id) {
-            R.id.logoutButton -> {
-                FirebaseAuth.getInstance().signOut()
-                myStartActivity(SignUpActivity::class.java)
-            }
-        }
-    }
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)

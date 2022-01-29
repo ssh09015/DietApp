@@ -76,22 +76,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.507" />
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="157dp"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/nanummingyeong"
-        android:text="로그아웃"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:textStyle="normal"
-        android:letterSpacing="0.1"
-        app:backgroundTint="@color/button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -114,13 +98,10 @@
         android:layout_height="1dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="280dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_todo"
@@ -129,10 +110,8 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="15dp"
         android:background="@drawable/button_resource"
         android:fontFamily="@font/nanummingyeong"
-        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultButton" />
