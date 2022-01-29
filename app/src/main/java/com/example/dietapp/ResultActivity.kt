@@ -3,10 +3,14 @@ package com.example.dietapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlin.math.round
-import kotlin.math.roundToInt
 
 
 class ResultActivity : AppCompatActivity() {
@@ -30,12 +34,23 @@ class ResultActivity : AppCompatActivity() {
         ResultTextView = findViewById(R.id.bmiResultTextView)
         imageView = findViewById<ImageView>(R.id.imageView)
         radioGroup = findViewById(R.id.RadioGroup)
-        radioButton1 = findViewById(R.id.radioButton2)
-        radioButton2 = findViewById(R.id.radioButton1)
+        radioButton1 = findViewById(R.id.bmiResultButton2)
+        radioButton2 = findViewById(R.id.bmiResultButton1)
         progressBar = findViewById(R.id.progressBar)
-        bmiButton = findViewById(R.id.bmiButton)
-        myBmi = findViewById(R.id.myBmi)
+        bmiButton = findViewById(R.id.bmiToastButton)
+        myBmi = findViewById(R.id.myBmiTextView)
 
+
+        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+
+        // 툴바를 액티비티의 앱바로 지정 (송하)
+        setSupportActionBar(toolbar)
+        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
+        // 툴바에 타이틀 안보이게 (송하)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
@@ -117,7 +132,7 @@ class ResultActivity : AppCompatActivity() {
 
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
-                R.id.radioButton1 -> {
+                R.id.bmiResultButton1 -> {
                     num = 1
                     val intent = Intent(this, RecoWay::class.java)
                     // bmi 값을 RecoWay로 전달 (송하)
@@ -127,7 +142,7 @@ class ResultActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                R.id.radioButton2 -> {
+                R.id.bmiResultButton2 -> {
                     num = 2
                     val intent = Intent(this, RecoWay::class.java)
                     // bmi 값을 RecoWay로 전달 (송하)
@@ -137,11 +152,6 @@ class ResultActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            val intent2 = Intent(this, recommand::class.java)
-            // bmi 값을 RecoWay로 전달 (송하)
-            intent2.putExtra("bmi", bmi)
-            intent2.putExtra("num", num)
-            intent2.putExtra("goalWeight", goalWeight)
         }
 
         //progress 진행(max = 40이고 진행은 bmiInt 숫자로) progress 관련 수정은 activity_bmi_result에서 완료!!
@@ -155,5 +165,4 @@ class ResultActivity : AppCompatActivity() {
         myBmi.text = bmiInt.toString()
 
     }
-
 }

@@ -7,14 +7,31 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView6"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fontFamily="@font/maruburibold"
+        android:layout_height="52dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/flower"
+        android:text="HealthLog"
+        android:textAlignment="center"
+        android:textColor="#378ACC"
+        android:textSize="62sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/bmiRateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:fontFamily="@font/nanummingyeong"
         android:gravity="center"
         android:text="회원정보"
+        android:letterSpacing="0.2"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -28,45 +45,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="이름"
-            android:fontFamily="@font/maruburiregular"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/phoneNumberEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="전화번호"
-            android:fontFamily="@font/maruburiregular"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/birthDayEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="생년월일"
-            android:fontFamily="@font/maruburiregular"
-            android:inputType="date" />
+            android:inputType="date"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/addressEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/nanummingyeong"
             android:hint="주소"
-            android:fontFamily="@font/maruburiregular"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/checkButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/maruburibold"
+            android:fontFamily="@font/nanummingyeong"
             android:text="확인"
+            android:letterSpacing="0.1"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:backgroundTint="@color/button" />
 

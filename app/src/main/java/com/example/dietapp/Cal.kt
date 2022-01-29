@@ -1,19 +1,15 @@
 package com.example.dietapp
 
 import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-// 달력 액티비티 (세이)
-class Cal : AppCompatActivity() {
-    var userID:String="" // 스트링 타입 변수
+class Cal : AppCompatActivity() { //달력 파트(세이)
+    var userID: String = "userID"
     lateinit var fname: String //파일 이름
     lateinit var str: String //메모한 내용
     lateinit var calendarView: CalendarView //캘린더
@@ -24,6 +20,11 @@ class Cal : AppCompatActivity() {
     lateinit var diaryContent:TextView //메모하고 난 후 메모 영역
     lateinit var title:TextView //제목
     lateinit var contextEditText: EditText //사용자가 메모를 입력하는 영역
+
+
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,29 +41,22 @@ class Cal : AppCompatActivity() {
         title=findViewById(R.id.title)
         contextEditText=findViewById(R.id.contextEditText)
 
-        // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
-        val user = FirebaseAuth.getInstance().currentUser
-        val db = FirebaseFirestore.getInstance()
-        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
-        docRef?.get()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val document = task.result
-                if (document != null) {
-                    if (document.exists()) { // 정보가 있으면
-                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
-                        userID=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
-                        title.text=document.data?.get("name").toString() // 달력 이름 바꾸기
-                        /*if(userID!=null){ // userID 값 들어왔는지 확인
-                            startToast(title.toString())
-                        }*/
-                    } else {
-                        Log.d(MainActivity.TAG, "No such document")
-                    }
-                }
-            } else {
-                Log.d(MainActivity.TAG, "get failed with ", task.exception)
-            }
-        }
+        title.text = "Daily Memo"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // 날짜 눌릴 때
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -76,7 +70,7 @@ class Cal : AppCompatActivity() {
 
             diaryTextView.text = String.format("%d / %d / %d", year, month + 1, dayOfMonth) //날짜 정보 가져오기
             contextEditText.setText("")
-            checkDay(year, month, dayOfMonth, userID) // checkDay 함수에 넘기기
+            checkDay(year, month, dayOfMonth, userID)
         }
 
         // 저장 버튼 눌릴 때
@@ -95,11 +89,10 @@ class Cal : AppCompatActivity() {
         }
     }
 
-    // 로그인한 사용자를 알아보는 달력
     // 달력 내용 조회, 수정
     fun checkDay(cYear: Int, cMonth: Int, cDay: Int, userID: String) {
         //저장할 파일 이름설정
-        fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt" // 메모 내용 저장할 파일 이름 설정
+        fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
 
         var fileInputStream: FileInputStream
 
@@ -168,30 +161,15 @@ class Cal : AppCompatActivity() {
 
     // 달력 내용 추가
     @SuppressLint("WrongConstant")
-
     fun saveDiary(readDay: String?) {
         var fileOutputStream: FileOutputStream
-
-        fileOutputStream = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS)
-
-        val content = contextEditText.text.toString()
-
         try {
-            fileOutputStream = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS) // 파일에 쓰기
+            fileOutputStream = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS)
             val content = contextEditText.text.toString()
             fileOutputStream.write(content.toByteArray())
             fileOutputStream.close()
-
-            if(content!=null){
-                startToast(readDay.toString())
-            }
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
-    }
-
-    // 토스트 메시지 따로 함수 만듦
-    private fun startToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }
