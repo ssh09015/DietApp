@@ -3,8 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/action_home" />
+
+    <item
         android:id="@+id/action_cal"
         android:icon="@drawable/ic_baseline_calendar_today_24"
         android:title="@string/action_cal" />
+
+    <item
+        android:id="@+id/action_account"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/action_account" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_baseline_logout_24"
+        android:title="@string/action_logout" />
+
+    <item
+         android:id="@+id/action_information"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/action_information" />
 
 </menu>

@@ -121,9 +121,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_cal->{
-                var intent=Intent(this, Cal::class.java)
+            R.id.action_home -> {
+                Toast.makeText(this, "여기가 메인화면입니다.", Toast.LENGTH_SHORT).show()
+            }
+            R.id.action_cal -> {
+                var intent = Intent(this, Cal::class.java)
                 startActivity(intent)
+            }
+            R.id.action_account -> {
+                // 회원정보 페이지로 이동
+            }
+            R.id.action_logout -> {
+                // 로그아웃 기능
+                FirebaseAuth.getInstance().signOut()
+                myStartActivity(SignUpActivity::class.java)
+                Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
+            }
+            R.id.action_information -> {
+                // 앱정보 화면으로 이동
             }
         }
         return false
