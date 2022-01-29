@@ -3,7 +3,6 @@ package com.example.dietapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,7 +28,7 @@ class TodoAdapter(val itemlist: ArrayList<Todolist>) : RecyclerView.Adapter<Todo
 
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //val checked = itemView.findViewById<CheckBox>(R.id.iv_checkbox)
-        val content = itemView.findViewById<TextView>(R.id.tv_content)
+        val content = itemView.findViewById<TextView>(R.id.todoTextView)
     }
 
 }

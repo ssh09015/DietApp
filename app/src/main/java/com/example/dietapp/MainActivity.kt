@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var weightEditText: EditText
     lateinit var navigationView : NavigationView
     lateinit var drawerLayout : DrawerLayout
-    lateinit var rv_todo : RecyclerView
+    lateinit var todoRecyclerView : RecyclerView
+    lateinit var addButton: Button
 
     lateinit var memberButton: Button // 회원정보 페이지 확인해보려고 임시로 넣은 버튼
 
@@ -60,7 +61,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         resultButton = findViewById<Button>(R.id.resultButton)
         heightEditText = findViewById<EditText>(R.id.heightEditText)
         weightEditText = findViewById<EditText>(R.id.weightEditText)
-        rv_todo = findViewById<RecyclerView>(R.id.rv_todo)
+        todoRecyclerView = findViewById<RecyclerView>(R.id.todoRecyclerView)
+        addButton = findViewById<Button>(R.id.addButton)
 
         memberButton=findViewById(R.id.memberButton) // 회원정보 보는 임시 버튼
         memberButton.setOnClickListener {
@@ -108,9 +110,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Todolist("물 마시기")
         )
         // todolist.kt에 있는 목록을 불러오기 (지인)
-        rv_todo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_todo.setHasFixedSize(true)
-        rv_todo.adapter = TodoAdapter(todoList)
+        todoRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        todoRecyclerView.setHasFixedSize(true)
+        todoRecyclerView.adapter = TodoAdapter(todoList)
 
     }
 

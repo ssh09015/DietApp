@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.827">
 
         <CheckBox
-            android:id="@+id/iv_checkbox"
+            android:id="@+id/todoCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_content"
+            android:id="@+id/todoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -39,8 +39,8 @@
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_checkbox"
-            app:layout_constraintStart_toEndOf="@+id/iv_checkbox"
-            app:layout_constraintTop_toTopOf="@+id/iv_checkbox" />
+            app:layout_constraintBottom_toBottomOf="@+id/todoCheckBox"
+            app:layout_constraintStart_toEndOf="@+id/todoCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/todoCheckBox" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

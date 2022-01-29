@@ -104,7 +104,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_todo"
+        android:id="@+id/todoRecyclerView"
         android:layout_width="388dp"
         android:layout_height="171dp"
         android:layout_marginStart="7dp"
@@ -112,6 +112,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_resource"
         android:fontFamily="@font/nanummingyeong"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultButton" />
@@ -125,6 +126,18 @@
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/logoutButton" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="58dp"
+        android:text="추가"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todoRecyclerView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
