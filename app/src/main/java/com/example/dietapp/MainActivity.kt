@@ -122,6 +122,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.action_home -> {
                 Toast.makeText(this, "여기가 메인화면입니다.", Toast.LENGTH_SHORT).show()
+                drawerLayout.closeDrawers()
             }
             R.id.action_cal -> {
                 var intent = Intent(this, Cal::class.java)
@@ -181,22 +182,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             weightEditText.setText(weight.toString())
         }
     }
-
-
-    // override fun onCreateOptionsMenu(menu: Menu?): Boolean { //캘린더 메뉴(세이)
-    //   menuInflater.inflate(R.menu.main,menu)
-    //     return true
-    //  }
-
-    // override fun onOptionsItemSelected(item: MenuItem): Boolean { //캘린더 아이콘 누르면(세이)
-    //     when(item?.itemId){
-    //     R.id.action_cal->{
-    //      var intent=Intent(this, Cal::class.java)
-    //      startActivity(intent)
-    //     }
-    //  }
-    //    return super.onOptionsItemSelected(item)
-    //  }
-
-
 }
