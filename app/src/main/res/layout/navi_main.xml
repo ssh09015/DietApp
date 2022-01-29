@@ -21,6 +21,7 @@
         android:fitsSystemWindows="true"
         android:background="@color/background"
         app:menu="@menu/main"
-        app:headerLayout="@layout/navi_header"/>
+        app:headerLayout="@layout/navi_header"
+        app:itemTextAppearance="@style/MenuItemFont"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

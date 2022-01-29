@@ -64,11 +64,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         todoRecyclerView = findViewById<RecyclerView>(R.id.todoRecyclerView)
         addButton = findViewById<Button>(R.id.addButton)
 
-        memberButton=findViewById(R.id.memberButton) // 회원정보 보는 임시 버튼
-        memberButton.setOnClickListener {
-            myStartActivity(UserInfoActivity::class.java)
-        }
-
 
         loadData()
 
@@ -133,17 +128,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.action_home -> {
                 Toast.makeText(this, "여기가 메인화면입니다.", Toast.LENGTH_SHORT).show()
+                drawerLayout.closeDrawers()
             }
             R.id.action_cal -> {
                 var intent = Intent(this, Cal::class.java)
                 startActivity(intent)
             }
             R.id.action_account -> {
-                // 회원정보 페이지로 이동
+                myStartActivity(UserInfoActivity::class.java)
             }
             R.id.action_logout -> {
                 // 로그아웃 기능
-                FirebaseAuth.getInstance().signOut()
+                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
                 myStartActivity(SignUpActivity::class.java)
                 Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
             }
@@ -163,15 +159,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    // 로그아웃 버튼 누를 때 (세이)
-    var onClickListener = View.OnClickListener { view ->
-        when (view.id) {
-            R.id.logoutButton -> {
-                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
-                myStartActivity(SignUpActivity::class.java)
-            }
-        }
-    }
     private fun myStartActivity(c: Class<*>) { // 인텐트 이동을 따로 함수로 만듦 (세이)
         val intent = Intent(this, c)
         startActivity(intent)

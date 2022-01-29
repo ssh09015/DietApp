@@ -40,6 +40,17 @@ class Cal : AppCompatActivity() {
         title=findViewById(R.id.title)
         contextEditText=findViewById(R.id.contextEditText)
 
+        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+
+        // 툴바를 액티비티의 앱바로 지정 (송하)
+        setSupportActionBar(toolbar)
+        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
+        // 툴바에 타이틀 안보이게 (송하)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
