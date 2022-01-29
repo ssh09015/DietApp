@@ -1,5 +1,6 @@
 package com.example.dietapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,7 +50,8 @@ class UserInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun myStartActivity(c: Class<*>) { // 인텐트 이동 함수 따로 만듦듦        val intent = Intent(this, c)
+    private fun myStartActivity(c: Class<*>) { // 인텐트 이동 함수 따로 만듦듦
+        val intent = Intent(this, c)
         startActivity(intent)
     }
 }

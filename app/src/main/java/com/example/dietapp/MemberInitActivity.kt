@@ -68,15 +68,15 @@ class MemberInitActivity : AppCompatActivity() {
 
             if (user != null) {
                 db.collection("users").document(user.uid).set(memberInfo)
-                    .addOnSuccessListener {
-                        startToast("회원정보 등록을 성공하였습니다.")
-                        myStartActivity(MainActivity::class.java)
-                        finish()
-                    }
-                    .addOnFailureListener { e ->
-                        startToast("회원정보 등록에 실패하였습니다.")
-                        Log.w(TAG, "Error writing document", e)
-                    }
+                        .addOnSuccessListener {
+                            startToast("회원정보 등록을 성공하였습니다.")
+                            myStartActivity(MainActivity::class.java)
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            startToast("회원정보 등록에 실패하였습니다.")
+                            Log.w(TAG, "Error writing document", e)
+                        }
             }
         } else {
             startToast("회원정보를 입력해주세요.")

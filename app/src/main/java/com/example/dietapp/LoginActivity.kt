@@ -34,17 +34,17 @@ class LoginActivity : AppCompatActivity() {
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
             mAuth!!.signInWithEmailAndPassword(email, password) // 로그인 (FirebaseAuth의 기능)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        val user = mAuth!!.currentUser // 현재 로그인된 유저 정보
-                        startToast("로그인에 성공하였습니다.")
-                        myStartActivity(MainActivity::class.java)
-                    } else {
-                        if (task.exception != null) {
-                            startToast(task.exception.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val user = mAuth!!.currentUser // 현재 로그인된 유저 정보
+                            startToast("로그인에 성공하였습니다.")
+                            myStartActivity(MainActivity::class.java)
+                        } else {
+                            if (task.exception != null) {
+                                startToast(task.exception.toString())
+                            }
                         }
                     }
-                }
         } else {
             startToast("이메일 또는 비밀번호를 입력해주세요.")
         }
