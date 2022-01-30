@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_check_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".UserInfoActivity"></activity>
-        <activity android:name=".MemberManagement" />
+        <activity android:name=".UserInfoActivity"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".PasswordResetActivity" />
         <activity android:name=".MemberInitActivity" />
@@ -28,9 +27,6 @@
         </activity>
         <activity
             android:name=".Cal"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".recommand"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RecoWay"

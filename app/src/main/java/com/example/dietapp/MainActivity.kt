@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 //activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var resultButton: Button//추후에 초기화 변수타입
+    lateinit var resultButton: Button //추후에 초기화 변수타입
     lateinit var heightEditText: EditText
     lateinit var weightEditText: EditText
     lateinit var navigationView : NavigationView
@@ -32,15 +32,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var list: ArrayList<Todolist>
     lateinit var todoAdapter: TodoAdapter
 
-
-    lateinit var memberButton: Button // 회원정보 페이지 확인해보려고 임시로 넣은 버튼
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContentView(R.layout.navi_main)
 
-        // 회원정보 입력
+        // 회원정보 입력(세이)
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) { // 현재 등록된 유저가 없을 때
             myStartActivity(SignUpActivity::class.java)
@@ -91,6 +88,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
+        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
+        var navi_header=navigationView.getHeaderView(0)
+        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
+        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
+
+        if (user == null) { // 현재 등록된 유저가 없을 때
+            myStartActivity(SignUpActivity::class.java)
+        } else { // 파이어베이스 정보 가져오기
+            val db = FirebaseFirestore.getInstance()
+            val docRef = db.collection("users").document(user.uid) // 사용자 고유 id로 파이어베이스 정보 가져오기
+            docRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (document != null) {
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.data)
+                            navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
+                            navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
+                        } else {
+                            Log.d(TAG, "No such document")
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.exception)
+                }
+            }
+        }
+
         resultButton.setOnClickListener {
             if (heightEditText.length()==0 && weightEditText.length()==0){ //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
                 Toast.makeText(this,"값을 모두 입력해주세요.",Toast.LENGTH_SHORT).show()
@@ -125,11 +150,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 .show()
         }
-
-
     }
 
-   
     // 리스트 불러오기
     private fun initRecyclerView(){
         todoRecyclerView.setHasFixedSize(true)
@@ -223,8 +245,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             weightEditText.setText(weight.toString())
         }
     }
-
-
-
 }
 

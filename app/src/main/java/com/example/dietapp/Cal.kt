@@ -63,7 +63,7 @@ Cal : AppCompatActivity() {
                     if (document.exists()) { // 정보가 있으면
                         Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
                         userID=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
-                        title.text=document.data?.get("name").toString() // 달력 이름 바꾸기
+                        title.text=document.data?.get("name").toString() + "의 달력"// 달력 이름 바꾸기
                         /*if(userID!=null){ // userID 값 들어왔는지 확인
                             startToast(title.toString())
                         }*/
