@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
+
 
 //activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +29,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawerLayout : DrawerLayout
     lateinit var todoRecyclerView : RecyclerView
     lateinit var addButton: Button
+    lateinit var list: ArrayList<Todolist>
+    lateinit var todoAdapter: TodoAdapter
+
 
     lateinit var memberButton: Button // 회원정보 페이지 확인해보려고 임시로 넣은 버튼
 
@@ -67,6 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         loadData()
 
+
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
         // 툴바를 액티비티의 앱바로 지정 (송하)
@@ -98,18 +105,49 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        // 투두 리스트 우선 지정해 놓기 (지인)
-        val todoList = arrayListOf(
-            Todolist("어깨운동"),
-            Todolist("유산소 운동"),
-            Todolist("물 마시기")
-        )
-        // todolist.kt에 있는 목록을 불러오기 (지인)
-        todoRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        todoRecyclerView.setHasFixedSize(true)
-        todoRecyclerView.adapter = TodoAdapter(todoList)
+        setDate()
+        initRecyclerView()
+
+        // 추가 버튼 누르면 리스트 추가(지인)
+        // 오류 수정 해야하는 부분
+        addButton.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val dialogView = layoutInflater.inflate(R.layout.activity_dialog, null)
+            val dialogText = dialogView.findViewById<EditText>(R.id.addText)
+
+            builder.setView(dialogView)
+                .setPositiveButton("확인"){dialogInterface,i ->
+                    val content = dialogText.text.toString()
+                    list.add(Todolist("$content"))
+                    todoAdapter.notifyDataSetChanged()
+                }
+                .setNegativeButton("취소") {dialogInterface, i ->
+                }
+                .show()
+        }
+
 
     }
+
+   
+    // 리스트 불러오기
+    private fun initRecyclerView(){
+        todoRecyclerView.setHasFixedSize(true)
+        todoAdapter = TodoAdapter(list)
+        val layoutManager = LinearLayoutManager(this)
+        todoRecyclerView.layoutManager = layoutManager
+        todoRecyclerView.adapter = todoAdapter
+        todoAdapter.notifyDataSetChanged() //새로추가
+    }
+
+    // 리스트 구성하기 (지인)
+    private fun setDate(){
+        list = arrayListOf()
+        list.add(Todolist("유산소 운동"))
+        list.add(Todolist("근육 운동"))
+
+    }
+
 
     // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -185,4 +223,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             weightEditText.setText(weight.toString())
         }
     }
+
+
+
 }
+

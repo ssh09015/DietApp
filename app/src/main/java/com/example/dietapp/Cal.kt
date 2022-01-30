@@ -12,7 +12,8 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 // 달력 액티비티 (세이)
-class Cal : AppCompatActivity() {
+class
+Cal : AppCompatActivity() {
     var userID:String="" // 스트링 타입 변수
     lateinit var fname: String //파일 이름
     lateinit var str: String //메모한 내용

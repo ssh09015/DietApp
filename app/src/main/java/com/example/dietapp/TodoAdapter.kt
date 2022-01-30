@@ -1,8 +1,11 @@
 package com.example.dietapp
 
+import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -21,14 +24,23 @@ class TodoAdapter(val itemlist: ArrayList<Todolist>) : RecyclerView.Adapter<Todo
 
     override fun onBindViewHolder(holder: TodoAdapter.CustomViewHolder, position: Int) {
         holder.content.text = itemlist.get(position).content
+        holder.checked.setOnCheckedChangeListener(null)
+        holder.checked.setOnCheckedChangeListener{ buttonView, isChecked ->
+            if(isChecked) {
+                holder.checked.setChecked(true)
+            }
+            else
+                holder.checked.setChecked(false)
+
+        }
 
     }
-
 
 
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        //val checked = itemView.findViewById<CheckBox>(R.id.iv_checkbox)
+        val checked = itemView.findViewById<CheckBox>(R.id.todoCheckBox)
         val content = itemView.findViewById<TextView>(R.id.todoTextView)
     }
+
 
 }
