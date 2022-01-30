@@ -10,8 +10,10 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="309dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/flower"
         android:text="당신만을 위한 건강기록 앱"
         android:textSize="35sp"
@@ -23,8 +25,9 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="match_parent"
+        android:layout_width="373dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:fontFamily="@font/flower"
         android:text="Healthy Log"
         android:textSize="25sp"
@@ -34,7 +37,11 @@
         android:id="@+id/navigationnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
         android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/navigationemailTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +51,7 @@
         android:id="@+id/navigationemailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
