@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawerLayoutMain)
 
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
@@ -191,8 +191,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 drawerLayout.closeDrawers()
             }
             R.id.action_cal -> {
-                var intent = Intent(this, Cal::class.java)
-                startActivity(intent)
+                myStartActivity(Cal::class.java)
             }
             R.id.action_account -> {
                 myStartActivity(UserInfoActivity::class.java)
@@ -205,8 +204,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.action_information -> {
                 // 앱정보 화면으로 이동
-                var intent = Intent(this, AppInformation::class.java)
-                startActivity(intent)
+                myStartActivity(AppInformation::class.java)
             }
         }
         return false

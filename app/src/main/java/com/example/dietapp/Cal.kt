@@ -1,11 +1,16 @@
 package com.example.dietapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.FileInputStream
@@ -13,7 +18,7 @@ import java.io.FileOutputStream
 
 // 달력 액티비티 (세이)
 class
-Cal : AppCompatActivity() {
+Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var userID:String="" // 스트링 타입 변수
     lateinit var fname: String //파일 이름
     lateinit var str: String //메모한 내용
@@ -25,12 +30,15 @@ Cal : AppCompatActivity() {
     lateinit var diaryContent:TextView //메모하고 난 후 메모 영역
     lateinit var title:TextView //제목
     lateinit var contextEditText: EditText //사용자가 메모를 입력하는 영역
+    lateinit var navigationView : NavigationView
+    lateinit var drawerLayout : DrawerLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContentView(R.layout.activity_cal)
+        setContentView(R.layout.navi_cal)
 
         calendarView=findViewById(R.id.calendarView)
         diaryTextView=findViewById(R.id.diaryTextView)
@@ -40,6 +48,7 @@ Cal : AppCompatActivity() {
         diaryContent=findViewById(R.id.diaryContent)
         title=findViewById(R.id.title)
         contextEditText=findViewById(R.id.contextEditText)
+        drawerLayout = findViewById(R.id.drawerLayoutCal)
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
@@ -51,6 +60,9 @@ Cal : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
         // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        navigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
@@ -202,8 +214,50 @@ Cal : AppCompatActivity() {
         }
     }
 
+    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_home -> {
+                myStartActivity(MainActivity::class.java)
+            }
+            R.id.action_cal -> {
+                startToast("여기가 캘린더 화면입니다.")
+                drawerLayout.closeDrawers()
+
+            }
+            R.id.action_account -> {
+                myStartActivity(UserInfoActivity::class.java)
+            }
+            R.id.action_logout -> {
+                // 로그아웃 기능
+                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
+                myStartActivity(SignUpActivity::class.java)
+                startToast("로그아웃 되었습니다.")
+            }
+            R.id.action_information -> {
+                // 앱정보 화면으로 이동
+                myStartActivity(AppInformation::class.java)
+            }
+        }
+        return false
+    }
+
+    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     // 토스트 메시지 따로 함수 만듦
     private fun startToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun myStartActivity(c: Class<*>) { // 세이가 메인화면에 만든 인텐트 이동 함수 가져옴 (송하)
+        val intent = Intent(this, c)
+        startActivity(intent)
     }
 }
