@@ -205,6 +205,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.action_information -> {
                 // 앱정보 화면으로 이동
+                var intent = Intent(this, AppInfo::class.java)
+                startActivity(intent)
             }
         }
         return false

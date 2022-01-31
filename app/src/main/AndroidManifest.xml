@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_check_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".UserInfoActivity"/>
+        <activity android:name=".AppInfo"></activity>
+        <activity android:name=".UserInfoActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".PasswordResetActivity" />
         <activity android:name=".MemberInitActivity" />
