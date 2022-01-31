@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.TextView
-import androidx.core.view.GravityCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -18,6 +18,8 @@ class UserInfoActivity : AppCompatActivity() {
     lateinit var birthDayTextView: TextView
     lateinit var addressTextView: TextView
 
+    lateinit var correctButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
@@ -26,6 +28,13 @@ class UserInfoActivity : AppCompatActivity() {
         phoneNumberTextView=findViewById(R.id.phoneNumberTextView)
         birthDayTextView=findViewById(R.id.birthDayTextView)
         addressTextView=findViewById(R.id.addressTextView)
+
+        correctButton=findViewById(R.id.correctButton)
+
+        // 회원정보 수정
+        correctButton.setOnClickListener {
+            myStartActivity(MemberInitActivity::class.java)
+        }
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
