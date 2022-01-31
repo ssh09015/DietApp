@@ -66,6 +66,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         weightEditText = findViewById<EditText>(R.id.weightEditText)
         todoRecyclerView = findViewById<RecyclerView>(R.id.todoRecyclerView)
         addButton = findViewById<Button>(R.id.addButton)
+        drawerLayout = findViewById(R.id.drawerLayoutMain)
+        navigationView = findViewById(R.id.naviViewMain)
 
 
         loadData()
@@ -83,9 +85,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        drawerLayout = findViewById(R.id.drawerLayoutMain)
-
-        navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
         // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)

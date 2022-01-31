@@ -49,6 +49,7 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
         title=findViewById(R.id.title)
         contextEditText=findViewById(R.id.contextEditText)
         drawerLayout = findViewById(R.id.drawerLayoutCal)
+        navigationView = findViewById(R.id.naviViewCal)
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
@@ -61,7 +62,6 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
         // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)

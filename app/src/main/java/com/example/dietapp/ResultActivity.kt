@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlin.math.round
 
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     //결과 페이지 부분 텍스트, 사진, 버튼 변수 선언(윤솔)
     lateinit var ResultTextView : TextView
@@ -24,11 +24,14 @@ class ResultActivity : AppCompatActivity() {
     lateinit var progressBar : ProgressBar
     lateinit var bmiButton: Button
     lateinit var myBmi: TextView
+    lateinit var navigationView : NavigationView
+    lateinit var drawerLayout : DrawerLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmi_result)
+        setContentView(R.layout.navi_result)
 
         //변수에 위젯 대입(윤솔)
         ResultTextView = findViewById(R.id.bmiResultTextView)
@@ -39,6 +42,8 @@ class ResultActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         bmiButton = findViewById(R.id.bmiToastButton)
         myBmi = findViewById(R.id.myBmiTextView)
+        drawerLayout = findViewById(R.id.drawerLayoutResult)
+        navigationView = findViewById(R.id.naviViewResult)
 
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
@@ -51,6 +56,8 @@ class ResultActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
         // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
@@ -164,5 +171,50 @@ class ResultActivity : AppCompatActivity() {
 
         myBmi.text = bmiInt.toString()
 
+    }
+
+    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_home -> {
+                myStartActivity(MainActivity::class.java)
+            }
+            R.id.action_cal -> {
+                myStartActivity(Cal::class.java)
+            }
+            R.id.action_account -> {
+                myStartActivity(UserInfoActivity::class.java)
+            }
+            R.id.action_logout -> {
+                // 로그아웃 기능
+                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
+                myStartActivity(SignUpActivity::class.java)
+                startToast("로그아웃 되었습니다.")
+            }
+            R.id.action_information -> {
+                // 앱정보 화면으로 이동
+                myStartActivity(AppInformation::class.java)
+            }
+        }
+        return false
+    }
+
+    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    // 토스트 메시지 따로 함수 만듦
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun myStartActivity(c: Class<*>) { // 세이가 메인화면에 만든 인텐트 이동 함수 가져옴 (송하)
+        val intent = Intent(this, c)
+        startActivity(intent)
     }
 }
