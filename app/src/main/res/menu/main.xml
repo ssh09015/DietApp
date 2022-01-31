@@ -18,6 +18,14 @@
         android:title="@string/action_account" />
 
     <item
+        android:id="@+id/action_walk"
+        android:title="만보기" />
+
+    <item
+        android:id="@+id/action_timer"
+        android:title="타이머" />
+
+    <item
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_baseline_logout_24"
         android:title="@string/action_logout" />

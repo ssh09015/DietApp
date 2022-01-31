@@ -195,6 +195,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.action_account -> {
                 myStartActivity(UserInfoActivity::class.java)
             }
+            R.id.action_walk -> {
+                myStartActivity(StepActivity::class.java)
+            }
+            // 송하 언니 타이머
+            /*R.id.action_timer -> {
+                myStartActivity(UserInfoActivity::class.java)
+            }*/
             R.id.action_logout -> {
                 // 로그아웃 기능
                 FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
