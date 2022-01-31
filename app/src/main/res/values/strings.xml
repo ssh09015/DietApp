@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DietApp</string>
+    <string name="app_name">HealthLog</string>
 
     <!-- 메뉴 아이템 (송하) -->
     <string name="action_cal">캘린더</string>

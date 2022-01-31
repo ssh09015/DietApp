@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="7dp"
         android:fontFamily="@font/flower"
-        android:text="HealthyLog"
+        android:text="@string/app_name"
         android:textColor="#FFFFFF"
         android:textSize="45sp"
         android:textStyle="bold"
