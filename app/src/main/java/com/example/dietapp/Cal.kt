@@ -64,6 +64,11 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
+        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
+        var navi_header=navigationView.getHeaderView(0)
+        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
+        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
+
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
@@ -76,6 +81,8 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
                         Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
                         userID=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
                         title.text=document.data?.get("name").toString() + "의 달력"// 달력 이름 바꾸기
+                        navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
+                        navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
                         /*if(userID!=null){ // userID 값 들어왔는지 확인
                             startToast(title.toString())
                         }*/

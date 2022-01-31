@@ -3,6 +3,7 @@ package com.example.dietapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -10,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.round
 
 
@@ -58,6 +60,32 @@ class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
+
+        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
+        var navi_header=navigationView.getHeaderView(0)
+        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
+        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
+
+        // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
+        val user = FirebaseAuth.getInstance().currentUser
+        val db = FirebaseFirestore.getInstance()
+        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+        docRef?.get()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document = task.result
+                if (document != null) {
+                    if (document.exists()) { // 정보가 있으면
+                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
+                        navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
+                        navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
+                    } else {
+                        Log.d(MainActivity.TAG, "No such document")
+                    }
+                }
+            } else {
+                Log.d(MainActivity.TAG, "get failed with ", task.exception)
+            }
+        }
 
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
