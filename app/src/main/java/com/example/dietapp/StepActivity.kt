@@ -45,7 +45,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
 
         // 걸음 센서 연결
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        stepCountSensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        stepCountSensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
 
         // 디바이스에 걸음 센서의 존재 여부 체크
         if (stepCountSensor == null) {
@@ -62,7 +62,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         // 걸음 센서 이벤트 발생시
-        if (event.sensor.type == Sensor.TYPE_STEP_COUNTER) {
+        if (event.sensor.type == Sensor.TYPE_STEP_DETECTOR) {
             if (event.values[0] == 1.0f) {
                 // 센서 이벤트가 발생할때 마다 걸음수 증가
                 currentSteps++
@@ -70,6 +70,5 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
             }
         }
     }
-
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 }
