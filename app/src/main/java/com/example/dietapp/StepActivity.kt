@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
+// 만보기(세이)
 class StepActivity : AppCompatActivity(), SensorEventListener {
     var sensorManager: SensorManager? = null
     var stepCountSensor: Sensor? = null
@@ -43,10 +44,6 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
         }
 
         // 걸음 센서 연결
-        // * 옵션
-        // - TYPE_STEP_DETECTOR:  리턴 값이 무조건 1, 앱이 종료되면 다시 0부터 시작
-        // - TYPE_STEP_COUNTER : 앱 종료와 관계없이 계속 기존의 값을 가지고 있다가 1씩 증가한 값을 리턴
-        //
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         stepCountSensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
@@ -59,14 +56,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
     public override fun onStart() {
         super.onStart()
         if (stepCountSensor != null) {
-            // 센서 속도 설정
-            // * 옵션
-            // - SENSOR_DELAY_NORMAL: 20,000 초 딜레이
-            // - SENSOR_DELAY_UI: 6,000 초 딜레이
-            // - SENSOR_DELAY_GAME: 20,000 초 딜레이
-            // - SENSOR_DELAY_FASTEST: 딜레이 없음
-            //
-            sensorManager!!.registerListener(this, stepCountSensor, SensorManager.SENSOR_DELAY_FASTEST)
+            sensorManager!!.registerListener(this, stepCountSensor, SensorManager.SENSOR_DELAY_FASTEST) // 센서 속도 설정
         }
     }
 
