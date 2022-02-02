@@ -22,15 +22,20 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
     var stepCountSensor: Sensor? = null
     var stepCountView: TextView? = null
     var resetButton: Button? = null
+    lateinit var ctoastbutton: Button
 
     // 현재 걸음 수
     var currentSteps = 0
+
+    // 현재 칼로리수
+    var calorie = 0
     @RequiresApi(api = Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_step)
         stepCountView = findViewById(R.id.stepCountView)
         resetButton=findViewById(R.id.resetButton)
+        ctoastbutton=findViewById(R.id.ctoastbutton)
 
         resetButton?.setOnClickListener(View.OnClickListener {
             currentSteps=0
@@ -50,6 +55,12 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
         // 디바이스에 걸음 센서의 존재 여부 체크
         if (stepCountSensor == null) {
             Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show()
+        }
+
+        //칼로리 계산 토스트 버튼
+        calorie = 33 * currentSteps
+        ctoastbutton.setOnClickListener {
+            Toast.makeText(this, "$calorie"+"Cal이 소모되었습니다.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -71,4 +82,13 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
         }
     }
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
+
+    //토스트 버튼 함수
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
+
+
+
 }
