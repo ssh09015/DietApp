@@ -104,7 +104,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/todoRecyclerView"
+        android:id="@+id/todoRecyclerview"
+        android:nestedScrollingEnabled="true"
         android:layout_width="388dp"
         android:layout_height="171dp"
         android:layout_marginStart="7dp"
@@ -112,22 +113,27 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_resource"
         android:fontFamily="@font/nanummingyeong"
-        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintBottom_toTopOf="@+id/addtdButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultButton" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/addtdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="58dp"
         android:text="추가"
+        android:fontFamily="@font/nanummingyeong"
+        android:textSize="25dp"
+        android:letterSpacing="0.1"
+        android:textStyle="normal|bold"
+        android:background="@drawable/button_resource"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todoRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/todoRecyclerview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

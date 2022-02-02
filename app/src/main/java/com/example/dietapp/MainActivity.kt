@@ -1,36 +1,43 @@
 package com.example.dietapp
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
+import java.util.*
 
 
 //activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener ,
+    OnDialogCloseListner {
     lateinit var resultButton: Button //추후에 초기화 변수타입
     lateinit var heightEditText: EditText
     lateinit var weightEditText: EditText
     lateinit var navigationView : NavigationView
     lateinit var drawerLayout : DrawerLayout
-    lateinit var todoRecyclerView : RecyclerView
-    lateinit var addButton: Button
-    lateinit var list: ArrayList<Todolist>
-    lateinit var todoAdapter: TodoAdapter
+    lateinit var todoRecyclerview: RecyclerView
+    lateinit var addtdButton: Button
+    lateinit var myDB: DataBaseHelper
+    lateinit var mList: MutableList<ToDoModel>
+    lateinit var adapter: ToDoAdapter
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +71,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         resultButton = findViewById<Button>(R.id.resultButton)
         heightEditText = findViewById<EditText>(R.id.heightEditText)
         weightEditText = findViewById<EditText>(R.id.weightEditText)
-        todoRecyclerView = findViewById<RecyclerView>(R.id.todoRecyclerView)
-        addButton = findViewById<Button>(R.id.addButton)
         drawerLayout = findViewById(R.id.drawerLayoutMain)
         navigationView = findViewById(R.id.naviViewMain)
 
@@ -73,7 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadData()
 
 
-        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
         // 툴바를 액티비티의 앱바로 지정 (송하)
         setSupportActionBar(toolbar)
@@ -88,9 +93,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
         // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
-        var navi_header=navigationView.getHeaderView(0)
-        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
-        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
+        var navi_header = navigationView.getHeaderView(0)
+        var navigationnameTextView =
+            navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
+        var navigationemailTextView =
+            navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
 
         if (user == null) { // 현재 등록된 유저가 없을 때
             myStartActivity(SignUpActivity::class.java)
@@ -103,7 +110,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     if (document != null) {
                         if (document.exists()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.data)
-                            navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
+                            navigationnameTextView.text =
+                                document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
                             navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
                         } else {
                             Log.d(TAG, "No such document")
@@ -116,11 +124,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         resultButton.setOnClickListener {
-            if (heightEditText.length()==0 && weightEditText.length()==0){ //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
-                Toast.makeText(this,"값을 모두 입력해주세요.",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                saveData(heightEditText.text.toString().toInt(), weightEditText.text.toString().toInt())
+            if (heightEditText.length() == 0 && weightEditText.length() == 0) { //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
+                Toast.makeText(this, "값을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                saveData(
+                    heightEditText.text.toString().toInt(),
+                    weightEditText.text.toString().toInt()
+                )
                 //버튼이 눌릴때 동작
                 var intent = Intent(this, ResultActivity::class.java) //bmi결과페이지로 이동
                 intent.putExtra("height", heightEditText.text.toString()) //입력된 키값 가져오기
@@ -129,45 +139,53 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        setDate()
-        initRecyclerView()
+        //todolist 사용되는 변수들(지인)
+        todoRecyclerview = findViewById(R.id.todoRecyclerview)
+        addtdButton = findViewById(R.id.addtdButton)
+        myDB = DataBaseHelper(this@MainActivity)
+        //mList = MutableList()
+        adapter = ToDoAdapter(myDB, this@MainActivity)
+        todoRecyclerview.setHasFixedSize(true)
+        todoRecyclerview.setLayoutManager(LinearLayoutManager(this))
+        todoRecyclerview.setAdapter(adapter)
+        mList = myDB.allTask
+        //mList = myDB.allTask.toMutableList()
+        Collections.reverse(mList)
+        adapter.setTasks(mList)
 
-        // 추가 버튼 누르면 리스트 추가(지인)
-        // 오류 수정 해야하는 부분
-        addButton.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            val dialogView = layoutInflater.inflate(R.layout.activity_dialog, null)
-            val dialogText = dialogView.findViewById<EditText>(R.id.addText)
+        // 투두리스트 항목 스와이프 할 때 필요한 변수들 함수 (지인)
+        val swipegesture = object :SwipeGesture(this){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                when(direction){
+                    ItemTouchHelper.LEFT ->{
+                        adapter.deleteTask(viewHolder.adapterPosition)
+                    }
+                    //ItemTouchHelper.RIGHT -> {
+                    //}
+                }
+            }
 
-            builder.setView(dialogView)
-                .setPositiveButton("확인"){dialogInterface,i ->
-                    val content = dialogText.text.toString()
-                    list.add(Todolist("$content"))
-                    todoAdapter.notifyDataSetChanged()
-                }
-                .setNegativeButton("취소") {dialogInterface, i ->
-                }
-                .show()
         }
+        val touchHelper = ItemTouchHelper(swipegesture)
+        touchHelper.attachToRecyclerView(todoRecyclerview)
+
+
+        // 투두리스트 추가 버튼 누르면 dialog 창 실행 (지인)
+        addtdButton.setOnClickListener(View.OnClickListener { v: View? -> AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG) })
+        //val itemTouchHelper = ItemTouchHelper(RecyclerViewTouchHelper(adapter))
+        //itemTouchHelper.attachToRecyclerView(mRecyclerview)
     }
 
-    // 리스트 불러오기
-    private fun initRecyclerView(){
-        todoRecyclerView.setHasFixedSize(true)
-        todoAdapter = TodoAdapter(list)
-        val layoutManager = LinearLayoutManager(this)
-        todoRecyclerView.layoutManager = layoutManager
-        todoRecyclerView.adapter = todoAdapter
-        todoAdapter.notifyDataSetChanged() //새로추가
+
+    // 투두리스트 추가버튼 누르면 나오는 창 (지인)
+    override fun onDialogClose(dialogInterface: DialogInterface?) {
+        mList = myDB.allTask.toMutableList()
+        Collections.reverse(mList)
+        adapter!!.setTasks(mList)
+        adapter!!.notifyDataSetChanged()
     }
 
-    // 리스트 구성하기 (지인)
-    private fun setDate(){
-        list = arrayListOf()
-        list.add(Todolist("유산소 운동"))
-        list.add(Todolist("근육 운동"))
 
-    }
 
 
     // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
