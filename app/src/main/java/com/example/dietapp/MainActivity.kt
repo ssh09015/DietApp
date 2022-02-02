@@ -216,7 +216,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.action_walk -> {
                 myStartActivity(StepActivity::class.java)
             }
-            // 송하 언니 타이머
+
+            // 통계
+            R.id.action_statics -> {
+                myStartActivity(StatisticsActivity::class.java)
+            }
+            // 타이머
             /*R.id.action_timer -> {
                 myStartActivity(UserInfoActivity::class.java)
             }*/

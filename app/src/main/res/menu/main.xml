@@ -26,12 +26,15 @@
         android:title="타이머" />
 
     <item
+        android:id="@+id/action_statics"
+        android:title="통계" />
+    <item
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_baseline_logout_24"
         android:title="@string/action_logout" />
 
     <item
-         android:id="@+id/action_information"
+        android:id="@+id/action_information"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="@string/action_information" />
 
