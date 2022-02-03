@@ -7,6 +7,9 @@
     <string name="action_account">마이페이지</string>
     <string name="action_logout">로그아웃</string>
     <string name="action_information">앱정보</string>
+    <string name="action_walk">만보기</string>
+    <string name="action_timer">타이머</string>
+    <string name="action_statics">통계</string>
     <!-- 추천 창 변경되지 않을 텍스트 부분 (송하) -->
     <string name="reco_habit">추천 습관</string>
     <string name="reco_exercise">추천 운동</string>
