@@ -3,7 +3,7 @@
     package="com.example.dietapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_check_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".AppInformation"/>
-        <activity android:name=".StepActivity"/>
+        <activity android:name=".Timer"></activity>
+        <activity android:name=".AppInformation" />
+        <activity android:name=".StepActivity" />
         <activity android:name=".UserInfoActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".PasswordResetActivity" />

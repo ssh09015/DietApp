@@ -245,7 +245,7 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
             // 타이머
             R.id.action_timer -> {
                 // 타이머로 이동
-                // myStartActivity(UserInfoActivity::class.java)
+                myStartActivity(Timer::class.java)
             }
             R.id.action_logout -> {
                 // 로그아웃 기능
