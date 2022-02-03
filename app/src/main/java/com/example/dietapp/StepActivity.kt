@@ -141,7 +141,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
-    // 화살표 누르면 메인화면으로 이동하는 함수 (송하)
+    // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
