@@ -37,6 +37,18 @@ class StepActivity : AppCompatActivity(), SensorEventListener {
         resetButton=findViewById(R.id.resetButton)
         ctoastbutton=findViewById(R.id.ctoastbutton)
 
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+
+        // 툴바를 액티비티의 앱바로 지정 (송하)
+        setSupportActionBar(toolbar)
+
+        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        // 툴바에 타이틀 안보이게 (송하)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         resetButton?.setOnClickListener(View.OnClickListener {
             currentSteps=0
             stepCountView?.text=currentSteps.toString()
