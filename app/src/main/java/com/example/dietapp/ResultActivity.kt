@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.round
 
 
-class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ResultActivity : AppCompatActivity() {
 
     //결과 페이지 부분 텍스트, 사진, 버튼 변수 선언(윤솔)
     lateinit var ResultTextView : TextView
@@ -26,14 +26,12 @@ class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     lateinit var progressBar : ProgressBar
     lateinit var bmiButton: Button
     lateinit var myBmi: TextView
-    lateinit var navigationView : NavigationView
-    lateinit var drawerLayout : DrawerLayout
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmi_result)
-        setContentView(R.layout.navi_result)
 
         //변수에 위젯 대입(윤솔)
         ResultTextView = findViewById(R.id.bmiResultTextView)
@@ -44,8 +42,7 @@ class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         progressBar = findViewById(R.id.progressBar)
         bmiButton = findViewById(R.id.bmiToastButton)
         myBmi = findViewById(R.id.myBmiTextView)
-        drawerLayout = findViewById(R.id.drawerLayoutResult)
-        navigationView = findViewById(R.id.naviViewResult)
+
 
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
@@ -59,33 +56,7 @@ class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // 툴바에 타이틀 안보이게 (송하)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
 
-        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
-        var navi_header=navigationView.getHeaderView(0)
-        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
-        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
-
-        // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
-        val user = FirebaseAuth.getInstance().currentUser
-        val db = FirebaseFirestore.getInstance()
-        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
-        docRef?.get()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val document = task.result
-                if (document != null) {
-                    if (document.exists()) { // 정보가 있으면
-                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
-                        navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
-                        navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
-                    } else {
-                        Log.d(MainActivity.TAG, "No such document")
-                    }
-                }
-            } else {
-                Log.d(MainActivity.TAG, "get failed with ", task.exception)
-            }
-        }
 
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
@@ -201,48 +172,5 @@ class ResultActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     }
 
-    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_home -> {
-                myStartActivity(MainActivity::class.java)
-            }
-            R.id.action_cal -> {
-                myStartActivity(Cal::class.java)
-            }
-            R.id.action_account -> {
-                myStartActivity(UserInfoActivity::class.java)
-            }
-            R.id.action_logout -> {
-                // 로그아웃 기능
-                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
-                myStartActivity(SignUpActivity::class.java)
-                startToast("로그아웃 되었습니다.")
-            }
-            R.id.action_information -> {
-                // 앱정보 화면으로 이동
-                myStartActivity(AppInformation::class.java)
-            }
-        }
-        return false
-    }
 
-    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawers()
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    // 토스트 메시지 따로 함수 만듦
-    private fun startToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun myStartActivity(c: Class<*>) { // 세이가 메인화면에 만든 인텐트 이동 함수 가져옴 (송하)
-        val intent = Intent(this, c)
-        startActivity(intent)
-    }
 }

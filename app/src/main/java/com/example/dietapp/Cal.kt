@@ -235,6 +235,18 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
             R.id.action_account -> {
                 myStartActivity(UserInfoActivity::class.java)
             }
+            R.id.action_walk -> {
+                myStartActivity(StepActivity::class.java)
+            }
+            // 통계
+            R.id.action_statics -> {
+                myStartActivity(StatisticsActivity::class.java)
+            }
+            // 타이머
+            R.id.action_timer -> {
+                // 타이머로 이동
+                // myStartActivity(UserInfoActivity::class.java)
+            }
             R.id.action_logout -> {
                 // 로그아웃 기능
                 FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)

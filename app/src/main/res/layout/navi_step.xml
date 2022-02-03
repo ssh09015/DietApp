@@ -9,7 +9,7 @@
     tools:openDrawer="left">
 
     <include
-        layout="@layout/activity_bmi_result"
+        layout="@layout/activity_step"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
