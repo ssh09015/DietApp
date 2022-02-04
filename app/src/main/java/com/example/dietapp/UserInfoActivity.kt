@@ -1,14 +1,20 @@
 package com.example.dietapp
 
+import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_user_info.*
+
 
 // 회원 정보 보여주는 액티비티 (세이)
 class UserInfoActivity : AppCompatActivity() {
@@ -33,7 +39,46 @@ class UserInfoActivity : AppCompatActivity() {
 
         // 회원정보 수정
         correctButton.setOnClickListener {
-            myStartActivity(MemberInitActivity::class.java)
+            myStartActivity(MemberInitActivity2::class.java)
+        }
+
+        // 탈퇴
+        deleteButton.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("회원 탈퇴")
+            builder.setMessage("정말 탈퇴하시겠습니까?")
+            builder.setPositiveButton(
+                "취소"
+            ) { _: DialogInterface?, _: Int -> }
+            builder.setNegativeButton(
+                "탈퇴"
+            ) { _: DialogInterface?, _: Int ->
+                // 파이어베이스 계정 삭제
+                FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        //로그아웃처리
+                        FirebaseAuth.getInstance().signOut()
+                        myStartActivity(SignUpActivity::class.java)
+                        Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                    } else {
+                        // 회원가입 1시간 후면 재인증 해야 탈퇴 가능하기 때문에 재인증해야 함(파이어베이스 규칙)
+                        val user = FirebaseAuth.getInstance().currentUser!!
+                        val credential = EmailAuthProvider
+                            .getCredential("user@example.com", "password1234")
+                        user.reauthenticate(credential)
+                            .addOnCompleteListener {
+                                // 재인증 완료
+                            }
+                        user.delete()
+                            .addOnCompleteListener { task ->
+                                FirebaseAuth.getInstance().signOut()
+                                myStartActivity(SignUpActivity::class.java)
+                                Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                            }
+                    }
+                }
+            }
+            builder.show()
         }
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
