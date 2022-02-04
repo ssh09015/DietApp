@@ -50,10 +50,10 @@ class UserInfoActivity : AppCompatActivity() {
 
         correctButton=findViewById(R.id.correctButton)
 
-        /*// 회원정보 수정
+        // 회원정보 수정
         correctButton.setOnClickListener {
             myStartActivity(MemberInitActivity2::class.java)
-        }*/
+        }
 
         // 탈퇴
         deleteButton.setOnClickListener {

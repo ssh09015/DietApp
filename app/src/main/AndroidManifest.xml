@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_check_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
-        <activity android:name=".Timer"></activity>
+        <activity android:name=".Timer"/>
+        <activity android:name=".MemberInitActivity2"/>
         <activity android:name=".StatisticsActivity"/>
         <activity android:name=".AppInformation" />
         <activity android:name=".StepActivity" />
