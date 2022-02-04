@@ -231,6 +231,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 myStartActivity(SignUpActivity::class.java)
                 Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
             }
+            R.id.action_manual -> {
+                //앱 사용 방법 화면으로 이동
+                myStartActivity(AppManual::class.java)
+            }
+
             R.id.action_information -> {
                 // 앱정보 화면으로 이동
                 myStartActivity(AppInformation::class.java)

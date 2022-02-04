@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:layout_gravity="center"
-    android:background="@color/top_bar"
+    android:background="@color/button"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/manualTextView"
         android:layout_width="309dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/nanummingyeong"
         android:text="당신만을 위한 건강기록 앱"
-        android:textColor="#D5CDCD"
+        android:textColor="#08518A"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,10 +31,16 @@
         android:layout_marginLeft="7dp"
         android:fontFamily="@font/flower"
         android:text="@string/app_name"
-        android:textColor="#FFFFFF"
+        android:textColor="#378ACC"
         android:textSize="45sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/manualTextView" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <TextView
         android:id="@+id/navigationnameTextView"
@@ -42,9 +48,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/nanummingyeong"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/navigationemailTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +63,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:fontFamily="@font/nanummingyeong"
         android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

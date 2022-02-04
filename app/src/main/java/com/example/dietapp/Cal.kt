@@ -46,7 +46,7 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
         deleteBtn=findViewById(R.id.deleteBtn)
         updateBtn=findViewById(R.id.updateBtn)
         diaryContent=findViewById(R.id.diaryContent)
-        title=findViewById(R.id.title)
+        title=findViewById(R.id.stepTitleTextView)
         contextEditText=findViewById(R.id.contextEditText)
         drawerLayout = findViewById(R.id.drawerLayoutCal)
         navigationView = findViewById(R.id.naviViewCal)

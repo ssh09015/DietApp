@@ -38,6 +38,10 @@
         android:title="@string/action_logout" />
 
     <item
+        android:id="@+id/action_manual"
+        android:title="앱 사용 방법" />
+
+    <item
         android:id="@+id/action_information"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="@string/action_information" />

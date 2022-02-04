@@ -21,7 +21,7 @@
             android:background="@color/top_bar" >
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/stepTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:paddingLeft="25dp"
@@ -40,11 +40,11 @@
                 tools:layout_editor_absoluteY="8dp" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/pencilImageView"
                 android:layout_width="37dp"
                 android:layout_height="26dp"
                 app:layout_constraintEnd_toEndOf="@+id/appBarLayout"
-                app:layout_constraintStart_toEndOf="@+id/title"
+                app:layout_constraintStart_toEndOf="@+id/stepTitleTextView"
                 app:srcCompat="@drawable/pencil"
                 tools:layout_editor_absoluteY="32dp" />
 
@@ -161,7 +161,7 @@
 
 
     <View
-        android:id="@+id/divider5"
+        android:id="@+id/calDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="25dp"

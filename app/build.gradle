@@ -69,6 +69,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
+
+    implementation 'me.relex:circleindicator:2.1.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
 
 apply plugin: 'com.android.application'

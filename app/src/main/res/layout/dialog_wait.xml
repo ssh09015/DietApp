@@ -6,13 +6,14 @@
 
 
     <TextView
+        android:id="@+id/waitTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewwait"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/nanummingyeong"
         android:text="잠시만 기다려주세요..."
         android:textColor="@color/black"
-        android:textSize="10dp"/>
+        android:textSize="20dp" />
 
     <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
         android:id="@+id/google_progress"
@@ -20,6 +21,6 @@
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textViewwait"
+        android:layout_below="@+id/waitTextView"
         gpb:type="folding_circles"/>
 </RelativeLayout>

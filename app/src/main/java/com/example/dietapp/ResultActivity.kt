@@ -3,15 +3,8 @@ package com.example.dietapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.*
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.round
 
 
@@ -35,7 +28,7 @@ class ResultActivity : AppCompatActivity() {
 
         //변수에 위젯 대입(윤솔)
         ResultTextView = findViewById(R.id.bmiResultTextView)
-        imageView = findViewById<ImageView>(R.id.imageView)
+        imageView = findViewById<ImageView>(R.id.manualImageView)
         radioGroup = findViewById(R.id.RadioGroup)
         radioButton1 = findViewById(R.id.bmiResultButton2)
         radioButton2 = findViewById(R.id.bmiResultButton1)
