@@ -2,45 +2,63 @@ package com.example.dietapp
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dietapp.databinding.ActivityUserInfoBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_user_info.*
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.lang.Exception
+import java.util.*
 
 
 // 회원 정보 보여주는 액티비티 (세이)
 class UserInfoActivity : AppCompatActivity() {
+    lateinit var binding:ActivityUserInfoBinding
 
     lateinit var nameTextView: TextView
     lateinit var phoneNumberTextView: TextView
     lateinit var birthDayTextView: TextView
     lateinit var addressTextView: TextView
+    lateinit var profileImage:ImageView
 
     lateinit var correctButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_info)
+        val binding:ActivityUserInfoBinding= ActivityUserInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
 
         nameTextView=findViewById(R.id.nameTextView)
         phoneNumberTextView=findViewById(R.id.phoneNumberTextView)
         birthDayTextView=findViewById(R.id.birthDayTextView)
         addressTextView=findViewById(R.id.addressTextView)
+        profileImage=findViewById(R.id.profileImage)
 
         correctButton=findViewById(R.id.correctButton)
 
-        // 회원정보 수정
+        /*// 회원정보 수정
         correctButton.setOnClickListener {
             myStartActivity(MemberInitActivity2::class.java)
-        }
+        }*/
 
         // 탈퇴
         deleteButton.setOnClickListener {
@@ -95,6 +113,7 @@ class UserInfoActivity : AppCompatActivity() {
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
+
         val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
         docRef?.get()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -102,6 +121,17 @@ class UserInfoActivity : AppCompatActivity() {
                 if (document != null) {
                     if (document.exists()) { // 정보가 있으면
                         Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
+                        val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
+                        val localfile= File.createTempFile("Image","jpg")
+                        storageRef.getFile(localfile).addOnSuccessListener {
+
+                            val bitmap=BitmapFactory.decodeFile(localfile.absolutePath)
+                            binding.profileImage.setImageBitmap(bitmap)
+                        }.addOnFailureListener{
+                            Toast.makeText(this,"사진을 불러오지 못했습니다.",Toast.LENGTH_SHORT).show()
+                        }
+
+
                         nameTextView.text=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
                         phoneNumberTextView.text=document.data?.get("phoneNumber").toString()
                         birthDayTextView.text=document.data?.get("birthDay").toString()
@@ -134,3 +164,4 @@ class UserInfoActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
