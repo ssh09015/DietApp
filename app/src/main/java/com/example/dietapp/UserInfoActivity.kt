@@ -2,11 +2,8 @@ package com.example.dietapp
 
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
@@ -22,14 +19,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_user_info.*
 import java.io.File
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.lang.Exception
-import java.util.*
-
 
 // 회원 정보 보여주는 액티비티 (세이)
 class UserInfoActivity : AppCompatActivity() {
+    companion object {
+        private const val TAG = "MainActivity"
+    }
     lateinit var binding:ActivityUserInfoBinding
 
     lateinit var nameTextView: TextView
@@ -72,12 +67,113 @@ class UserInfoActivity : AppCompatActivity() {
                 "탈퇴"
             ) { _: DialogInterface?, _: Int ->
                 // 파이어베이스 계정 삭제
-                FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
+                // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
+                val user = FirebaseAuth.getInstance().currentUser
+                val db = FirebaseFirestore.getInstance()
+                val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+                docRef?.get()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val document = task.result
+                        if (document != null) {
+                            if (document.exists()) { // 사진 삭제
+                                val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
+                                storageRef.delete().addOnSuccessListener {
+                                    Log.d(TAG,"파이어베이스 사진 삭제 완료")
+                                }.addOnFailureListener {
+                                    Log.d(TAG,"파이어베이스 사진 삭제 실패"+document.data?.get("name").toString())
+                                }
+                                // 계정 삭제
+                                FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
+                                    if (task.isSuccessful){
+                                        db.collection("users").document(user.uid)
+                                            .delete()
+                                            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+                                            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+                                        FirebaseAuth.getInstance().signOut()
+                                        myStartActivity(SignUpActivity::class.java)
+                                        Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                    }else {
+                                        // 회원가입 1시간 후면 재인증 해야 탈퇴 가능하기 때문에 재인증해야 함(파이어베이스 규칙)
+                                        val user=FirebaseAuth.getInstance().currentUser!!
+                                        val credential = EmailAuthProvider
+                                            .getCredential("user@example.com", "password1234")
+                                        user.reauthenticate(credential)
+                                            .addOnCompleteListener {
+                                                // 재인증 완료
+                                            }
+                                        user.delete()
+                                            .addOnCompleteListener { task ->
+                                                FirebaseAuth.getInstance().signOut()
+                                                myStartActivity(SignUpActivity::class.java)
+                                                Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                            }
+                                    }
+                                }
+                            } else {
+                                Log.d(MainActivity.TAG, "No such document")
+                            }
+                        }
+                    } else {
+                        Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                /*FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         //로그아웃처리
-                        FirebaseAuth.getInstance().signOut()
-                        myStartActivity(SignUpActivity::class.java)
-                        Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+
+                        // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
+                        val user = FirebaseAuth.getInstance().currentUser
+                        val db = FirebaseFirestore.getInstance()
+
+                        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+                        docRef?.get()?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document = task.result
+                                if (document != null) {
+                                    if (document.exists()) { // 정보가 있으면
+                                        val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
+                                        storageRef.delete().addOnSuccessListener {
+                                            Log.d(TAG,"파이어베이스 사진 삭제 완료")
+                                        }.addOnFailureListener {
+                                            Log.d(TAG,"파이어베이스 사진 삭제 실패"+document.data?.get("name").toString())
+                                        }
+                                        FirebaseAuth.getInstance().signOut()
+                                        myStartActivity(SignUpActivity::class.java)
+                                        Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                    } else {
+                                        Log.d(MainActivity.TAG, "No such document")
+                                    }
+                                }
+                            } else {
+                                Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                            }
+                        }
+
                     } else {
                         // 회원가입 1시간 후면 재인증 해야 탈퇴 가능하기 때문에 재인증해야 함(파이어베이스 규칙)
                         val user = FirebaseAuth.getInstance().currentUser!!
@@ -94,7 +190,7 @@ class UserInfoActivity : AppCompatActivity() {
                                 Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
                             }
                     }
-                }
+                }*/
             }
             builder.show()
         }
@@ -124,13 +220,11 @@ class UserInfoActivity : AppCompatActivity() {
                         val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
                         val localfile= File.createTempFile("Image","jpg")
                         storageRef.getFile(localfile).addOnSuccessListener {
-
                             val bitmap=BitmapFactory.decodeFile(localfile.absolutePath)
                             binding.profileImage.setImageBitmap(bitmap)
                         }.addOnFailureListener{
                             Toast.makeText(this,"사진을 불러오지 못했습니다.",Toast.LENGTH_SHORT).show()
                         }
-
 
                         nameTextView.text=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
                         phoneNumberTextView.text=document.data?.get("phoneNumber").toString()
