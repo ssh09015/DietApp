@@ -111,8 +111,8 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         }
 
         //칼로리 계산 토스트 버튼
-        calorie = 33 * currentSteps
         ctoastbutton.setOnClickListener {
+            calorie = 33 * currentSteps
             Toast.makeText(this, "$calorie"+"Cal이 소모되었습니다.", Toast.LENGTH_LONG).show()
         }
     }
