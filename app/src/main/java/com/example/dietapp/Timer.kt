@@ -21,6 +21,7 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
 
     private var time = 0
     private var timerTask : Timer? = null
+    private var isRunning = false
 
     lateinit var secTextView: TextView
     lateinit var milliTextView: TextView
@@ -28,17 +29,20 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
     lateinit var settingButton : Button
     lateinit var navigationView : NavigationView
     lateinit var drawerLayout : DrawerLayout
+    lateinit var startButton : Button
+    lateinit var resetButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
         setContentView(R.layout.navi_timer)
 
-            secTextView = findViewById<TextView>(R.id.secTextView)
-            milliTextView = findViewById<TextView>(R.id.milliTextView)
-            settingEditText = findViewById<EditText>(R.id.settingEditText)
-            settingButton = findViewById<Button>(R.id.settingButton)
-
+        secTextView = findViewById<TextView>(R.id.secTextView)
+        milliTextView = findViewById<TextView>(R.id.milliTextView)
+        settingEditText = findViewById<EditText>(R.id.settingEditText)
+        settingButton = findViewById<Button>(R.id.settingButton)
+        startButton = findViewById(R.id.startButton)
+        resetButton = findViewById(R.id.resetButton)
 
         drawerLayout = findViewById(R.id.drawerLayoutTimer)
         navigationView = findViewById(R.id.naviViewTimer)
@@ -84,33 +88,70 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
 
         settingButton.setOnClickListener {
             time = settingEditText.text.toString().toInt()*100
-            start()
+        }
+
+        startButton.setOnClickListener {
+
+            if (time==0) {
+            Toast.makeText(this, "타이머 설정을 해주세요.",Toast.LENGTH_SHORT).show()
+            }
+            else {
+                isRunning = !isRunning
+
+                if (isRunning) {
+                    start()
+                } else {
+                    pause()
+                }
+            }
+        }
+
+        resetButton.setOnClickListener {
+            reset()
         }
 
     }
-         private fun start() {
 
-            timerTask = timer(period=10){
-                time--
-                val sec = time / 100
-                val milli = time % 100
+    private fun pause() {
+        startButton.text = "START"
+        timerTask?.cancel()
+    }
 
-                if (time == 0) {
-                    timerTask?.cancel()
-                }
 
-                runOnUiThread {
-                    if (time != 0) {
-                        secTextView.text = "$sec"
-                        milliTextView.text = "$milli"
-                    } else {
-                        secTextView.text = "0"
-                        milliTextView.text = "00"
-                    }
+    private fun start() {
+        startButton.text = "PAUSE"
 
-                }
+        timerTask = timer(period=10){
+            time--
+            val sec = time / 100
+            val milli = time % 100
+
+            if (time == 0) {
+                timerTask?.cancel()
             }
-         }
+
+            runOnUiThread {
+                if (time != 0) {
+                    secTextView.text = "$sec"
+                    milliTextView.text = "$milli"
+                } else {
+                    secTextView.text = "0"
+                    milliTextView.text = "00"
+                }
+
+            }
+        }
+    }
+
+    private fun reset() {
+        timerTask?.cancel()
+
+        time = 0
+        isRunning = false
+        startButton.text="START"
+        secTextView.text = "0"
+        milliTextView.text = "00"
+    }
 
     // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
