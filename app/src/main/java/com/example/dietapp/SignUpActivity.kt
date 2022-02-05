@@ -1,12 +1,17 @@
 package com.example.dietapp
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Process
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import kotlin.system.exitProcess
 
@@ -15,9 +20,86 @@ import kotlin.system.exitProcess
 class SignUpActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null //파이어베이스 연동
 
+    private val REQUEST = 1000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
+        // 외부 저장소 읽기 권한이 부여되었는지 확인
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            // 권한이 허용되지 않음
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                // 이전에 거부한 적이 있으면 설명 (경고)
+                var dlg = AlertDialog.Builder(this)
+                dlg.setTitle("권한이 필요한 이유")
+                dlg.setMessage("만보기 정보를 얻기 위해서는 활동 퍼미션 체크 권한이 필수로 필요합니다.")
+                dlg.setPositiveButton("확인") {dialog, which -> ActivityCompat.requestPermissions(this@SignUpActivity, arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE),
+                    REQUEST)}
+                dlg.setNegativeButton("취소", null)
+                dlg.show()
+            }
+            else {
+                // 권한 요청
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST)
+            }
+        }
+        else {
+            Toast.makeText(this,"Welcome",Toast.LENGTH_SHORT).show()
+        }
+
+        // 활동 퍼미션 체크 권한이 부여되었는지 확인
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+
+            // 권한이 허용되지 않음
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACTIVITY_RECOGNITION)) {
+
+                // 이전에 거부한 적이 있으면 설명 (경고)
+                var dlg = AlertDialog.Builder(this)
+                dlg.setTitle("권한이 필요한 이유")
+                dlg.setMessage("만보기 정보를 얻기 위해서는 활동 퍼미션 체크 권한이 필수로 필요합니다.")
+                dlg.setPositiveButton("확인") {dialog, which -> ActivityCompat.requestPermissions(this@SignUpActivity, arrayOf(
+                    Manifest.permission.ACTIVITY_RECOGNITION),
+                    REQUEST)}
+                dlg.setNegativeButton("취소", null)
+                dlg.show()
+            }
+            else {
+                // 권한 요청
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), REQUEST)
+            }
+        }
+        else {
+            Toast.makeText(this,"Welcome",Toast.LENGTH_SHORT).show()
+        }
+
+        // 인터넷 사용 권한이 부여되었는지 확인
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+
+            // 권한이 허용되지 않음
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.INTERNET)) {
+
+                // 이전에 거부한 적이 있으면 설명 (경고)
+                var dlg = AlertDialog.Builder(this)
+                dlg.setTitle("권한이 필요한 이유")
+                dlg.setMessage("사용자 정보를 얻기 위해서는 인터넷 권한이 필수로 필요합니다.")
+                dlg.setPositiveButton("확인") {dialog, which -> ActivityCompat.requestPermissions(this@SignUpActivity, arrayOf(
+                    Manifest.permission.INTERNET),
+                    REQUEST)}
+                dlg.setNegativeButton("취소", null)
+                dlg.show()
+            }
+            else {
+                // 권한 요청
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.INTERNET), REQUEST)
+            }
+        }
+        else {
+            Toast.makeText(this,"Welcome",Toast.LENGTH_SHORT).show()
+        }
 
         mAuth = FirebaseAuth.getInstance()
         findViewById<View>(R.id.signUpButton).setOnClickListener(onClickListener)
