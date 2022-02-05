@@ -95,6 +95,12 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
             stepCountView?.text=currentSteps.toString()
         })
 
+        // 활동 퍼미션 체크
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), 0)
+        }
+
         // 걸음 센서 연결
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         stepCountSensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
