@@ -28,10 +28,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintTop_toBottomOf="@+id/splashTextView"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
         android:id="@+id/splashTextView"
@@ -61,8 +61,8 @@
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintTop_toBottomOf="@+id/splashTitleTextView"
+        app:layout_constraintVertical_bias="0.88" />
 </androidx.constraintlayout.widget.ConstraintLayout>

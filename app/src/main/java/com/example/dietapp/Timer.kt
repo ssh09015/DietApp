@@ -40,8 +40,8 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
             settingButton = findViewById<Button>(R.id.settingButton)
 
 
-        drawerLayout = findViewById(R.id.drawerLayoutResult)
-        navigationView = findViewById(R.id.naviViewResult)
+        drawerLayout = findViewById(R.id.drawerLayoutTimer)
+        navigationView = findViewById(R.id.naviViewTimer)
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
