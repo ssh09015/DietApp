@@ -48,8 +48,8 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         stepCountView = findViewById(R.id.stepCountView)
         resetButton=findViewById(R.id.resetButton)
         ctoastbutton=findViewById(R.id.ctoastbutton)
-        drawerLayout = findViewById(R.id.drawerLayoutResult)
-        navigationView = findViewById(R.id.naviViewResult)
+        drawerLayout = findViewById(R.id.drawerLayoutStep)
+        navigationView = findViewById(R.id.naviViewStep)
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
