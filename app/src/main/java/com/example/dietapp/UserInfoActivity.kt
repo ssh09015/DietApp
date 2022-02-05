@@ -65,6 +65,7 @@ class UserInfoActivity : AppCompatActivity() {
             builder.setNegativeButton(
                 "탈퇴"
             ) { _: DialogInterface?, _: Int ->
+                showProgressBar()
                 // 파이어베이스 계정 삭제
                 // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
                 val user = FirebaseAuth.getInstance().currentUser
@@ -84,13 +85,18 @@ class UserInfoActivity : AppCompatActivity() {
                                 // 계정 삭제
                                 FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
                                     if (task.isSuccessful){
-                                        db.collection("users").document(user.uid)
+                                        db.collection("users").document(user.uid) // 문서 삭제
                                             .delete()
-                                            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
-                                            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
-                                        FirebaseAuth.getInstance().signOut()
-                                        myStartActivity(SignUpActivity::class.java)
-                                        Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                            .addOnSuccessListener {
+                                                Log.d(TAG, "DocumentSnapshot successfully deleted!")
+                                                hideProgressBar()
+                                                FirebaseAuth.getInstance().signOut()
+                                                myStartActivity(SignUpActivity::class.java)
+                                                Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                            }
+                                            .addOnFailureListener {
+                                                    e -> Log.w(TAG, "Error deleting document", e)
+                                            }
                                     }else {
                                         // 회원가입 1시간 후면 재인증 해야 탈퇴 가능하기 때문에 재인증해야 함(파이어베이스 규칙)
                                         val user=FirebaseAuth.getInstance().currentUser!!

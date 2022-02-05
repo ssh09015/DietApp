@@ -1,12 +1,14 @@
 package com.example.dietapp
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,7 @@ class MemberInitActivity2 : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
     }
+    private lateinit var dialog:Dialog // 로딩창n
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,7 @@ class MemberInitActivity2 : AppCompatActivity() {
         }
 
         checkButton.setOnClickListener {
+            showProgressBar()
             uploadImageToFirebaseStorage()
         }
 
@@ -111,6 +115,7 @@ class MemberInitActivity2 : AppCompatActivity() {
         if (user != null) {
             ref.setValue(memberInfo)
                 .addOnSuccessListener {
+                    hideProgressBar()
                     db.collection("users").document(user.uid).set(memberInfo)
                     startToast("회원정보를 수정하였습니다.")
                     myStartActivity(MainActivity::class.java)
@@ -137,5 +142,19 @@ class MemberInitActivity2 : AppCompatActivity() {
         val intent = Intent(this, c)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //로그인 하고 뒤로 가기 버튼 누르면 앱 꺼지는 기능
         startActivity(intent)
+    }
+
+    // 로딩창 보이기
+    private fun showProgressBar(){
+        dialog= Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_wait)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+    }
+
+    // 로딩창 숨기기
+    private fun hideProgressBar(){
+        dialog.dismiss()
     }
 }
