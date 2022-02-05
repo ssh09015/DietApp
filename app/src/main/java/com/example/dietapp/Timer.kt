@@ -169,7 +169,7 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
         } else {
-            super.onBackPressed()
+            myStartActivity(MainActivity::class.java)
         }
     }
 

@@ -197,7 +197,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
         } else {
-            super.onBackPressed()
+            myStartActivity(MainActivity::class.java)
         }
     }
 
