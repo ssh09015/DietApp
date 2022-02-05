@@ -38,6 +38,12 @@ class MemberInitActivity2 : AppCompatActivity() {
                     val document = task.result
                     if (document != null) {
                         if (document.exists()) {
+                            val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
+                            storageRef.delete().addOnSuccessListener {
+                                Log.d(TAG,"파이어베이스 사진 삭제 완료")
+                            }.addOnFailureListener {
+                                Log.d(TAG,"파이어베이스 사진 삭제 실패"+document.data?.get("name").toString())
+                            }
                             Log.d(TAG, "DocumentSnapshot data: " + document.data)
                         } else {
                             Log.d(TAG, "No such document")
