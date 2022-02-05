@@ -14,7 +14,7 @@
         android:text="잠시만 기다려주세요..."
         android:textColor="@color/black"
         android:textSize="20dp" />
-
+<!--
     <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
         android:id="@+id/google_progress"
         android:layout_width="50dp"
@@ -23,4 +23,5 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/waitTextView"
         gpb:type="folding_circles"/>
+        -->
 </RelativeLayout>

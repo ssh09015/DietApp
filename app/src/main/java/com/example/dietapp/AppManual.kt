@@ -20,7 +20,7 @@ class AppManual : AppCompatActivity() {
         vpAdapter = CustomPagerAdapter(this)
         manualViewPager.adapter = vpAdapter
 
-        indicator.setViewPager(manualViewPager)
+       // indicator.setViewPager(manualViewPager)
 
     }
 
