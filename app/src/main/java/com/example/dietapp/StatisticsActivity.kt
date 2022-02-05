@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_statistics.*
 
-
 class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var linelist: ArrayList<Entry>
@@ -113,6 +112,8 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         myHelper = myDBHelper(this)
 
         btnshow.setOnClickListener {
+            Toast.makeText(this,"그래프를 한 번 터치해주세요!", Toast.LENGTH_LONG).show()
+
             var firstInput:String
             var secondInput:String
             var thirdInput:String
@@ -223,7 +224,7 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             cursor = sqlDB.rawQuery("SELECT * FROM staticsTBL;", null)
 
             var strDate = "날짜" + "\r\n" + "---------" + "\r\n"
-            var strWeight = "체중" + "\r\n" + "---------" + "\r\n"
+            var strWeight = "몸무게" + "\r\n" + "---------" + "\r\n"
 
             var count:Int=cursor.count
             cursor.moveToPosition(count)
