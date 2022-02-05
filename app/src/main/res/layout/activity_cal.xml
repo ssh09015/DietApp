@@ -18,35 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/top_bar" >
-
-            <TextView
-                android:id="@+id/stepTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="46dp"
-                android:paddingLeft="25dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/nanummingyeong"
-                android:gravity="center"
-                android:letterSpacing="0.05"
-                android:text="Daily Memo"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#001BA4"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="8dp" />
-
-            <ImageView
-                android:id="@+id/pencilImageView"
-                android:layout_width="37dp"
-                android:layout_height="26dp"
-                app:layout_constraintEnd_toEndOf="@+id/appBarLayout"
-                app:layout_constraintStart_toEndOf="@+id/stepTitleTextView"
-                app:srcCompat="@drawable/pencil"
-                tools:layout_editor_absoluteY="32dp" />
+            android:background="@color/top_bar">
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -57,11 +29,40 @@
         android:layout_width="353dp"
         android:layout_height="342dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <ImageView
+        android:id="@+id/pencilImageView"
+        android:layout_width="37dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pencil" />
+
+    <TextView
+        android:id="@+id/stepTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:fontFamily="@font/nanummingyeong"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:paddingLeft="25dp"
+        android:text="Daily Memo"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#001BA4"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/calDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/diaryTextView"

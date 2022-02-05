@@ -28,7 +28,7 @@ class UserInfoActivity : AppCompatActivity() {
         private const val TAG = "MainActivity"
     }
     private lateinit var dialog:Dialog // 로딩창
-    lateinit var binding:ActivityUserInfoBinding // 파이어베이스 이미지 가져와 바꾸기 위함
+    lateinit var binding: ActivityUserInfoBinding // 파이어베이스 이미지 가져와 바꾸기 위함
     lateinit var nameTextView: TextView // 이름
     lateinit var phoneNumberTextView: TextView // 전화번호
     lateinit var birthDayTextView: TextView // 생년월일
@@ -75,12 +75,12 @@ class UserInfoActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val document = task.result
                         if (document != null) {
-                            if (document.exists()) { // 계정보다 사진 먼저 삭제
+                            if (document.exists()) { // 사진 먼저 삭제
                                 val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
                                 storageRef.delete().addOnSuccessListener {
                                     Log.d(TAG,"파이어베이스 사진 삭제 완료")
                                 }.addOnFailureListener {
-                                    Log.d(TAG,"파이어베이스 사진 삭제 실패"+document.data?.get("name").toString())
+                                    Log.d(TAG,"파이어베이스 사진 삭제 실패")
                                 }
                                 // 계정 삭제
                                 FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
@@ -104,13 +104,13 @@ class UserInfoActivity : AppCompatActivity() {
                                             .getCredential("user@example.com", "password1234")
                                         user.reauthenticate(credential)
                                             .addOnCompleteListener {
-                                                // 재인증 완료
-                                            }
-                                        user.delete()
-                                            .addOnCompleteListener { task ->
-                                                FirebaseAuth.getInstance().signOut()
-                                                myStartActivity(SignUpActivity::class.java)
-                                                Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                                // 재인증 완료시 계정 삭제
+                                                user.delete()
+                                                        .addOnCompleteListener { task ->
+                                                            FirebaseAuth.getInstance().signOut()
+                                                            myStartActivity(SignUpActivity::class.java)
+                                                            Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                                        }
                                             }
                                     }
                                 }

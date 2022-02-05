@@ -54,7 +54,7 @@ class MemberInitActivity : AppCompatActivity() {
 
         // 확인 버튼
         checkButton.setOnClickListener {
-            showProgressBar() // 로딩창
+            showProgressBar()
             uploadImageToFirebaseStorage()
         }
 
@@ -73,7 +73,7 @@ class MemberInitActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==0&&resultCode== Activity.RESULT_OK && data !=null){
-            Log.d(TAG,"사진이 선택되었습니다.")
+            Log.d(TAG,"사진 선택됨")
             selectedPhotoUri=data.data
             val bitmap=MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri) // uri를 ImageView로 바꾸기
             selectphoto_imageview_register.setImageBitmap(bitmap)
@@ -84,21 +84,25 @@ class MemberInitActivity : AppCompatActivity() {
     // 파이어베이스에 사진 업로드
     private fun uploadImageToFirebaseStorage(){
         val name = (findViewById<View>(R.id.nameEditText) as EditText).text.toString()
-        if(selectedPhotoUri==null) return
-
-        val ref= FirebaseStorage.getInstance().getReference("/images/$name.jpg") // path 참조
-
-        ref.putFile(selectedPhotoUri!!)
-            .addOnSuccessListener {
-                Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
-                ref.downloadUrl.addOnSuccessListener {
-                    Log.d(TAG, "File Location: $it")
-                    saveUserToFirebaseDatabase(it.toString())
-                }
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "Failed to upload image to storage: ${it.message}")
-            }
+        if(selectedPhotoUri==null) {
+            hideProgressBar()
+            startToast("이미지를 등록하세요.")
+            return
+        }else{
+            val ref= FirebaseStorage.getInstance().getReference("/images/$name.jpg") // path 참조
+            ref.putFile(selectedPhotoUri!!)
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
+                        ref.downloadUrl.addOnSuccessListener {
+                            Log.d(TAG, "File Location: $it")
+                            saveUserToFirebaseDatabase(it.toString())
+                        }
+                    }
+                    .addOnFailureListener {
+                        hideProgressBar()
+                        Log.d(TAG, "Failed to upload image to storage: ${it.message}")
+                    }
+        }
     }
 
     // 파이어베이스에 사용자 정보 저장
@@ -117,17 +121,17 @@ class MemberInitActivity : AppCompatActivity() {
 
         if (user != null) {
             ref.setValue(memberInfo)
-                .addOnSuccessListener {
-                    db.collection("users").document(user.uid).set(memberInfo)
-                    startToast("회원정보 등록을 성공하였습니다.")
-                    myStartActivity(MainActivity::class.java)
-                    finish()
-                }
-                .addOnFailureListener {
-                    hideProgressBar()
-                    startToast("회원정보 등록에 실패하였습니다.")
-                }
-            hideProgressBar()
+                    .addOnSuccessListener {
+                        db.collection("users").document(user.uid).set(memberInfo)
+                        startToast("회원정보 등록을 성공하였습니다.")
+                        hideProgressBar()
+                        myStartActivity(MainActivity::class.java)
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        startToast("회원정보 등록에 실패하였습니다.")
+                        hideProgressBar()
+                    }
         }
     }
 

@@ -83,9 +83,6 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
                         title.text=document.data?.get("name").toString() + "의 달력"// 달력 이름 바꾸기
                         navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
                         navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
-                        /*if(userID!=null){ // userID 값 들어왔는지 확인
-                            startToast(title.toString())
-                        }*/
                     } else {
                         Log.d(MainActivity.TAG, "No such document")
                     }
@@ -214,7 +211,7 @@ Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
             fileOutputStream.close()
 
             if(content!=null){
-                startToast(readDay.toString())
+                startToast("저장되었습니다.")
             }
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
