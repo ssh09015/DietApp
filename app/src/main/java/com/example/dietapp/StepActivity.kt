@@ -38,7 +38,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
     var currentSteps = 0
 
     // 현재 칼로리수
-    var calorie = 0
+    var calorie : Double = 0.0
     @RequiresApi(api = Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +112,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
 
         //칼로리 계산 토스트 버튼
         ctoastbutton.setOnClickListener {
-            calorie = 33 * currentSteps
+            calorie = 0.04 * currentSteps
             Toast.makeText(this, "$calorie"+"Cal이 소모되었습니다.", Toast.LENGTH_LONG).show()
         }
     }
