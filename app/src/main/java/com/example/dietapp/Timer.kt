@@ -93,7 +93,7 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
         startButton.setOnClickListener {
 
             if (time==0) {
-            Toast.makeText(this, "타이머 설정을 해주세요.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "타이머 설정 먼저 해주세요.",Toast.LENGTH_SHORT).show()
             }
             else {
                 isRunning = !isRunning
