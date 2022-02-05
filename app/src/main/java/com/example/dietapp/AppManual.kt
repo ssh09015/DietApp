@@ -1,7 +1,9 @@
 package com.example.dietapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -36,7 +38,17 @@ class AppManual : AppCompatActivity() {
 
     }
 
+    // 화살표 누르면 메인화면으로 이동하는 함수 (송하)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
+        when(item!!.itemId){
+            android.R.id.home -> { // 메뉴 버튼
+                var intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     class CustomPagerAdapter(fa: FragmentActivity): FragmentStateAdapter(fa){
         //전체 페이지수 7개

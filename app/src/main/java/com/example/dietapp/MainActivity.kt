@@ -249,7 +249,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
         } else {
-            super.onBackPressed()
+           super.onBackPressed()
         }
     }
 
