@@ -27,15 +27,13 @@ class AppInformation : AppCompatActivity() {
 
         when(item!!.itemId){
             android.R.id.home -> {
-                var intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                myStartActivity(MainActivity::class.java)
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 
-    // 인텐트 이동 함수 따로 만듦
+    // 인텐트 이동 함수
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)

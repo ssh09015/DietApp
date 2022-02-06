@@ -14,12 +14,10 @@ import android.view.View
 import android.widget.Button
 
 class AddNewTask : BottomSheetDialogFragment() {
-
     // 투두리스트 추가버튼 누를때 나오는 kt
     lateinit var enterText: EditText
     lateinit var saveButton: Button
     lateinit var myDB: DataBaseHelper
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_add_newtask, container, false)
@@ -42,8 +40,8 @@ class AddNewTask : BottomSheetDialogFragment() {
                 saveButton.setEnabled(false)
             }
         }
-        //할일을 입력했을 경우 저장 버튼 색 변경
 
+        //할일을 입력했을 경우 저장 버튼 색 변경
         enterText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -55,7 +53,6 @@ class AddNewTask : BottomSheetDialogFragment() {
                     saveButton.setBackgroundColor(resources.getColor(R.color.teal_700))
                 }
             }
-
             override fun afterTextChanged(s: Editable) {}
         })
         val finalIsUpdate = isUpdate
