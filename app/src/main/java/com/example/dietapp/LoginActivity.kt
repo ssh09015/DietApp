@@ -8,35 +8,37 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
-// 로그인 액티비티
 class LoginActivity : AppCompatActivity() {
-    private var mAuth: FirebaseAuth? = null // 파이어베이스 연동
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        mAuth = FirebaseAuth.getInstance() // 파이어베이스 인증
+        mAuth = FirebaseAuth.getInstance()
         findViewById<View>(R.id.loginButton).setOnClickListener(onClickListener)
         findViewById<View>(R.id.gotoPasswordResetButton).setOnClickListener(onClickListener)
     }
 
+    // 버튼 클릭 시
     var onClickListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.loginButton -> login()
-            R.id.gotoPasswordResetButton -> myStartActivity(PasswordResetActivity::class.java) // 비밀번호 재설정 액티비티로 이동
+            // 비밀번호 재설정 액티비티로 이동
+            R.id.gotoPasswordResetButton -> myStartActivity(PasswordResetActivity::class.java)
         }
     }
 
-    private fun login() { // 로그인 함수. 이메일, 비번 받기
+    // 로그인 함수. 이메일, 비번 받기
+    private fun login() {
         val email = (findViewById<View>(R.id.emailEditText) as EditText).text.toString()
         val password = (findViewById<View>(R.id.passwordEditText) as EditText).text.toString()
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            mAuth!!.signInWithEmailAndPassword(email, password) // 로그인 (FirebaseAuth의 기능)
+            // 로그인 (FirebaseAuth 기능)
+            mAuth!!.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val user = mAuth!!.currentUser // 현재 로그인된 유저 정보
                             startToast("로그인에 성공하였습니다.")
                             myStartActivity(MainActivity::class.java)
                         } else {

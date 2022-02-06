@@ -47,9 +47,6 @@ class SignUpActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST)
             }
         }
-        else {
-            Toast.makeText(this,"Welcome",Toast.LENGTH_SHORT).show()
-        }
 
 
         mAuth = FirebaseAuth.getInstance()

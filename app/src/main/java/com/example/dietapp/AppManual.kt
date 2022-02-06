@@ -10,7 +10,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import kotlinx.android.synthetic.main.activity_app_manual.*
 
 class AppManual : AppCompatActivity() {
-
     private var vpAdapter: FragmentStateAdapter? = null
 
     //ViewPager와 어댑터 연결

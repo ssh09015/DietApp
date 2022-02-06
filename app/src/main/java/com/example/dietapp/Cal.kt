@@ -16,7 +16,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-// 달력 액티비티
 class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var userID:String=""
     lateinit var fname: String
