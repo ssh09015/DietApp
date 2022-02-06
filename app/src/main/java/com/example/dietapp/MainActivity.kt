@@ -24,10 +24,9 @@ import java.util.*
 import kotlin.system.exitProcess
 
 
-//activity_main.xml constraint 부분 오류나는 부분이랑 실행했을 때 이상한 부분들 변경했음(윤솔)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener ,
     OnDialogCloseListner {
-    lateinit var resultButton: Button //추후에 초기화 변수타입
+    lateinit var resultButton: Button
     lateinit var heightEditText: EditText
     lateinit var weightEditText: EditText
     lateinit var navigationView : NavigationView
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setContentView(R.layout.navi_main)
 
-        // 회원정보 입력(세이)
+        // 회원정보 입력
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) { // 현재 등록된 유저가 없을 때
             myStartActivity(SignUpActivity::class.java)
@@ -73,6 +72,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         weightEditText = findViewById<EditText>(R.id.weightEditText)
         drawerLayout = findViewById(R.id.drawerLayoutMain)
         navigationView = findViewById(R.id.naviViewMain)
+        todoRecyclerview = findViewById(R.id.todoRecyclerview)
+        addtdButton = findViewById(R.id.addtdButton)
 
 
         loadData()
@@ -80,19 +81,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
 
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
+        // navigation 리스너
+        navigationView.setNavigationItemSelectedListener(this)
 
-        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
+        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기
         var navi_header = navigationView.getHeaderView(0)
         var navigationnameTextView =
             navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
@@ -124,7 +126,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         resultButton.setOnClickListener {
-            if (heightEditText.length() == 0 && weightEditText.length() == 0) { //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분(if부분만 세이가 넣고 else 안의 부분은 다른 분이 하셨음)
+            //키, 몸무게 값을 넣지 않았을 때 토스트 메시지 뜨기 부분
+            if (heightEditText.length() == 0 && weightEditText.length() == 0) {
                 Toast.makeText(this, "값을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 saveData(
@@ -139,9 +142,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        //todolist 사용되는 변수들(지인)
-        todoRecyclerview = findViewById(R.id.todoRecyclerview)
-        addtdButton = findViewById(R.id.addtdButton)
+
         myDB = DataBaseHelper(this@MainActivity)
         //mList = MutableList()
         adapter = ToDoAdapter(myDB, this@MainActivity)
@@ -153,7 +154,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Collections.reverse(mList)
         adapter.setTasks(mList)
 
-        // 투두리스트 항목 스와이프 할 때 필요한 변수들 함수 (지인)
+        // 투두리스트 항목 스와이프 할 때 필요한 변수들 함수
         val swipegesture = object :SwipeGesture(this){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){
@@ -170,14 +171,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         touchHelper.attachToRecyclerView(todoRecyclerview)
 
 
-        // 투두리스트 추가 버튼 누르면 dialog 창 실행 (지인)
+        // 투두리스트 추가 버튼 누르면 dialog 창 실행
         addtdButton.setOnClickListener(View.OnClickListener { v: View? -> AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG) })
         //val itemTouchHelper = ItemTouchHelper(RecyclerViewTouchHelper(adapter))
         //itemTouchHelper.attachToRecyclerView(mRecyclerview)
     }
 
 
-    // 투두리스트 추가버튼 누르면 나오는 창 (지인)
+    // 투두리스트 추가버튼 누르면 나오는 창
     override fun onDialogClose(dialogInterface: DialogInterface?) {
         mList = myDB.allTask.toMutableList()
         Collections.reverse(mList)
@@ -188,31 +189,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-    // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
+    // 메뉴버튼 누르면 navigation Drawer 나오게 하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
-            android.R.id.home -> { // 메뉴 버튼
-                drawerLayout.openDrawer(GravityCompat.START) // 네비게이션 드로어 열기
+            android.R.id.home -> {
+                drawerLayout.openDrawer(GravityCompat.START)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
+    // navigation Drawer에서 각 아이템이 클릭되었을 때 할일
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            // 메인화면
             R.id.action_home -> {
                 Toast.makeText(this, "여기가 메인화면입니다.", Toast.LENGTH_SHORT).show()
                 drawerLayout.closeDrawers()
             }
+            // 캘린더
             R.id.action_cal -> {
                 myStartActivity(Cal::class.java)
             }
+            // 회원정보
             R.id.action_account -> {
                 myStartActivity(UserInfoActivity::class.java)
             }
+            // 만보기
             R.id.action_walk -> {
                 myStartActivity(StepActivity::class.java)
             }
@@ -222,29 +227,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             // 타이머
             R.id.action_timer -> {
-                // 타이머로 이동
                 myStartActivity(Timer::class.java)
             }
+            // 로그아웃
             R.id.action_logout -> {
-                // 로그아웃 기능
                 FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
                 myStartActivity(SignUpActivity::class.java)
                 Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
             }
+            // 앱 사용 법
             R.id.action_manual -> {
-                //앱 사용 방법 화면으로 이동
                 myStartActivity(AppManual::class.java)
             }
-
+            // 앱 정보
             R.id.action_information -> {
-                // 앱정보 화면으로 이동
                 myStartActivity(AppInformation::class.java)
             }
         }
         return false
     }
 
-    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
+    // navigation Drawer가 열렸을 때 뒤로 가기 버튼을 누르면 navigation Drawer가 닫히게 하기
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
@@ -256,15 +259,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun myStartActivity(c: Class<*>) { // 인텐트 이동을 따로 함수로 만듦 (세이)
+    // 인텐트 이동 함수
+    private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)
     }
-    companion object { // 태그 선언
+    // 태그 선언
+    companion object {
         const val TAG = "MainActivity"
     }
 
-    private fun saveData(height: Int, weight: Int){ // SharedPreference로 키, 몸무게 저장(세이)
+    // SharedPreference로 키, 몸무게 저장
+    private fun saveData(height: Int, weight: Int){
         var pref = this.getPreferences(0)
         var editor = pref.edit()
 
@@ -272,8 +278,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         editor.putInt("KEY_WEIGHT", weightEditText.text.toString().toInt()).apply()
     }
 
+    // SharedPreference로 키, 몸무게 저장
     private fun loadData(){
-        var pref=this.getPreferences(0) // SharedPreference로 키, 몸무게 저장(세이)
+        var pref=this.getPreferences(0)
         var height = pref.getInt("KEY_HEIGHT", 0)
         var weight = pref.getInt("KEY_WEIGHT", 0)
 

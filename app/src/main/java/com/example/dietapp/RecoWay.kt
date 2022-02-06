@@ -39,21 +39,21 @@ class RecoWay : AppCompatActivity() {
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (화살표모양으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        // ResultActivity에서 bmi 값 받기 (송하)
+        // ResultActivity에서 bmi 값 받기
         var bmi = intent.getDoubleExtra("bmi", 0.0)
         var num = intent.getIntExtra("num", 0)
         var weight = intent.getDoubleExtra("goalWeight", 0.0)
 
-        // 추천 운동에서 동영상 부분을 누르면 추천 운동 영상의 유튜브 링크로 이동 (송하)
+        // 추천 운동에서 동영상 부분을 누르면 추천 운동 영상의 유튜브 링크로 이동
         when {
             // 정상 (유지)
             bmi >= 18.5 && bmi < 23 && num == 2 -> {

@@ -9,7 +9,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 abstract class SwipeGesture(context: Context) : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
 
-    // 투두리스트 항목 오른쪽을 스와이프 할 경우 나타나는 제스쳐 (지인)
+    // 투두리스트 항목 오른쪽을 스와이프 할 경우 나타나는 제스쳐
 
     val deleteColor = ContextCompat.getColor(context,R.color.deletecolor)
     val deleteIcon = R.drawable.ic_baseline_delete

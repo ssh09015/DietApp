@@ -72,18 +72,19 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
 
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
+        // navigation 리스너
+        navigationView.setNavigationItemSelectedListener(this)
 
-        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
+        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기
         var navi_header=navigationView.getHeaderView(0)
         var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
         var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
@@ -276,30 +277,34 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
-    // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
+    // 메뉴버튼 누르면 navigation Drawer 나오게 하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
-            android.R.id.home -> { // 메뉴 버튼
-                drawerLayout.openDrawer(GravityCompat.START) // 네비게이션 드로어 열기
+            android.R.id.home -> {
+                drawerLayout.openDrawer(GravityCompat.START)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
+    // navigation Drawer에서 각 아이템이 클릭되었을 때 할일
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            // 메인 화면
             R.id.action_home -> {
                 myStartActivity(MainActivity::class.java)
             }
+            // 캘린더
             R.id.action_cal -> {
                 myStartActivity(Cal::class.java)
             }
+            // 회원 정보
             R.id.action_account -> {
                 myStartActivity(UserInfoActivity::class.java)
             }
+            // 만보기
             R.id.action_walk -> {
                 myStartActivity(StepActivity::class.java)
             }
@@ -310,28 +315,27 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             }
             // 타이머
             R.id.action_timer -> {
-                // 타이머로 이동
                 myStartActivity(Timer::class.java)
             }
+            // 로그아웃
             R.id.action_logout -> {
-                // 로그아웃 기능
-                FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
+                FirebaseAuth.getInstance().signOut()
                 myStartActivity(SignUpActivity::class.java)
                 Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
             }
+            // 앱 사용법
             R.id.action_manual -> {
-                //앱 사용 방법 화면으로 이동
                 myStartActivity(AppManual::class.java)
             }
+            // 앱정보
             R.id.action_information -> {
-                // 앱정보 화면으로 이동
                 myStartActivity(AppInformation::class.java)
             }
         }
         return false
     }
 
-    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
+    // navigation Drawer가 열렸을 때 뒤로 가기 버튼을 누르면 navigation Drawer가 닫히게 하기
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
@@ -340,7 +344,8 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
-    private fun myStartActivity(c: Class<*>) { // 인텐트 이동을 따로 함수로 만듦 (세이)
+    // 인텐트 이동 함수
+    private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)
     }

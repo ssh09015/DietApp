@@ -26,23 +26,23 @@ class AppManual : AppCompatActivity() {
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
 
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (화살표모양으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
     }
 
-    // 화살표 누르면 메인화면으로 이동하는 함수 (송하)
+    // 툴바에 화살표 버튼을 누르면 메인화면으로 이동
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
-            android.R.id.home -> { // 메뉴 버튼
+            android.R.id.home -> {
                 var intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }

@@ -29,7 +29,7 @@ class MemberInitActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_member_init)
 
-        // 회원 정보 입력 (세이)
+        // 회원 정보 입력
         val user = FirebaseAuth.getInstance().currentUser // 현재 사용자 가져옴
         if (user == null) { // 만약 로그인이 안 되어 있다면
             myStartActivity(SignUpActivity::class.java) // 회원가입 창 먼저 뜨기
@@ -135,13 +135,13 @@ class MemberInitActivity : AppCompatActivity() {
         }
     }
 
-    // 뒤로 가기 버튼 누를 때(세이)
+    // 뒤로 가기 버튼 누를 때
     override fun onBackPressed() {
         super.onBackPressed()
         finish() // 앱 종료
     }
 
-    // 토스트 메시지 따로 함수 만들어놓음(세이)
+    // 토스트 메시지 함수
     private fun startToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }

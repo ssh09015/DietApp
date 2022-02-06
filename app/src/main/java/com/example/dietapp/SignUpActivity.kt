@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlin.system.exitProcess
 
 
-// 회원가입 액티비티 (세이)
+// 회원가입 액티비티
 class SignUpActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null //파이어베이스 연동
 

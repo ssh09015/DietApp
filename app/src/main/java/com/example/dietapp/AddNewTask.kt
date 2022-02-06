@@ -15,7 +15,7 @@ import android.widget.Button
 
 class AddNewTask : BottomSheetDialogFragment() {
 
-    // 투두리스트 추가버튼 누를때 나오는 kt (지인)
+    // 투두리스트 추가버튼 누를때 나오는 kt
     lateinit var enterText: EditText
     lateinit var saveButton: Button
     lateinit var myDB: DataBaseHelper
@@ -42,7 +42,7 @@ class AddNewTask : BottomSheetDialogFragment() {
                 saveButton.setEnabled(false)
             }
         }
-        //할일을 입력했을 경우 저장 버튼 색 변경 (지인)
+        //할일을 입력했을 경우 저장 버튼 색 변경
 
         enterText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -60,7 +60,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         })
         val finalIsUpdate = isUpdate
 
-        // 할일 입력 후 저장 버튼 눌렀을 경우 db에 저장되도록 (지인)
+        // 할일 입력 후 저장 버튼 눌렀을 경우 db에 저장되도록
         saveButton.setOnClickListener(View.OnClickListener {
             val text = enterText.getText().toString()
             if (finalIsUpdate) {
@@ -75,7 +75,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         })
     }
 
-    // 창 사라지도록 하는 (지인)
+    // 창 사라지도록 하는
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         val activity: Activity? = activity

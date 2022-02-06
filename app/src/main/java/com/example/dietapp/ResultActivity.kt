@@ -10,7 +10,6 @@ import kotlin.math.round
 
 class ResultActivity : AppCompatActivity() {
 
-    //결과 페이지 부분 텍스트, 사진, 버튼 변수 선언(윤솔)
     lateinit var ResultTextView : TextView
     lateinit var imageView : ImageView
     lateinit var radioGroup: RadioGroup
@@ -26,7 +25,6 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmi_result)
 
-        //변수에 위젯 대입(윤솔)
         ResultTextView = findViewById(R.id.bmiResultTextView)
         imageView = findViewById<ImageView>(R.id.manualImageView)
         radioGroup = findViewById(R.id.RadioGroup)
@@ -40,15 +38,14 @@ class ResultActivity : AppCompatActivity() {
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (화살표모양으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
 
 
         var height = intent.getStringExtra("height").toInt()
@@ -56,16 +53,16 @@ class ResultActivity : AppCompatActivity() {
         var num : Int = 0
 
 
-        //BMI 계산_변수형 Double로 변경 (송하)
+        //BMI 계산_변수형 Double로 변경
         var bmi : Double = weight / Math.pow(height/100.0, 2.0)
 
-        //progressbar는 정수만 되는 관계로 bmi를 int형으로 변경 (윤솔)
+        //progressbar는 정수만 되는 관계로 bmi를 int형으로 변경
         var bmiInt : Int = bmi.toInt()
 
-        // 정상 몸무게 계산 (송하)
+        // 정상 몸무게 계산
         var normalWeight : Double = 22.9 * Math.pow(height/100.0, 2.0)
 
-        // 증량/감량 해야하는 몸무게 계산 (송하)
+        // 증량/감량 해야하는 몸무게 계산
         var goalWeight : Double
         when {
             normalWeight > weight && bmi < 18.5 -> {
@@ -90,7 +87,7 @@ class ResultActivity : AppCompatActivity() {
             else -> ResultTextView.text = "'당신은 저체중입니다.'"
         }
 
-        //이미지로 출력 변경했습니다.(윤솔)
+        //이미지로 출력
         when{
             bmi >= 35 ->
                 imageView.setImageResource(
@@ -112,10 +109,9 @@ class ResultActivity : AppCompatActivity() {
                     R.drawable.underweight)
         }
 
-        //무게별 라디오 버튼 출력(윤솔)
-        //송하가 말한 단계로 이름 수정 완료(윤솔)
+        //무게별 라디오 버튼 출력
         when{
-            bmi >= 25 -> {  // 옵션 하나만 나와야 하는 부분에 두 개 나오는 부분 고쳐서 하나만 나오게 수정 함(세이)
+            bmi >= 25 -> {
                 radioButton1.visibility = View.INVISIBLE
                 radioButton2.text = "감량하기"
             }
@@ -129,12 +125,12 @@ class ResultActivity : AppCompatActivity() {
             }
         }
 
+        // 라디오 버튼을 누르면 bmi 값을 RecoWay 페이지로 전달
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.bmiResultButton1 -> {
                     num = 1
                     val intent = Intent(this, RecoWay::class.java)
-                    // bmi 값을 RecoWay로 전달 (송하)
                     intent.putExtra("bmi", bmi)
                     intent.putExtra("num", num)
                     intent.putExtra("goalWeight", goalWeight)
@@ -144,7 +140,6 @@ class ResultActivity : AppCompatActivity() {
                 R.id.bmiResultButton2 -> {
                     num = 2
                     val intent = Intent(this, RecoWay::class.java)
-                    // bmi 값을 RecoWay로 전달 (송하)
                     intent.putExtra("bmi", bmi)
                     intent.putExtra("num", num)
                     intent.putExtra("goalWeight", goalWeight)
@@ -153,7 +148,7 @@ class ResultActivity : AppCompatActivity() {
             }
         }
 
-        //progress 진행(max = 40이고 진행은 bmiInt 숫자로) progress 관련 수정은 activity_bmi_result에서 완료!!
+        //progress 진행(max = 40이고 진행은 bmiInt 숫자로)
             progressBar.max = 40
             progressBar.progress = bmiInt
 

@@ -22,7 +22,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_user_info.*
 import java.io.File
 
-// 회원 정보 보여주는 액티비티 (세이)
+// 회원 정보 보여주는 액티비티
 class UserInfoActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
@@ -128,13 +128,13 @@ class UserInfoActivity : AppCompatActivity() {
 
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (화살표모양으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
@@ -173,11 +173,11 @@ class UserInfoActivity : AppCompatActivity() {
         }
     }
 
-    // 화살표 누르면 메인화면으로 이동하는 함수 (송하)
+    // 화살표 누르면 메인화면으로 이동하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
-            android.R.id.home -> { // 메뉴 버튼
+            android.R.id.home -> {
                 var intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
@@ -185,7 +185,7 @@ class UserInfoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    // 인텐트 이동 함수 따로 만듦
+    // 인텐트 이동 함수
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)

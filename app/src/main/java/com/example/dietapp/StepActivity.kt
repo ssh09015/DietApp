@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-// 만보기(세이)
+// 만보기
 class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.OnNavigationItemSelectedListener {
     var sensorManager: SensorManager? = null
     var stepCountSensor: Sensor? = null
@@ -53,18 +53,19 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-        // 툴바를 액티비티의 앱바로 지정 (송하)
+        // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
 
-        // 드로어를 꺼낼 홈 버튼 활성화 (송하)
+        // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        // 홈버튼 (메뉴모양버튼으로) 이미지 변경 (송하)
+        // 홈버튼 (메뉴모양버튼으로) 이미지 변경
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        // 툴바에 타이틀 안보이게 (송하)
+        // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        navigationView.setNavigationItemSelectedListener(this) // navigation 리스너 (송하)
+        // navigation 리스너
+        navigationView.setNavigationItemSelectedListener(this)
 
-        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기 (세이)
+        // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기
         var navi_header=navigationView.getHeaderView(0)
         var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
         var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
@@ -136,16 +137,16 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
     }
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
-    //토스트 버튼 함수
+    // 토스트 버튼 함수
     private fun startToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
-    // 메뉴바 누르면 네비게이션 기능 나오게 하는 함수 (송하)
+    // 메뉴버튼 누르면 navigation Drawer 나오게 하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item!!.itemId){
-            android.R.id.home -> { // 메뉴 버튼
+            android.R.id.home -> {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
         }
@@ -153,18 +154,21 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         return super.onOptionsItemSelected(item)
     }
 
-    // navigation에서 각 아이템이 클릭되었을 때 할일 (송하)
+    // navigation Drawer에서 각 아이템이 클릭되었을 때 할일
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            // 메인 화면
             R.id.action_home -> {
                 myStartActivity(MainActivity::class.java)
             }
+            // 캘린더
             R.id.action_cal -> {
                 myStartActivity(Cal::class.java)
             }
+            // 회원정보
             R.id.action_account -> {
                 myStartActivity(UserInfoActivity::class.java)
-            }
+            }// 만보기
             R.id.action_walk -> {
                 startToast("여기가 만보기화면 입니다.")
                 drawerLayout.closeDrawers()
@@ -175,28 +179,27 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
             }
             // 타이머
             R.id.action_timer -> {
-                // 타이머로 이동
                 myStartActivity(Timer::class.java)
             }
+            // 로그아웃
             R.id.action_logout -> {
-                // 로그아웃 기능
                 FirebaseAuth.getInstance().signOut() // 사용자 로그아웃 시키는 signOut() (파이어베이스 참조)
                 myStartActivity(SignUpActivity::class.java)
                 startToast("로그아웃 되었습니다.")
             }
+            // 앱 사용법
             R.id.action_manual -> {
-                //앱 사용 방법 화면으로 이동
                 myStartActivity(AppManual::class.java)
             }
+            // 앱정보
             R.id.action_information -> {
-                // 앱정보 화면으로 이동
                 myStartActivity(AppInformation::class.java)
             }
         }
         return false
     }
 
-    // navigation이 열렸을 때 뒤로 가기 버튼을 누르면 navigation이 닫히게 하기 (송하)
+    // navigation Drawer가 열렸을 때 뒤로 가기 버튼을 누르면 navigation Drawer가 닫히게 하기
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
@@ -205,8 +208,8 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         }
     }
 
-
-    private fun myStartActivity(c: Class<*>) { // 세이가 메인화면에 만든 인텐트 이동 함수 가져옴 (송하)
+    // 인텐트 이동 함수
+    private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)
     }

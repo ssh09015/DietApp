@@ -10,7 +10,7 @@ import java.util.*
 
 class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
     lateinit var db: SQLiteDatabase
-    // 투두리스트 내부 db 이용해서 유지하기_ 유튜브 참조(지인)
+    // 투두리스트 내부 db 이용해서 유지하기
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, TASK TEXT, STATUS INTEGER)")
     }
@@ -74,7 +74,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
             return modelList
         }
 
-    // db에 사용할 변수 (지인)
+    // db에 사용할 변수
     companion object {
         private const val DATABASE_NAME = "TODO_DATABASE"
         private const val TABLE_NAME = "TODO_TABLE"

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HealthLog</string>
 
-    <!-- 메뉴 아이템 (송하) -->
+    <!-- 메뉴 아이템 -->
     <string name="action_cal">캘린더</string>
     <string name="action_home">메인화면</string>
     <string name="action_account">마이페이지</string>
@@ -10,7 +10,7 @@
     <string name="action_walk">만보기</string>
     <string name="action_timer">타이머</string>
     <string name="action_statics">통계</string>
-    <!-- 추천 창 변경되지 않을 텍스트 부분 (송하) -->
+    <!-- 추천 창 변경되지 않을 텍스트 부분 -->
     <string name="reco_habit">추천 습관</string>
     <string name="reco_exercise">추천 운동</string>
     <string name="goal">정상 체중까지</string>

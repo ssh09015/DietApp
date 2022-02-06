@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
-// 로그인 액티비티(세이)
+// 로그인 액티비티
 class LoginActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null // 파이어베이스 연동
 

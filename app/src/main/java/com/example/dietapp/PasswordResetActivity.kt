@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
-// 비밀번호 재설정 시 나오는 액티비티 (세이)
+// 비밀번호 재설정 시 나오는 액티비티
 class PasswordResetActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null // 파이어베이스의 여러 가지 기능 사용 위한 FirebaseAuth 선언
 
@@ -43,7 +43,7 @@ class PasswordResetActivity : AppCompatActivity() {
         }
     }
 
-    // 토스트 메시지 함수 따로 만듦
+    // 토스트 메시지 함수
     private fun startToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class ToDoAdapter(private val myDB: DataBaseHelper, activity: MainActivity?) : RecyclerView.Adapter<ToDoAdapter.MyViewHolder>() {
-    // 투두리스트 삭제, 수정, 추가 및 모든 기능 넣은 곳(지인)
+    // 투두리스트 삭제, 수정, 추가 및 모든 기능 넣은 곳
     lateinit var mList: MutableList<ToDoModel>
     private val activity: MainActivity? = null
 
@@ -51,7 +51,7 @@ class ToDoAdapter(private val myDB: DataBaseHelper, activity: MainActivity?) : R
 
     }
 
-    // 투두리스트 편집 함수 --> 얘가 말썽임
+    // 투두리스트 편집 함수
     //fun editItem(position: Int) {
         //val item = mList[position]
         //val bundle = Bundle()
