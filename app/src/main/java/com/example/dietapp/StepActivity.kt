@@ -37,10 +37,11 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
     lateinit var drawerLayout : DrawerLayout
 
     // 현재 걸음 수
-    var currentSteps = 0
+    var currentSteps= 0
 
     // 현재 칼로리수
-    var calorie : Double = 0.0
+    var calorie:Double = 0.0
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,7 +115,8 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
 
         //걸음 당 칼로리 계산 토스트 버튼
         ctoastbutton.setOnClickListener {
-            calorie = 0.04 * currentSteps
+            var doubleStep=currentSteps.toDouble()
+            calorie=0.04*doubleStep // kcal 단위로 바꿈
             startToast("$calorie"+"kcal이 소모되었습니다.")
         }
     }
