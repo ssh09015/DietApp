@@ -117,7 +117,7 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         ctoastbutton.setOnClickListener {
             var doubleStep=currentSteps.toDouble()
             calorie=0.04*doubleStep // kcal 단위로 바꿈
-            startToast("$calorie"+"kcal이 소모되었습니다.")
+            startToast("${String.format("%.2f",calorie)}"+"kcal이 소모되었습니다.")
         }
     }
 
