@@ -51,16 +51,6 @@ class ToDoAdapter(private val myDB: DataBaseHelper, activity: MainActivity?) : R
 
     }
 
-    // 투두리스트 편집 함수
-    //fun editItem(position: Int) {
-        //val item = mList[position]
-        //val bundle = Bundle()
-       // bundle.putInt("id", item.id)
-        //bundle.putString("task", item.task)
-        //val task = AddNewTask()
-        //task.arguments = bundle
-        //task.show(activity!!.supportFragmentManager, task.tag)
-    //}
 
     override fun getItemCount(): Int {
         return mList.size
