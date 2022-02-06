@@ -31,7 +31,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         saveButton = view.findViewById(R.id.saveButton)
         myDB = DataBaseHelper(activity)
 
-        //db 업데이트 (지인)
+        //db 업데이트
         var isUpdate = false
         val bundle = arguments
         if (bundle != null) {

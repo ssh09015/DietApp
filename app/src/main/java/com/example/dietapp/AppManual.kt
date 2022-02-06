@@ -54,6 +54,7 @@ class AppManual : AppCompatActivity() {
         //전체 페이지수 7개
         private val PAGENUMBER = 7
 
+        //pagenumber 넘겨주기
         override fun getItemCount(): Int {
             return PAGENUMBER
         }

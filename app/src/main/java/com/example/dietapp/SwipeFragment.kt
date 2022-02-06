@@ -17,6 +17,7 @@ class SwipeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let{
+            //image , text container에 넣음
             image = it.getInt("image",0)
             text = it.getString("text","")
         }
@@ -38,9 +39,12 @@ class SwipeFragment : Fragment() {
         manualTextView.text = text
     }
 
+    //fragment 처음 만들 때 newInstance 함수 실행
     companion object{
+        //외부로부터 image와 text 파라미터 값 받아옴
         fun newInstance(image: Int, text: String) =
             SwipeFragment().apply {
+                //keyvalue 형식으로 받음
                 arguments = Bundle().apply {
                     putInt("image",image)
                     putString("text", text)

@@ -35,7 +35,7 @@ class AppInformation : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    // 인텐트 이동 함수 따로 만듦듦
+    // 인텐트 이동 함수 따로 만듦
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)

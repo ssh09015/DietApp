@@ -152,6 +152,7 @@ class ResultActivity : AppCompatActivity() {
             progressBar.max = 40
             progressBar.progress = bmiInt
 
+        //bmi 설명 토스트 메세지
         bmiButton.setOnClickListener {
             Toast.makeText(this,"키와 몸무게를 이용하여 지방의 양을 추정하는 비만 측정법",Toast.LENGTH_LONG).show()
         }

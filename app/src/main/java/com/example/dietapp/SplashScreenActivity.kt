@@ -10,7 +10,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        // 스플래시 창 뜨고 살짝 유지시켜주는
+        // 스플래시 창 뜨고 살짝 유지시켜주기
         Handler().postDelayed({
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
