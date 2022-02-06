@@ -138,8 +138,7 @@ class Timer : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListen
                     secTextView.text = "$sec"
                     milliTextView.text = "$milli"
                 } else {
-                    secTextView.text = "0"
-                    milliTextView.text = "00"
+                    reset()
                 }
 
             }
