@@ -14,6 +14,14 @@ import android.view.View
 import android.widget.Button
 
 class AddNewTask : BottomSheetDialogFragment() {
+    companion object {
+        const val TAG = "AddNewTask"
+        @kotlin.jvm.JvmStatic
+        fun newInstance(): AddNewTask {
+            return AddNewTask()
+        }
+    }
+
     // 투두리스트 추가버튼 누를때 나오는 kt
     lateinit var enterText: EditText
     lateinit var saveButton: Button
@@ -78,14 +86,6 @@ class AddNewTask : BottomSheetDialogFragment() {
         val activity: Activity? = activity
         if (activity is OnDialogCloseListner) {
             (activity as OnDialogCloseListner).onDialogClose(dialog)
-        }
-    }
-
-    companion object {
-        const val TAG = "AddNewTask"
-        @kotlin.jvm.JvmStatic
-        fun newInstance(): AddNewTask {
-            return AddNewTask()
         }
     }
 }

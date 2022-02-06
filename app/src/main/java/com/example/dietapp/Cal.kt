@@ -17,6 +17,9 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    companion object {
+        const val TAG = "MainActivity"
+    }
     var userID:String=""
     lateinit var fname: String
     lateinit var str: String
@@ -75,17 +78,17 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
                 val document = task.result
                 if (document != null) {
                     if (document.exists()) { // 정보가 있으면
-                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
+                        Log.d(TAG, "DocumentSnapshot data: " + document.data)
                         userID=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
                         title.text=document.data?.get("name").toString() + "의 달력"// 달력 이름 바꾸기
                         navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
                         navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
                     } else {
-                        Log.d(MainActivity.TAG, "No such document")
+                        Log.d(TAG, "No such document")
                     }
                 }
             } else {
-                Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                Log.d(TAG, "get failed with ", task.exception)
             }
         }
 
