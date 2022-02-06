@@ -18,7 +18,7 @@ class ToDoAdapter(private val myDB: DataBaseHelper, activity: MainActivity?) : R
         val v = LayoutInflater.from(parent.context).inflate(R.layout.activity_task_layout, parent, false)
         return MyViewHolder(v)
     }
-
+    //투두리스트의 항목들이 보이게 해주는 함수
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = mList[position]
         holder.todoCheckbox.text = item.task
@@ -37,7 +37,7 @@ class ToDoAdapter(private val myDB: DataBaseHelper, activity: MainActivity?) : R
     val context: Context?
         get() = activity
 
-    //투두 리스트 보이도록
+    //투두리스트의 항목들이 설정되는 함수
     fun setTasks(mList: MutableList<ToDoModel>?) {
         this.mList = mList!!
         notifyDataSetChanged()
@@ -51,11 +51,11 @@ class ToDoAdapter(private val myDB: DataBaseHelper, activity: MainActivity?) : R
 
     }
 
-
+    // 투두리스트 항목의 갯수를 저장하는 함수
     override fun getItemCount(): Int {
         return mList.size
     }
-
+    // 투두리스트의 체크박스를 표시하도록 하는 함수
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var todoCheckbox: CheckBox
 

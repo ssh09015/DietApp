@@ -22,7 +22,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         }
     }
 
-    // 투두리스트 추가버튼 누를때 나오는 kt
+
     lateinit var enterText: EditText
     lateinit var saveButton: Button
     lateinit var myDB: DataBaseHelper
@@ -80,7 +80,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         })
     }
 
-    // 창 사라지도록 하는
+    // dialog 창을 사라지도록 하게 함
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         val activity: Activity? = activity

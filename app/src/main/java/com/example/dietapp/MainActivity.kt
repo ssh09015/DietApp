@@ -138,13 +138,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         myDB = DataBaseHelper(this@MainActivity)
-        //mList = MutableList()
         adapter = ToDoAdapter(myDB, this@MainActivity)
         todoRecyclerview.setHasFixedSize(true)
         todoRecyclerview.setLayoutManager(LinearLayoutManager(this))
         todoRecyclerview.setAdapter(adapter)
         mList = myDB.allTask
-        //mList = myDB.allTask.toMutableList()
         Collections.reverse(mList)
         adapter.setTasks(mList)
 
@@ -155,21 +153,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     ItemTouchHelper.LEFT ->{
                         adapter.deleteTask(viewHolder.adapterPosition)
                     }
-                    //ItemTouchHelper.RIGHT -> {
-                    //}
                 }
             }
         }
+        // 투두리스트 항목들의 스와이프 제스쳐를 시행해주는 함수
         val touchHelper = ItemTouchHelper(swipegesture)
         touchHelper.attachToRecyclerView(todoRecyclerview)
 
         // 투두리스트 추가 버튼 누르면 dialog 창 실행
         addtdButton.setOnClickListener(View.OnClickListener { v: View? -> AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG) })
-        //val itemTouchHelper = ItemTouchHelper(RecyclerViewTouchHelper(adapter))
-        //itemTouchHelper.attachToRecyclerView(mRecyclerview)
     }
 
-    // 투두리스트 추가버튼 누르면 나오는 창
+    // 투두리스트 dialog창에서 저장버튼을 누르고 창이 사라지면 실행되는 함수
     override fun onDialogClose(dialogInterface: DialogInterface?) {
         mList = myDB.allTask.toMutableList()
         Collections.reverse(mList)

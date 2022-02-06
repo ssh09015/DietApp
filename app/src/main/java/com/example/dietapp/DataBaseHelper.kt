@@ -19,7 +19,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
         onCreate(db)
     }
-
+    // 투두리스트 항목을 리스트에 추가하기
     fun insertTask(model: ToDoModel) {
         db = this.writableDatabase
         val values = ContentValues()
@@ -27,7 +27,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         values.put(COL_3, 0)
         db.insert(TABLE_NAME, null, values)
     }
-
+    // 데이터베이스에 목록 넣기
     fun updateTask(id: Int, task: String?) {
         db = this.writableDatabase
         val values = ContentValues()
@@ -41,7 +41,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         values.put(COL_3, status)
         db.update(TABLE_NAME, values, "ID=?", arrayOf(id.toString()))
     }
-
+    // 투두데이터베이스에 리스트 삭제하기
     fun deleteTask(id: Int) {
         db = this.writableDatabase
         db.delete(TABLE_NAME, "ID=?", arrayOf(id.toString()))
