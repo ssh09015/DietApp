@@ -7,29 +7,29 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
-// 비밀번호 재설정 시 나오는 액티비티
 class PasswordResetActivity : AppCompatActivity() {
-    private var mAuth: FirebaseAuth? = null // 파이어베이스의 여러 가지 기능 사용 위한 FirebaseAuth 선언
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password_reset)
-
-        mAuth = FirebaseAuth.getInstance() // 파이어베이스 인증
+        mAuth = FirebaseAuth.getInstance()
         findViewById<View>(R.id.sendButton).setOnClickListener(onClickListener)
     }
 
+    // 버튼 클릭 시
     var onClickListener = View.OnClickListener { v ->
         when (v.id) {
-            R.id.sendButton -> send() // 보내기 버튼 눌렀을 때
+            R.id.sendButton -> send()
         }
     }
 
+    // 비밀번호 재설정 이메일 보내기
     private fun send() {
         val email = (findViewById<View>(R.id.emailEditText) as EditText).text.toString()
-
         if (email.isNotEmpty()) {
-            mAuth!!.sendPasswordResetEmail(email) // 회원 가입한 비밀번호 재설정 (FirebaseAuth의 기능)
+            // 회원 가입한 비밀번호 재설정 (FirebaseAuth 기능)
+            mAuth!!.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         startToast("이메일을 보냈습니다.")

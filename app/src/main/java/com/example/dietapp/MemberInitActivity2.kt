@@ -97,17 +97,17 @@ class MemberInitActivity2 : AppCompatActivity() {
         } else{
             val ref= FirebaseStorage.getInstance().getReference("/images/$name.jpg") // path 참조
             ref.putFile(selectedPhotoUri!!)
-                    .addOnSuccessListener {
-                        Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
-                        ref.downloadUrl.addOnSuccessListener {
-                            Log.d(TAG, "File Location: $it")
-                            saveUserToFirebaseDatabase(it.toString())
-                        }
+                .addOnSuccessListener {
+                    Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
+                    ref.downloadUrl.addOnSuccessListener {
+                        Log.d(TAG, "File Location: $it")
+                        saveUserToFirebaseDatabase(it.toString())
                     }
-                    .addOnFailureListener {
-                        hideProgressBar()
-                        Log.d(TAG, "Failed to upload image to storage: ${it.message}")
-                    }
+                }
+                .addOnFailureListener {
+                    hideProgressBar()
+                    Log.d(TAG, "Failed to upload image to storage: ${it.message}")
+                }
         }
     }
 
@@ -125,17 +125,17 @@ class MemberInitActivity2 : AppCompatActivity() {
         val memberInfo = MemberInfo(profileImageUrl, name, phoneNumber, birthDay, address)
         if (user != null) {
             ref.setValue(memberInfo)
-                    .addOnSuccessListener {
-                        db.collection("users").document(user.uid).set(memberInfo)
-                        startToast("회원정보를 수정하였습니다.")
-                        hideProgressBar()
-                        myStartActivity(MainActivity::class.java)
-                        finish()
-                    }
-                    .addOnFailureListener {
-                        startToast("회원정보 수정에 실패하였습니다.")
-                        hideProgressBar()
-                    }
+                .addOnSuccessListener {
+                    db.collection("users").document(user.uid).set(memberInfo)
+                    startToast("회원정보를 수정하였습니다.")
+                    hideProgressBar()
+                    myStartActivity(MainActivity::class.java)
+                    finish()
+                }
+                .addOnFailureListener {
+                    startToast("회원정보 수정에 실패하였습니다.")
+                    hideProgressBar()
+                }
         }
     }
 
@@ -143,18 +143,6 @@ class MemberInitActivity2 : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
-    }
-
-    // 토스트 메시지 함수
-    private fun startToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    //로그인 하고 뒤로 가기 버튼 누르면 앱 꺼지는 기능
-    private fun myStartActivity(c: Class<*>) {
-        val intent = Intent(this, c)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
     }
 
     // 로딩창 보여주기
@@ -169,5 +157,17 @@ class MemberInitActivity2 : AppCompatActivity() {
     // 로딩창 숨기기
     private fun hideProgressBar(){
         dialog.dismiss()
+    }
+
+    // 토스트 메시지 함수
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    //로그인 하고 뒤로 가기 버튼 누르면 앱 꺼지는 기능
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 }

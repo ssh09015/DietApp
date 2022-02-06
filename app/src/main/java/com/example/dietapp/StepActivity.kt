@@ -24,8 +24,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-// 만보기
 class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.OnNavigationItemSelectedListener {
+    companion object {
+        private const val TAG = "MainActivity"
+    }
     var sensorManager: SensorManager? = null
     var stepCountSensor: Sensor? = null
     var stepCountView: TextView? = null
@@ -44,7 +46,6 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_step)
         setContentView(R.layout.navi_step)
-
         stepCountView = findViewById(R.id.stepCountView)
         resetButton=findViewById(R.id.resetButton)
         ctoastbutton=findViewById(R.id.ctoastbutton)
@@ -55,7 +56,6 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
 
         // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
-
         // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // 홈버튼 (메뉴모양버튼으로) 이미지 변경
@@ -67,8 +67,8 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
 
         // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기
         var navi_header=navigationView.getHeaderView(0)
-        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
-        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
+        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView
+        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView
 
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
@@ -79,18 +79,19 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
                 val document = task.result
                 if (document != null) {
                     if (document.exists()) { // 정보가 있으면
-                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
+                        Log.d(TAG, "DocumentSnapshot data: " + document.data)
                         navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
                         navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
                     } else {
-                        Log.d(MainActivity.TAG, "No such document")
+                        Log.d(TAG, "No such document")
                     }
                 }
             } else {
-                Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                Log.d(TAG, "get failed with ", task.exception)
             }
         }
 
+        // 리셋 버튼 누를 시
         resetButton?.setOnClickListener(View.OnClickListener {
             currentSteps=0
             stepCountView?.text=currentSteps.toString()
@@ -108,13 +109,13 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
 
         // 디바이스에 걸음 센서의 존재 여부 체크
         if (stepCountSensor == null) {
-            Toast.makeText(this, "No Step Sensor", Toast.LENGTH_SHORT).show()
+            startToast("No Step Sensor")
         }
 
         //걸음 당 칼로리 계산 토스트 버튼
         ctoastbutton.setOnClickListener {
             calorie = 0.04 * currentSteps
-            Toast.makeText(this, "$calorie"+"kcal이 소모되었습니다.", Toast.LENGTH_LONG).show()
+            startToast("$calorie"+"kcal이 소모되었습니다.")
         }
     }
 
@@ -137,20 +138,13 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
     }
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
-    // 토스트 버튼 함수
-    private fun startToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-    }
-
     // 메뉴버튼 누르면 navigation Drawer 나오게 하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when(item!!.itemId){
             android.R.id.home -> {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -208,12 +202,14 @@ class StepActivity : AppCompatActivity(), SensorEventListener, NavigationView.On
         }
     }
 
+    // 토스트 버튼 함수
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
     // 인텐트 이동 함수
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)
     }
-
-
-
 }

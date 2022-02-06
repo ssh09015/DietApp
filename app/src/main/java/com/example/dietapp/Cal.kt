@@ -21,6 +21,7 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
         const val TAG = "MainActivity"
     }
     var userID:String=""
+    var uId:String=""
     lateinit var fname: String
     lateinit var str: String
     lateinit var calendarView: CalendarView
@@ -39,7 +40,6 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
         setContentView(R.layout.activity_main)
         setContentView(R.layout.activity_cal)
         setContentView(R.layout.navi_cal)
-
         calendarView=findViewById(R.id.calendarView)
         diaryTextView=findViewById(R.id.diaryTextView)
         saveBtn=findViewById(R.id.saveBtn)
@@ -50,7 +50,6 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
         contextEditText=findViewById(R.id.contextEditText)
         drawerLayout = findViewById(R.id.drawerLayoutCal)
         navigationView = findViewById(R.id.naviViewCal)
-
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
         // 툴바를 액티비티의 앱바로 지정
@@ -72,14 +71,16 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
-        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+        val docRef = user?.let { db.collection("users").document(it.uid) }
         docRef?.get()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val document = task.result
                 if (document != null) {
                     if (document.exists()) { // 정보가 있으면
                         Log.d(TAG, "DocumentSnapshot data: " + document.data)
-                        userID=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
+                        // 받아온 정보 텍스트뷰에 넣기
+                        userID=document.data?.get("name").toString()
+                        uId=user.uid // 사용자 이름을 수정해도 계정에 따라 메모 내용이 저장되게 사용자 고유 id로 파일 이름 설정하기 위함
                         title.text=document.data?.get("name").toString() + "의 달력"// 달력 이름 바꾸기
                         navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
                         navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
@@ -102,7 +103,7 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
             deleteBtn.visibility = View.INVISIBLE // 삭제 버튼 안 보이기
             diaryTextView.text = String.format("%d / %d / %d", year, month + 1, dayOfMonth) //날짜 정보 가져오기
             contextEditText.setText("")
-            checkDay(year, month, dayOfMonth, userID) // checkDay 함수에 넘기기
+            checkDay(year, month, dayOfMonth, uId) // checkDay 함수에 넘기기
         }
 
         // 저장 버튼 눌릴 때
@@ -120,9 +121,9 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 
     // 로그인한 사용자를 알아보는 달력
     // 달력 내용 조회, 수정
-    fun checkDay(cYear: Int, cMonth: Int, cDay: Int, userID: String) {
+    fun checkDay(cYear: Int, cMonth: Int, cDay: Int, uId: String) {
         //저장할 파일 이름설정
-        fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt" // 메모 내용 저장할 파일 이름 설정
+        fname = "" + uId + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt" // 메모 내용 저장할 파일 이름 설정
         var fileInputStream: FileInputStream
         try {
             fileInputStream = openFileInput(fname) //파일을 읽기 모드로 오픈
@@ -194,7 +195,6 @@ class Cal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
     fun saveDiary(readDay: String?) {
         var fileOutputStream: FileOutputStream
         fileOutputStream = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS)
-        val content = contextEditText.text.toString()
         try {
             fileOutputStream = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS) // 파일에 쓰기
             val content = contextEditText.text.toString()

@@ -7,9 +7,7 @@ import android.view.View
 import android.widget.*
 import kotlin.math.round
 
-
 class ResultActivity : AppCompatActivity() {
-
     lateinit var ResultTextView : TextView
     lateinit var imageView : ImageView
     lateinit var radioGroup: RadioGroup
@@ -19,12 +17,9 @@ class ResultActivity : AppCompatActivity() {
     lateinit var bmiButton: Button
     lateinit var myBmi: TextView
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmi_result)
-
         ResultTextView = findViewById(R.id.bmiResultTextView)
         imageView = findViewById<ImageView>(R.id.manualImageView)
         radioGroup = findViewById(R.id.RadioGroup)
@@ -33,9 +28,6 @@ class ResultActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         bmiButton = findViewById(R.id.bmiToastButton)
         myBmi = findViewById(R.id.myBmiTextView)
-
-
-
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
         // 툴바를 액티비티의 앱바로 지정
@@ -47,11 +39,9 @@ class ResultActivity : AppCompatActivity() {
         // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-
         var height = intent.getStringExtra("height").toInt()
         var weight = intent.getStringExtra("weight").toInt()
         var num : Int = 0
-
 
         //BMI 계산_변수형 Double로 변경
         var bmi : Double = weight / Math.pow(height/100.0, 2.0)
@@ -91,13 +81,13 @@ class ResultActivity : AppCompatActivity() {
         when{
             bmi >= 35 ->
                 imageView.setImageResource(
-                        R.drawable.high_obesity)
+                    R.drawable.high_obesity)
             bmi >= 30 ->
                 imageView.setImageResource(
-                        R.drawable.obesity2)
+                    R.drawable.obesity2)
             bmi >= 25 ->
                 imageView.setImageResource(
-                        R.drawable.obesity1)
+                    R.drawable.obesity1)
             bmi >= 23 ->
                 imageView.setImageResource(
                     R.drawable.overweight)
@@ -149,17 +139,18 @@ class ResultActivity : AppCompatActivity() {
         }
 
         //progress 진행(max = 40이고 진행은 bmiInt 숫자로)
-            progressBar.max = 40
-            progressBar.progress = bmiInt
+        progressBar.max = 40
+        progressBar.progress = bmiInt
 
         //bmi 설명 토스트 메세지
         bmiButton.setOnClickListener {
-            Toast.makeText(this,"키와 몸무게를 이용하여 지방의 양을 추정하는 비만 측정법",Toast.LENGTH_LONG).show()
+            startToast("키와 몸무게를 이용하여 지방의 양을 추정하는 비만 측정법")
         }
-
         myBmi.text = bmiInt.toString()
-
     }
 
-
+    // 토스트 메시지 함수
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
 }

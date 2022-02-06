@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 
 class RecoWay : AppCompatActivity() {
-
     lateinit var video1 : ImageButton
     lateinit var video2 : ImageButton
     lateinit var video3 : ImageButton
@@ -21,11 +20,9 @@ class RecoWay : AppCompatActivity() {
     lateinit var goalText : TextView
     lateinit var goalText1 : TextView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reco_way)
-
         video1 = findViewById(R.id.recoImage1)
         video2 = findViewById(R.id.recoImage2)
         video3 = findViewById(R.id.recoImage3)
@@ -69,12 +66,13 @@ class RecoWay : AppCompatActivity() {
                     intent.data = Uri.parse("https://youtu.be/lazFuEUBB7A")
                     startActivity(Intent.createChooser(intent, null))
                 }
-                    video2.setOnClickListener {
-                        val intent = Intent(Intent.ACTION_VIEW)
-                        intent.data = Uri.parse("https://youtu.be/2LyDkE7sDec")
-                        startActivity(Intent.createChooser(intent, null))
+                video2.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse("https://youtu.be/2LyDkE7sDec")
+                    startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 정상 (감량)
             bmi >= 18.5 && bmi < 23 && num == 1 -> {
                 goalText1.visibility = android.view.View.INVISIBLE
@@ -102,6 +100,7 @@ class RecoWay : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 과체중 (유지)
             bmi >= 23 && bmi < 25 && num == 2 -> {
                 goalText.text = "$weight"+"kg 감량 필요!"
@@ -122,6 +121,7 @@ class RecoWay : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 과체중 (감량)
             bmi >= 23 && bmi < 25 && num == 1 -> {
                 goalText.text = "$weight"+"kg 감량 필요!"
@@ -148,6 +148,7 @@ class RecoWay : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 1단계 비만
             bmi >= 25 && bmi < 30 -> {
                 goalText.text = "$weight"+"kg 감량 필요!"
@@ -168,6 +169,7 @@ class RecoWay : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 2단계 비만
             bmi >= 30 && bmi < 35 -> {
                 goalText.text = "$weight"+"kg 감량 필요!"
@@ -194,6 +196,7 @@ class RecoWay : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 3단계 비만
             bmi >= 35 -> {
                 goalText.text = "$weight"+"kg 감량 필요!"
@@ -214,6 +217,7 @@ class RecoWay : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, null))
                 }
             }
+
             // 저체중
             else -> {
                 goalText.text = "$weight"+"kg 증량 필요!"

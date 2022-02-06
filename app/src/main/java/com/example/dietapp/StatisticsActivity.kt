@@ -27,11 +27,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_statistics.*
 
 class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    companion object {
+        private const val TAG = "MainActivity"
+    }
     lateinit var linelist: ArrayList<Entry>
     lateinit var lineDataSet: LineDataSet
     lateinit var lineData: LineData
-
     lateinit var edtDate: EditText
     lateinit var edtWeight: EditText
     lateinit var edtDateResult: EditText
@@ -42,20 +43,15 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     lateinit var btnUpdate: Button
     lateinit var btnDelete: Button
     lateinit var btnshow: Button
-
     lateinit var myHelper: myDBHelper
     lateinit var sqlDB: SQLiteDatabase
-
     lateinit var navigationView : NavigationView
     lateinit var drawerLayout : DrawerLayout
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
         setContentView(R.layout.navi_statistics)
-
-
         edtDate = findViewById(R.id.edtDate)
         edtWeight = findViewById(R.id.edtWeight)
         edtDateResult = findViewById(R.id.edtDateResult)
@@ -66,7 +62,6 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         btnUpdate = findViewById(R.id.btnUpdate)
         btnDelete = findViewById(R.id.btnDelete)
         btnshow = findViewById(R.id.btnshow)
-
         drawerLayout = findViewById(R.id.drawerLayoutStatistics)
         navigationView = findViewById(R.id.naviViewStatistics)
 
@@ -74,7 +69,6 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         // 툴바를 액티비티의 앱바로 지정
         setSupportActionBar(toolbar)
-
         // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // 홈버튼 (메뉴모양버튼으로) 이미지 변경
@@ -86,35 +80,35 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         // navigation drawer header의 TextView를 파이어베이스에서 사용자 정보 불러와 바꾸기
         var navi_header=navigationView.getHeaderView(0)
-        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView // TextView로 바꾸기
-        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView // TextView로 바꾸기
+        var navigationnameTextView=navi_header.findViewById<NavigationView>(R.id.navigationnameTextView) as TextView
+        var navigationemailTextView=navi_header.findViewById<NavigationView>(R.id.navigationemailTextView) as TextView
 
         // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
         val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
-        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+        val docRef = user?.let { db.collection("users").document(it.uid) }
         docRef?.get()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val document = task.result
                 if (document != null) {
                     if (document.exists()) { // 정보가 있으면
-                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
-                        navigationnameTextView.text = document.data?.get("name").toString() // 불러온 사용자 이름으로 텍스트뷰 바꾸기
+                        Log.d(TAG, "DocumentSnapshot data: " + document.data)
+                        // 불러온 사용자 이름으로 navigation 텍스트뷰 바꾸기
+                        navigationnameTextView.text = document.data?.get("name").toString()
                         navigationemailTextView.setText(user.email); // 사용자 이메일 불러오기
                     } else {
-                        Log.d(MainActivity.TAG, "No such document")
+                        Log.d(TAG, "No such document")
                     }
                 }
             } else {
-                Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                Log.d(TAG, "get failed with ", task.exception)
             }
         }
-
         myHelper = myDBHelper(this)
 
+        // 그래프 버튼 누를 시
         btnshow.setOnClickListener {
-            Toast.makeText(this,"그래프를 한 번 터치해주세요!", Toast.LENGTH_LONG).show()
-
+            startToast("그래프를 한 번 터치해주세요!")
             var firstInput:String
             var secondInput:String
             var thirdInput:String
@@ -123,24 +117,21 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             var sixthInput:String
             var seventhInput:String
 
-
-
+            // sqlite 불러오기
             sqlDB = myHelper.readableDatabase
-
             var cursor: Cursor
-
             cursor = sqlDB.rawQuery("SELECT * FROM staticsTBL;", null)
-
             var arr1=Array<String>(7, { "0f" })
             var arr2=Array<String>(7, { "0" })
             val xLabel: ArrayList<String> = ArrayList()
+            var index =0
 
-            var index:Int=0
+            // 최근 데이터부터 보이게 순서 정렬
             var count:Int=cursor.count
             cursor.moveToPosition(count)
             while (cursor.moveToPrevious()) {
-                arr1[index] = cursor.getString(1) // 몸무게
-                arr2[index] =cursor.getString(0) // 날짜
+                arr1[index] = cursor.getString(1) // 몸무게 담는 배열
+                arr2[index] =cursor.getString(0) // 날짜 담는 배열
                 if(index==6){
                     break
                 }
@@ -154,6 +145,7 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             xLabel.add(arr2[1])
             xLabel.add(arr2[0])
 
+            // x 축 꾸미기
             val xAxis: XAxis = line_chart.xAxis
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.setDrawGridLines(false)
@@ -168,9 +160,8 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             sixthInput=arr1[1]
             seventhInput=arr1[0]
 
-
+            // 그래프에 불러온 값 넣기
             linelist= ArrayList()
-
             linelist.add(Entry(0f, firstInput.toFloat()))
             linelist.add(Entry(1f, secondInput.toFloat()))
             linelist.add(Entry(2f, thirdInput.toFloat()))
@@ -179,113 +170,87 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             linelist.add(Entry(5f, sixthInput.toFloat()))
             linelist.add(Entry(6f, seventhInput.toFloat()))
 
-
-
+            // 그래프 꾸미기
             lineDataSet= LineDataSet(linelist, "kg")
             lineData=LineData(lineDataSet)
             line_chart.data=lineData
             lineDataSet.color= Color.BLACK
-
-            //lineDataSet.setColors(*ColorTemplate.JOYFUL_COLORS)
-
             lineDataSet.valueTextColor= Color.BLACK
             lineDataSet.valueTextSize=10f
-            //lineDataSet.setDrawFilled(true)
-
             line_chart.description.isEnabled = false
-
             cursor.close()
             sqlDB.close()
         }
 
-
+        // 초기화 버튼 누를 시
         btnInit.setOnClickListener {
             sqlDB = myHelper.writableDatabase
             myHelper.onUpgrade(sqlDB, 1, 2)
             sqlDB.close()
         }
 
+        // 입력 버튼 누를 시
         btnInsert.setOnClickListener {
             sqlDB = myHelper.writableDatabase
-
             sqlDB.execSQL(
                 "INSERT INTO staticsTBL VALUES ('" + edtDate.text.toString() + "',"
                         + edtWeight.text.toString() + ");"
             )
-
             sqlDB.close()
-            Toast.makeText(applicationContext, "입력됨", Toast.LENGTH_SHORT).show()
+            startToast("입력됨")
             btnSelect.callOnClick()
         }
 
+        // 조회 버튼 누를 시
         btnSelect.setOnClickListener {
             sqlDB = myHelper.readableDatabase
-
             var cursor: Cursor
             cursor = sqlDB.rawQuery("SELECT * FROM staticsTBL;", null)
-
             var strDate = "날짜" + "\r\n" + "---------" + "\r\n"
             var strWeight = "몸무게" + "\r\n" + "---------" + "\r\n"
 
+            // 최근 데이터부터 보이게 순서 정렬
             var count:Int=cursor.count
             cursor.moveToPosition(count)
             while (cursor.moveToPrevious()) {
                 strDate += cursor.getString(0) + "\r\n"
                 strWeight += cursor.getString(1) + "\r\n"
             }
-
             edtDateResult.setText(strDate)
             edtWeightResult.setText(strWeight)
-
             cursor.close()
             sqlDB.close()
         }
 
+        // 수정 버튼 누를 시
         btnUpdate.setOnClickListener {
             sqlDB = myHelper.writableDatabase
-
             sqlDB.execSQL(
                 "UPDATE staticsTBL SET gWeight = " + edtWeight.text + " WHERE gDate = '"
                         + edtDate.text.toString() + "';"
             )
-
             sqlDB.close()
-
-            Toast.makeText(applicationContext, "수정됨", Toast.LENGTH_SHORT).show()
+            startToast("수정됨")
             btnSelect.callOnClick()
         }
 
+        // 삭제 버튼 누를 시
         btnDelete.setOnClickListener {
             sqlDB = myHelper.writableDatabase
-
             sqlDB.execSQL("DELETE FROM staticsTBL WHERE gDate = '" + edtDate.text.toString() + "';")
-
-
             sqlDB.close()
-            Toast.makeText(applicationContext, "삭제됨", Toast.LENGTH_SHORT).show()
+            startToast("삭제됨")
             btnSelect.callOnClick()
-        }
-    }
-    inner class myDBHelper(context: Context):SQLiteOpenHelper(context, "statics", null, 1){
-        override fun onCreate(db: SQLiteDatabase?) {
-            db!!.execSQL("CREATE TABLE staticsTBL (gDate CHAR(20) PRIMARY KEY, gWeight FLOAT);")
-        }
-
-        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-            db!!.execSQL("DROP TABLE IF EXISTS staticsTBL")
-            onCreate(db)
         }
     }
 
     // 메뉴버튼 누르면 navigation Drawer 나오게 하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when(item!!.itemId){
             android.R.id.home -> {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -310,7 +275,7 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             }
             // 통계
             R.id.action_statics -> {
-                Toast.makeText(this, "여기가 통계 화면입니다.", Toast.LENGTH_SHORT).show()
+                startToast("여기가 통계 화면입니다.")
                 drawerLayout.closeDrawers()
             }
             // 타이머
@@ -321,7 +286,7 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 myStartActivity(SignUpActivity::class.java)
-                Toast.makeText(this,"로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
+                startToast("로그아웃 되었습니다.")
             }
             // 앱 사용법
             R.id.action_manual -> {
@@ -335,6 +300,18 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         return false
     }
 
+    // sqlite 사용
+    inner class myDBHelper(context: Context):SQLiteOpenHelper(context, "statics", null, 1){
+        override fun onCreate(db: SQLiteDatabase?) {
+            db!!.execSQL("CREATE TABLE staticsTBL (gDate CHAR(20) PRIMARY KEY, gWeight FLOAT);")
+        }
+
+        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+            db!!.execSQL("DROP TABLE IF EXISTS staticsTBL")
+            onCreate(db)
+        }
+    }
+
     // navigation Drawer가 열렸을 때 뒤로 가기 버튼을 누르면 navigation Drawer가 닫히게 하기
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -344,10 +321,14 @@ class StatisticsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
+    // 토스트 메시지 함수
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
     // 인텐트 이동 함수
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
         startActivity(intent)
     }
 }
-

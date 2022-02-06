@@ -38,10 +38,8 @@ class UserInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 파이어베이스에서 사진 불러와 바꾸기 위함, 뷰 바인딩
         val binding:ActivityUserInfoBinding= ActivityUserInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         nameTextView=findViewById(R.id.nameTextView)
         phoneNumberTextView=findViewById(R.id.phoneNumberTextView)
         birthDayTextView=findViewById(R.id.birthDayTextView)
@@ -70,7 +68,7 @@ class UserInfoActivity : AppCompatActivity() {
                 // 파이어베이스에 저장된 사용자 정보 불러오기 (파이어베이스 문서 참조)
                 val user = FirebaseAuth.getInstance().currentUser
                 val db = FirebaseFirestore.getInstance()
-                val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+                val docRef = user?.let { db.collection("users").document(it.uid) }
                 docRef?.get()?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val document = task.result
@@ -78,9 +76,9 @@ class UserInfoActivity : AppCompatActivity() {
                             if (document.exists()) { // 사진 먼저 삭제
                                 val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
                                 storageRef.delete().addOnSuccessListener {
-                                    Log.d(TAG,"파이어베이스 사진 삭제 완료")
+                                    Log.d(TAG,"firebase photo delete complete")
                                 }.addOnFailureListener {
-                                    Log.d(TAG,"파이어베이스 사진 삭제 실패")
+                                    Log.d(TAG,"firebase photo delete fail")
                                 }
                                 // 계정 삭제
                                 FirebaseAuth.getInstance().currentUser!!.delete().addOnCompleteListener { task ->
@@ -92,7 +90,7 @@ class UserInfoActivity : AppCompatActivity() {
                                                 hideProgressBar()
                                                 FirebaseAuth.getInstance().signOut()
                                                 myStartActivity(SignUpActivity::class.java)
-                                                Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
+                                                startToast("탈퇴가 완료되었습니다")
                                             }
                                             .addOnFailureListener {
                                                     e -> Log.w(TAG, "Error deleting document", e)
@@ -106,20 +104,20 @@ class UserInfoActivity : AppCompatActivity() {
                                             .addOnCompleteListener {
                                                 // 재인증 완료시 계정 삭제
                                                 user.delete()
-                                                        .addOnCompleteListener { task ->
-                                                            FirebaseAuth.getInstance().signOut()
-                                                            myStartActivity(SignUpActivity::class.java)
-                                                            Toast.makeText(this, "탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
-                                                        }
+                                                    .addOnCompleteListener { task ->
+                                                        FirebaseAuth.getInstance().signOut()
+                                                        myStartActivity(SignUpActivity::class.java)
+                                                        startToast("탈퇴가 완료되었습니다")
+                                                    }
                                             }
                                     }
                                 }
                             } else {
-                                Log.d(MainActivity.TAG, "No such document")
+                                Log.d(TAG, "No such document")
                             }
                         }
                     } else {
-                        Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                        Log.d(TAG, "get failed with ", task.exception)
                     }
                 }
             }
@@ -141,14 +139,14 @@ class UserInfoActivity : AppCompatActivity() {
         showProgressBar()
         val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
-        val docRef = user?.let { db.collection("users").document(it.uid) } // 사용자 고유 id로 불러오기
+        val docRef = user?.let { db.collection("users").document(it.uid) }
         docRef?.get()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val document = task.result
                 if (document != null) {
                     if (document.exists()) { // 정보가 있으면
-                        Log.d(MainActivity.TAG, "DocumentSnapshot data: " + document.data)
-                        // 파이어베이스에서 사진 불러오기 (uri를 ImageView로 바꾸는 작업)
+                        Log.d(TAG, "DocumentSnapshot data: " + document.data)
+                        // 파이어베이스에서 사진 불러오기 (uri를 ImageView로 바꾸는 과정)
                         val storageRef=FirebaseStorage.getInstance().reference.child("/images/${document.data?.get("name").toString()}.jpg")
                         val localfile= File.createTempFile("Image","jpg")
                         storageRef.getFile(localfile).addOnSuccessListener {
@@ -156,39 +154,32 @@ class UserInfoActivity : AppCompatActivity() {
                             binding.profileImage.setImageBitmap(bitmap)
                             hideProgressBar()
                         }.addOnFailureListener{
-                            Toast.makeText(this,"사진을 불러오지 못했습니다.",Toast.LENGTH_SHORT).show()
+                            startToast("사진을 불러오지 못했습니다.")
                             hideProgressBar()
                         }
-                        nameTextView.text=document.data?.get("name").toString()  // 받아온 정보 텍스트뷰에 넣기
+                        // 받아온 정보 텍스트뷰에 넣기
+                        nameTextView.text=document.data?.get("name").toString()
                         phoneNumberTextView.text=document.data?.get("phoneNumber").toString()
                         birthDayTextView.text=document.data?.get("birthDay").toString()
                         addressTextView.text=document.data?.get("address").toString()
                     } else {
-                        Log.d(MainActivity.TAG, "No such document")
+                        Log.d(TAG, "No such document")
                     }
                 }
             } else {
-                Log.d(MainActivity.TAG, "get failed with ", task.exception)
+                Log.d(TAG, "get failed with ", task.exception)
             }
         }
     }
 
     // 화살표 누르면 메인화면으로 이동하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when(item!!.itemId){
             android.R.id.home -> {
-                var intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                myStartActivity(MainActivity::class.java)
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    // 인텐트 이동 함수
-    private fun myStartActivity(c: Class<*>) {
-        val intent = Intent(this, c)
-        startActivity(intent)
     }
 
     // 로딩창 보이기
@@ -204,5 +195,15 @@ class UserInfoActivity : AppCompatActivity() {
     private fun hideProgressBar(){
         dialog.dismiss()
     }
-}
 
+    // 토스트 버튼 함수
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
+    // 인텐트 이동 함수
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        startActivity(intent)
+    }
+}

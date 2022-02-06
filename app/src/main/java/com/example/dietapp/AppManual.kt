@@ -17,7 +17,6 @@ class AppManual : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_manual)
-
         vpAdapter = CustomPagerAdapter(this)
         manualViewPager.adapter = vpAdapter
         indicator.setViewPager(manualViewPager)

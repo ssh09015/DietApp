@@ -8,8 +8,19 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_bmi_result.*
 import kotlinx.android.synthetic.main.activity_user_info.*
 
-
 class SwipeFragment : Fragment() {
+    //fragment 처음 만들 때 newInstance 함수 실행
+    companion object{
+        //외부로부터 image와 text 파라미터 값 받아옴
+        fun newInstance(image: Int, text: String) =
+            SwipeFragment().apply {
+                //keyvalue 형식으로 받음
+                arguments = Bundle().apply {
+                    putInt("image",image)
+                    putString("text", text)
+                }
+            }
+    }
     private var image: Int? = null
     private var text: String? = null
     //외부에서 전달되는 image와 text 값을 newInstance에서초기화
@@ -38,19 +49,4 @@ class SwipeFragment : Fragment() {
         manualImageView.setImageResource(image!!)
         manualTextView.text = text
     }
-
-    //fragment 처음 만들 때 newInstance 함수 실행
-    companion object{
-        //외부로부터 image와 text 파라미터 값 받아옴
-        fun newInstance(image: Int, text: String) =
-            SwipeFragment().apply {
-                //keyvalue 형식으로 받음
-                arguments = Bundle().apply {
-                    putInt("image",image)
-                    putString("text", text)
-                }
-            }
-    }
-
-
 }

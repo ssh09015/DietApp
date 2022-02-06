@@ -9,6 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper
 import java.util.*
 
 class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
+    // db에 사용할 변수
+    companion object {
+        private const val DATABASE_NAME = "TODO_DATABASE"
+        private const val TABLE_NAME = "TODO_TABLE"
+        private const val COL_1 = "ID"
+        private const val COL_2 = "TASK"
+        private const val COL_3 = "STATUS"
+    }
     lateinit var db: SQLiteDatabase
     // 투두리스트 내부 db 이용해서 유지하기
     override fun onCreate(db: SQLiteDatabase) {
@@ -19,6 +27,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
         onCreate(db)
     }
+
     // 투두리스트 항목을 리스트에 추가하기
     fun insertTask(model: ToDoModel) {
         db = this.writableDatabase
@@ -27,6 +36,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         values.put(COL_3, 0)
         db.insert(TABLE_NAME, null, values)
     }
+
     // 데이터베이스에 목록 넣기
     fun updateTask(id: Int, task: String?) {
         db = this.writableDatabase
@@ -41,6 +51,7 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         values.put(COL_3, status)
         db.update(TABLE_NAME, values, "ID=?", arrayOf(id.toString()))
     }
+
     // 투두데이터베이스에 리스트 삭제하기
     fun deleteTask(id: Int) {
         db = this.writableDatabase
@@ -73,13 +84,4 @@ class DataBaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
             }
             return modelList
         }
-
-    // db에 사용할 변수
-    companion object {
-        private const val DATABASE_NAME = "TODO_DATABASE"
-        private const val TABLE_NAME = "TODO_TABLE"
-        private const val COL_1 = "ID"
-        private const val COL_2 = "TASK"
-        private const val COL_3 = "STATUS"
-    }
 }

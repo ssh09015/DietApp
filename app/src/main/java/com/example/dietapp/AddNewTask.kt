@@ -21,8 +21,6 @@ class AddNewTask : BottomSheetDialogFragment() {
             return AddNewTask()
         }
     }
-
-
     lateinit var enterText: EditText
     lateinit var saveButton: Button
     lateinit var myDB: DataBaseHelper
@@ -64,7 +62,6 @@ class AddNewTask : BottomSheetDialogFragment() {
             override fun afterTextChanged(s: Editable) {}
         })
         val finalIsUpdate = isUpdate
-
         // 할일 입력 후 저장 버튼 눌렀을 경우 db에 저장되도록
         saveButton.setOnClickListener(View.OnClickListener {
             val text = enterText.getText().toString()

@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContentView(R.layout.navi_main)
-
         // 회원정보 입력
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) { // 현재 등록된 유저가 없을 때
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             // 파이어베이스 정보 가져오기
             val db = FirebaseFirestore.getInstance()
-            val docRef = db.collection("users").document(user.uid) // 사용자 고유 id로 파이어베이스 정보 가져오기
+            val docRef = db.collection("users").document(user.uid)
             docRef.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val document = task.result
@@ -101,7 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             // 파이어베이스 정보 가져오기
             val db = FirebaseFirestore.getInstance()
-            val docRef = db.collection("users").document(user.uid) // 사용자 고유 id로 파이어베이스 정보 가져오기
+            val docRef = db.collection("users").document(user.uid)
             docRef.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val document = task.result
@@ -156,7 +155,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             }
         }
-        // 투두리스트 항목들의 스와이프 제스쳐를 시행해주는 함수
+
+        // 투두리스트 항목들의 스와이프 제스쳐를 실행해주는 함수
         val touchHelper = ItemTouchHelper(swipegesture)
         touchHelper.attachToRecyclerView(todoRecyclerview)
 
@@ -240,17 +240,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    // 토스트 메시지
-    private fun startToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    // 인텐트 이동 함수
-    private fun myStartActivity(c: Class<*>) {
-        val intent = Intent(this, c)
-        startActivity(intent)
-    }
-
     // SharedPreference로 키, 몸무게 저장
     private fun saveData(height: Int, weight: Int){
         var pref = this.getPreferences(0)
@@ -268,5 +257,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             heightEditText.setText(height.toString())
             weightEditText.setText(weight.toString())
         }
+    }
+
+    // 토스트 메시지
+    private fun startToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    // 인텐트 이동 함수
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        startActivity(intent)
     }
 }
