@@ -22,7 +22,6 @@ class MemberInitActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
     }
-
     private lateinit var dialog:Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,15 +66,16 @@ class MemberInitActivity : AppCompatActivity() {
         }
     }
 
-    var selectedPhotoUri: Uri?=null // 갤러리에서 선택된 사진 uri 받아오기
+    var selectedPhotoUri: Uri?=null
 
     // 사진 가져오는 부분
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==0&&resultCode== Activity.RESULT_OK && data !=null){
-            Log.d(TAG,"사진 선택됨")
+            Log.d(TAG,"Photo selected")
             selectedPhotoUri=data.data
-            val bitmap=MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri) // uri를 ImageView로 바꾸기
+            // uri를 ImageView로 바꾸는 과정
+            val bitmap=MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             selectphoto_imageview_register.setImageBitmap(bitmap)
             selectphoto_button_register.alpha=0f
         }
@@ -111,14 +111,12 @@ class MemberInitActivity : AppCompatActivity() {
         val phoneNumber = (findViewById<View>(R.id.phoneNumberEditText) as EditText).text.toString()
         val birthDay = (findViewById<View>(R.id.birthDayEditText) as EditText).text.toString()
         val address = (findViewById<View>(R.id.addressEditText) as EditText).text.toString()
-
         val uid=FirebaseAuth.getInstance().uid?:""
-        val ref= FirebaseDatabase.getInstance().getReference("/users/$uid") // 고유 id
-
-        val user = FirebaseAuth.getInstance().currentUser // 사용자 정보 가져오기 (파이어베이스 문서 참조)
+        val ref= FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val user = FirebaseAuth.getInstance().currentUser
         val db = FirebaseFirestore.getInstance()
-        val memberInfo = MemberInfo(profileImageUrl, name, phoneNumber, birthDay, address) // MemberInfo 클래스
-
+        // MemberInfo 클래스
+        val memberInfo = MemberInfo(profileImageUrl, name, phoneNumber, birthDay, address)
         if (user != null) {
             ref.setValue(memberInfo)
                     .addOnSuccessListener {
@@ -138,7 +136,7 @@ class MemberInitActivity : AppCompatActivity() {
     // 뒤로 가기 버튼 누를 때
     override fun onBackPressed() {
         super.onBackPressed()
-        finish() // 앱 종료
+        finish()
     }
 
     // 토스트 메시지 함수
@@ -146,10 +144,10 @@ class MemberInitActivity : AppCompatActivity() {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    //로그인 하고 뒤로 가기 버튼 누르면 앱 꺼지는 기능
+    // 다른 액티비티로 이동
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //뒤로 가기 버튼 누르면 앱 꺼지는 기능
         startActivity(intent)
     }
 

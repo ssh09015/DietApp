@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
     // 다른 액티비티로 이동
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //로그인 하고 뒤로 가기 버튼 누르면 앱 꺼지는 기능
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // 뒤로 가기 버튼 누르면 앱 꺼지는 기능
         startActivity(intent)
     }
 }
